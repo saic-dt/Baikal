@@ -1,0 +1,144 @@
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <!--<link rel="stylesheet" href="css/style-base.css">-->
+    <link rel="stylesheet" href="frame/bootstrap/css/bootstrap.min.css"/>
+    <!--<link rel="stylesheet" href="css/style-public.css"/>-->
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/takeNote.css"/>
+    <title>数据资产管理</title>
+</head>
+<body>
+<div class="main">
+    <!--头部区域-->
+    <div class="main-top">
+        <div class="top-left fl">
+            <div class="logo-img">
+                <img src="images/logo.png"/>
+            </div>
+        </div>
+        <div class="top-right fl">
+            <ul class="clearfix">
+                <li><img src="images/shezhi.png"/></li>
+                <li><img src="images/email.png"/></li>
+                <li class="personName">
+                    <span id="username"></span>
+                    <div class="accountReplace">
+                        <a class="dropOut" onclick="logout();">退出账户</a>
+                    </div>
+                </li>
+                <li class="personal"><img src="images/personal.png"/></li>
+            </ul>
+        </div>
+    </div>
+    <!--主要区域-->
+    <div class="main-content main-contentH">
+        <!--左侧边栏-->
+        <div id="menu" class="main-left-menu fl">
+            <p class="copy_p">上海汽车集团股份有限公司版权所有</p>
+        </div>
+        <!--中间图标区-->
+        <div class="main-centre fl">
+            <div class="Content_banner">
+                <ol class="clearfix">
+                    <li class="activeLi"><span class="glyphicon glyphicon-tag"></span>标签1</li>
+                    <li style="display: none;"><span class="glyphicon glyphicon-tag"></span>标签2</li>
+                </ol>
+            </div>
+            <div class="tableLabelDiv">
+                <div class="takeRecode marginTop" id="tableLabelTitle">
+                    <ul>
+                        <li><span>数据库名：</span> <em id="tableName"></em></li>
+                        <li><span>归属企业：</span> <em id="tableSection"></em></li>
+                        <li><span>数据库解释：</span> <em id="tableComment"></em></li>
+                        <li id="tableInDateLi"><span>入库时间：</span><em class="tableInDate tableEm"></em><input type="text"
+                                                                                                             id="tableInDate"
+                                                                                                             class="tableInput"
+                                                                                                             value=""
+                                                                                                             style="display: none;"/><span
+                                class="glyphicon glyphicon-edit" style="font-size: 16px; cursor: pointer;"></span></li>
+                        <li id="tableCountDateLi"><span>开始审计时间：</span> <em class="tableCountDate tableEm"></em><input
+                                type="text" id="tableCountDate" class="tableInput" value=""
+                                style="display: none;"/><span class="glyphicon glyphicon-edit"
+                                                              style="font-size: 16px; cursor: pointer;"></span></li>
+                        <li id="tableOthersLi"><span>备注：</span> <em class="tableOthers tableEm"></em><input type="text"
+                                                                                                            id="tableOthers"
+                                                                                                            class="tableInput"
+                                                                                                            value=""
+                                                                                                            style="display: none;"/><span
+                                class="glyphicon glyphicon-edit" style="font-size: 16px; cursor: pointer;"></span></li>
+                    </ul>
+                </div>
+                <div class="data_tongji marginTop">
+                    <p class="tongji_p">数据统计</p>
+                    <div class="clearfix timeDiv timeDiv1" style="margin: 0; padding-bottom: 20px;">
+                        <div class="timeframe">
+                            <span>开始时间:</span>
+                            <input type="text" id="tableOneBeginDate" value=""/>
+                        </div>
+                        <div class="timeframe">
+                            <span>结束时间:</span>
+                            <input type="text" id="tableOneEndDate" value=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="clmData" style="padding:0 5%">
+                    <div id="clmData1" style="width:100%;height:300px;"></div>
+                </div>
+            </div>
+            <div class="tableLabelDiv" style="display: none;">
+
+            </div>
+        </div>
+        <!--右边区域-->
+        <div class="main-right fl">
+            <p class="right-title parent-title" id="parentNameP">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <img src="images/shuju-icon.png" alt=""/>
+                <span id="parentNameSpan"></span>
+            </p>
+            <div class="screening">
+                <input type="text" value="" id="tableSearch"/>
+                <img src="images/search.png" alt=""/>
+            </div>
+            <ul class="total-result" id="tableNameList"
+                style="width: 90%;height: 80%;overflow-y: auto;overflow-x: hidden;">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="js/common/common.js"></script>
+<script type="text/javascript" src="js/lib/base64/jquery.base64.js"></script>
+<script type="text/javascript" src="js/common/data-lake-common.js"></script>
+<script type="text/javascript" src="js/lib/base64/jquery.base64.js"></script>
+<script type="text/javascript" src="js/echarts.js"></script>
+<script type="text/javascript" src="js/echart-all-3.js"></script>
+<script type="text/javascript" src="js/common/echarts-fun.js"></script>
+<!-- 日期控件 -->
+<link rel="stylesheet" type="text/css" href="js/lib/datetimepicker-master/jquery.datetimepicker.css"/>
+<script src="js/lib/datetimepicker-master/jquery.datetimepicker.full.js"></script>
+<!-- 日期控件end -->
+<script type="text/javascript" src="js/ServerManagement/takeNoteTable.js"></script>
+
+</body>
+</html>

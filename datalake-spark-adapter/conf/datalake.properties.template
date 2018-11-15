@@ -1,0 +1,13 @@
+########################### Datalake Configurable Properties #######################
+#####  USAGE: Copy me to $SPARK_HOME/conf and rename to datalake.properties    #####
+#####  SET spark.driver.extraJavaOptions & spark.executor.extraJavaOptions     #####
+#####  TO -Ddatalake.properties.filepath=$SPARK_HOME/conf/datalake.properties  #####
+#####  IN $SPARK_HOME/conf/spark-defaults.conf                                 #####
+####################################################################################
+
+
+
+
+######################### System Configuration #########################
+# Root path of datalake in HDFS
+datalake.hdfs.root.path=hdfs://localhost:9000/datalake

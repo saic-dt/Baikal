@@ -1,0 +1,347 @@
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/style-base.css">
+    <title>登录页面</title>
+    <style>
+        .login_div{
+            width:100%;
+            height: 100vh;
+            background: url("images/login_bg.png") no-repeat;
+            background-size: 100% 100%;
+            position: relative;
+        }
+        .logo_top{
+            padding:30px 0  0 60px;
+        }
+        .login_form{
+            width:240px;
+            position: absolute;
+            right:150px;
+            top:50%;
+            transform: translate(0,-50%);
+            -webkit-transform: translate(0,-50%);
+            -o-transform: translate(0,-50%);
+            -ms-transform: translate(0,-50%);
+            -moz-transform: translate(0,-50%);
+        }
+        .login_form .personInfo{
+            position: relative;
+            width:100%;
+            overflow: hidden;
+            margin-bottom:20px;
+        }
+        .login_form .personInfo>input{
+            border: 1px solid #fff;
+            width:100%;
+            line-height: 30px;
+            padding-left:30px;
+            color:#fff;
+            background: url("images/userName_icon.png") no-repeat 10px center;
+            background-size: 15px;
+            border-radius: 7px;
+            -webkit-border-radius: 7px;
+            -o-border-radius:7px;
+            -ms-border-radius:7px;
+            -moz-border-radius:7px;
+        }
+        .login_form .personInfo>input::-webkit-input-placeholder {
+            　color:#fff;
+            opacity: 0.3;
+         }
+        .login_form .personInfo>input:-ms-input-placeholder {
+            　color:#fff;
+            opacity: 0.3;
+        }
+        .login_form .personInfo>input:-moz-input-placeholder {
+            　color:#fff;
+            opacity: 0.3;
+        }
+        .login_form .personInfo select{
+            border: 1px solid #fff;
+            height: 30px;
+            line-height: 30px;
+        }
+        .login_form .personInfo1>input{
+            background: url("images/password_icon.png") no-repeat 10px center;
+            background-size: 15px;
+        }
+        .login_form .personInfo img{
+            display: inline-block;
+            width: 20px;
+            cursor: pointer;
+            position: absolute;
+        }
+        .login_form .personInfo img.delteIcon{
+            width: 10px;
+            right: 10px;
+            bottom: 10px;
+            display: none;
+        }
+       button.login_btn{
+           width:100%;
+           height:30px;
+           line-height: 30px;
+           text-align: center;
+           color:#fff;
+           font-size: 14px;
+            border:none;
+           margin:10px auto;
+           background: #229aea;
+           border-radius: 7px;
+           -webkit-border-radius: 7px;
+           -o-border-radius:7px;
+           -ms-border-radius:7px;
+           -moz-border-radius:7px;
+           cursor: pointer;
+       }
+        p.forgetPassword{
+            text-align: center;
+            color:#fff;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top:20px;
+        }
+        .welcome{
+            margin-bottom:40px;
+        }
+        .welcome p{
+            font-size: 22px;
+            color:#fff;
+            text-align: center;
+            letter-spacing:5px;
+        }
+        .welcome span{
+            background-color:#fff;
+            display: block;
+            margin:20px auto;
+            width:10px;
+            height:1px;
+        }
+       .welcome p.letter_spacing{
+            letter-spacing:11px;
+           font-size: 21px;
+           padding-left:11px;
+        }
+        form{
+            padding-left:11px;
+        }
+        .form-error{
+            color:#fff;
+            font-size:12px;
+            line-height:20px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div class="login_div">
+    <div class="logo_top">
+        <img src="images/login_logo.png"/>
+    </div>
+    <div class="login_form">
+        <div class="welcome">
+            <p>WELCOME</p>
+            <span></span>
+            <p class="letter_spacing">数据湖管理平台</p>
+        </div>
+        <!-- <form action="">-->
+        <div class="personInfo">
+            <input type="text" value="" id="insureName" placeholder="请输入您的用户名"/>
+            <img src="images/searchClose.png" class="delteIcon"/>
+        </div>
+        <div class="personInfo personInfo1">
+            <input type="password" value="" id="password" placeholder="请输入您的密码"/>
+            <img src="images/searchClose.png" class="delteIcon"/>
+        </div>
+        <div class="personInfo">
+            <select class="personInfo" id="select1">
+            </select>
+        </div>
+        <button type="submit" class="login_btn">登录</button>
+        <p class="forgetPassword">忘记密码？</p>
+        <!-- </form>-->
+    </div>
+</div>
+
+
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="js/common/common.js"></script>
+<script type="text/javascript" src="js/lib/base64/jquery.base64.js"></script>
+<script type="text/javascript" src="js/common/datalake-common.js"></script>
+<script type="text/javascript" src="js/pcf/login.js"></script>
+<script type="text/javascript" src="js/jquery.md5.js"></script>
+<script type="text/javascript" src="js/base64js.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+    	getSelect(); //取得节点列表
+    	loginCallback(); //判断登陆
+        document.onkeydown = function(e){
+            var ev = document.all ? window.event : e;
+            if(ev.keyCode==13) {
+                keyLogin()
+            }
+        }
+        //回车登陆
+        function keyLogin(){
+            $(".login_btn").click()  //调用登录按钮的登录事件
+        }
+
+        $(".personInfo input").focus(function(){
+            $(this).next("img").show();
+            $(this).parent().siblings(".personInfo").find("img").hide()
+        });
+        
+        $(".personInfo img.delteIcon").click(function () {
+            $(this).parent().find("input").val("")
+        });
+        function valiDataCallBack(message, id){
+            $(".form-error").remove();
+            $("#"+id).after('<span class="form-error">'+message+'</span>');
+            $(window).scrollTop(($("#"+id).offset().top - 20));
+        }
+        //姓名校验.
+        function checkName(name) {
+
+            if (!name) {
+
+                valiDataCallBack("用户名不能为空!", "insureName");
+
+                return false;
+            } else if (!(/^([a-zA-Z\u4e00-\u9fa5\s]){0,20}$/.test(name))) {
+
+                valiDataCallBack("用户名错误!", "insureName");
+
+                return false;
+            }
+            return true;
+        }
+        function checkPassword(password) {
+            if (!password) {
+                valiDataCallBack("密码不能为空!", "password");
+                return false;
+            } else if (password.length < 6) {
+                valiDataCallBack("密码错误!", "password");
+                return false;
+            }
+            return true;
+        }
+
+        $(".login_btn").on("click",function(){
+            var name = $("#insureName").val();
+            var password = $("#password").val();
+            
+            if (!checkName(name)) {
+                return false;
+            }
+            if (!checkPassword(password)) {
+                return false;
+            }
+            var login_host = $("#select1").val();
+            if(login_host!=http_host){
+             location.href="http://" +login_host+http_suffix+"/login.html?callback=true&loginParam="+BASE64.encoder(name+","+password);
+			 return;
+            }
+            $(this).text("正在登录...");
+            $.ajax({
+                type: "POST",
+                url: http_service + "/loginByUser",
+                dataType: "json",
+                data: {"username":name,"password":$.md5(name+password)},
+                success: function (msg) {
+                    if(msg.resultCode==200) {
+                        $.SetCookie('esurl', msg.data.esurl,'d1');
+                        $.SetCookie('username', msg.data.username, 'd1');
+                        $.SetCookie('tenantName', msg.data.tenantName, 'd1');
+                        location.href=http_service+"/test.html";
+                    }else{
+                        valiDataCallBack("用户名或密码错误!", "insureName");
+                        $(this).text("登录");
+                    }
+                },
+                error: function (ll) {
+                    valiDataCallBack("加载失败!", JSON.stringify(ll));
+                    $(this).text("登录");
+                }
+            });
+
+        })
+    });
+    
+     //跨域登陆
+    function loginCall(loginParam){
+    var unicode = BASE64.decoder(loginParam);
+    var str = '';  
+    for(var i = 0 , len =  unicode.length ; i < len ;++i){  
+      str += String.fromCharCode(unicode[i]);  
+    } 
+    var vlus = str.split(",");
+    var name = vlus[0];
+    var password = vlus[1];
+    $(".login_btn").text("正在登录...");
+     $.ajax({
+                type: "POST",
+                url: http_service + "/loginByUser",
+                dataType: "json",
+                data: {"username":name,"password":$.md5(name+password)},
+                success: function (msg) {
+                    if(msg.resultCode==200) {
+                        $.SetCookie('esurl', msg.data.esurl,'d1');
+                        $.SetCookie('username', msg.data.username, 'd1');
+                        location.href=http_service+"/index.html";
+                    }else{
+                        valiDataCallBack("用户名或密码错误!", "insureName");
+                    }
+                } });
+    }
+     function loginCallback(){
+			 if("true"==getQueryString("callback")){
+				var loginParam = getQueryString("loginParam");
+				loginCall(loginParam);
+			 }
+    }
+    //10.10前台紧急添加
+    function getSelect(){
+    	 $.ajax({
+                type: "POST",
+                url: http_service + "/hostList",
+                dataType: "json",
+                async:false,
+                data:{},
+                success: function (data) {
+					    var html = "<option value =\""+window.location.host +"\">当前节点</option>";
+                        $.each(data.hostList, function() {
+                            if (this.host != "" && this.host != null && this.host != undefined) {
+                                html += "<option value =\""+this.host+"\">"+this.name+"</option>"
+                            } 
+                        });
+                        $("#select1").html(html);
+                }
+             });
+    }
+
+
+
+</script>
+</body>
+</html>

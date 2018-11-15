@@ -1,0 +1,9 @@
+---------------------------Event ----------------------------
+CREATE TABLE IF NOT EXISTS Event(
+   EVENT_ID INTEGER PRIMARY KEY NOT NULL,
+   PARENT_EVENT_ID INTEGER   NOT NULL,
+   SOURCE_INSTANCE  TEXT     NOT NULL,
+   SOURCE_SCHEMA    TEXT,
+   SOURCE_TABLE     TEXT,
+   MESSAGE TEXT
+);

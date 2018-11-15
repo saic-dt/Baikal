@@ -1,0 +1,29 @@
+/*默认数据提示样式*/
+.spanOnError_pc{background: #fdf9f8 url(images/error-ico.png) -54px -187px no-repeat; font-size: 14px; height: 25px; line-height: 23px; display: inline-block; margin-left: 10px; color: #ce6969;  border: 1px solid #ead9d2;  padding: 1px 10px 1px 30px;}
+.spanOnFocus_pc{background:#fdf9f8 url(images/error-ico.png) -56px -127px no-repeat;  font-size: 14px; height:25px;line-height:23px; display:inline-block;  margin-left:10px; color: #f9a725; border:1px solid #ead9d2; padding:1px 10px 1px 30px;}
+/*数据检验时样式*/
+.spanOnLoad_pc{background:#fdf9f8 url(images/onLoad.gif) 5px 5px no-repeat;  font-size: 14px; height:25px;line-height:23px; display:inline-block;  margin-left:10px; color: #ce6969;padding:1px 10px 1px 30px;}
+/*ajax数据提示样式*/
+.ajaxErrorFalse_pc{background:#fdf9f8 url(images/error-ico.png) -54px -187px no-repeat;  font-size: 14px; height:25px;line-height:23px; display:inline-block;  margin-left:10px; color: #ce6969; border:1px solid #ead9d2; padding:1px 10px 1px 30px;}
+.ajaxErrorTrue_pc{background:#fdf9f8 url(images/error-ico.png) -54px -50px no-repeat;  font-size: 14px; height:25px;line-height:23px; display:inline-block;  margin-left:10px; color: #f9a725; border:1px solid #ead9d2; padding:1px 10px 1px 30px;}
+
+/*修改数据提示样式*/
+.spanOnErrorXG_pc{background: #fdf9f8 url(images/error-ico.png) -54px -23px no-repeat; font-size: 14px; height: 25px; line-height: 23px; display: inline-block; margin-left: 10px; color: #ce6969;  border: 1px solid #ead9d2;  padding: 1px 10px 1px 30px;}
+.spanOnFocusXG_pc{background:#fdf9f8 url(images/error-ico.png) -56px -127px no-repeat;  font-size: 14px; height:25px;line-height:23px; display:inline-block;  margin-left:10px; color: #f9a725; border:1px solid #ead9d2; padding:1px 10px 1px 30px;}
+
+
+
+.spanOnError_app{width: 100%; height: 25px; line-height: 25px;  border: 1px solid #e71f19;}
+.spanOnError_app .ico{background: #fdf9f8 url(images/error-ico.png) -54px -22px no-repeat; height: 23px; width: 30px;display: inline-block; float: left;}
+.spanOnError_app .errorSpan{font-size: 14px; height: 25px; line-height: 25px; display: inline-block;color: #e71f19;  float: left;}
+
+
+.spanOnFocus_app{width: 100%; height: 25px; line-height: 25px;  border: 1px solid #e71f19;}
+.spanOnFocus_app .ico{background: #fdf9f8 url(images/error-ico.png) -54px -22px no-repeat; height: 23px; width: 30px;display: inline-block; float: left;}
+.spanOnFocus_app .errorSpan{font-size: 14px; height: 25px; line-height: 25px; display: inline-block;color: #e71f19;  float: left;}
+
+
+/*.appSpanOnError{background: #fdf9f8 url(images/error-ico.png) -54px -20px no-repeat; width: 100%; font-size: 14px; height: 25px; line-height: 25px; display: inline-block;color: #e71f19;  border: 1px solid #e71f19;  padding: 1px 10px 1px 30px;}*/
+/*.appSpanOnFocus{background:#fdf9f8 url(images/error-ico.png) -56px -125px no-repeat;  font-size: 14px; height:25px;line-height:25px; display:inline-block;  margin-left:10px; color: #f9a725; border:1px solid #ead9d2; padding:1px 10px 1px 30px;}*/
+
+

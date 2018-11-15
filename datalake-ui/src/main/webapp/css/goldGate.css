@@ -1,0 +1,48 @@
+.main-contentH{height:1263px;}
+.gold-search .modular-content{position: relative; padding-left: 50px;}
+.gold-search .modular-title{margin-bottom: 0;}
+.inut_div input{border: 1px solid #0099ff;border-radius: 5px;height: 25px;background: #d0edff;width:270px;padding-left:5px;}
+.inut_div>span{margin-left:-25px;color: #0099ff;font-size: 14px;cursor: pointer;}
+.sorting_box{position: absolute;top: 34px;left:50px;z-index:10000000;width:396px;background: #1896ed;border-radius: 5px;-webkit-border-radius: 5px;-ms-border-radius: 5px;-moz-border-radius: 5px;-o-border-radius: 5px;padding-bottom: 44px;}
+.sorting_box .sorting{max-height:205px;overflow-y: auto;}
+.sorting_box .sorting ul{margin-bottom:0px;padding-right:5px;}
+.sorting ul li{float: left;position: relative;color:#fff;width:50%;height:41px;border-bottom: 1px solid #fff;display: none;}
+.sorting ul li p{width:100%;line-height: 40px;float: left;position: relative;text-align: left;margin:0;overflow: hidden;}
+.sorting ul li p span{display: inline-block;padding-left:40px;padding-right: 10px;font-size: 12px;}
+.sorting ul li p em{display: inline-block;width:10px;height:10px;border: 1px solid #fff;position: absolute;left:24px;top:15px;}
+.sorting ul li p em.checkEm{content: "";display: block;background: url("../images/whiteSelect.png") no-repeat;background-size: 10px;}
+.sorting_box div.lastLiAll{width:100%;height:45px;border-bottom: none;border-top: 1px solid #fff;text-align: right;font-weight: 700;background: #1896ed;display: none;position: absolute; left: 0; bottom: 0;}
+.sorting_box div.lastLiAll p{display: inline-block;width:50%;text-align: center;color:#fff;font-size: 14px;line-height: 45px;margin:0;border-right: 1px solid #fff;cursor: pointer;}
+.sorting_box div.lastLiAll p:nth-child(2){border-right:none;}
+.sorting::-webkit-scrollbar-track-piece{-webkit-border-radius:0;}
+.sorting::-webkit-scrollbar{width:3px;height:3px;}
+.sorting::-webkit-scrollbar-thumb{height:5px;background-color: #fff;-webkit-border-radius:4px;outline-offset:-2px;border: 1px solid #fff;}
+.sorting::-webkit-scrollbar-track {-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.8);border-radius: 5px;}
+.sorting::-webkit-scrollbar-thumb:hover{height:50px;background-color:#fff;-webkit-border-radius:4px;}
+.echart_div{width:100%;position: relative;padding-left:50px;overflow: hidden;}
+.echart_div .modular-title{padding-left: 0; margin-bottom: 0; margin-top: 0;}
+.flow-list{height: 360px; overflow: hidden;}
+.flow-list .modular-title{margin-top: 0; margin-bottom: 0;}
+#process_state .modular-content{height:88px;padding: 0 40px 0 50px;}
+.process-status{width:100%;height:78px;position: relative;}
+.process-status ol{ position:absolute; top: 40px; left: 0; width: 100%; height: 20px; padding:0 10px; margin: 0;}
+.process-status ol li{text-align: center;background: #2497e7;height:20px;float: left;width:33%;position: relative;}
+.process-status ol li p{position: absolute;top:-40px;left:50%;transform: translate(-50%,-50%);background: #2497e7;color:#fff;padding:5px;border-radius: 5px;-webkit-border-radius: 5px;-o-border-radius:5px;-ms-border-radius:5px;-moz-border-radius:5px;}
+.process-status ol li p::after{content: "";display: inline-block;width: 0;height: 0;border-left: 5px solid transparent;border-right: 5px solid transparent;border-top: 5px solid #2497e7;margin: 0 auto;position: absolute;bottom: -5px;left:50%;}
+.process-status ul{width:100%;position: absolute;left:0;}
+.process-status ul li{width: 32%;float: left;}
+.process-status ul li span{display: block;font-size: 14px;padding-left: 10px;}
+.process-status ul li.d-l-process{position: absolute;top:0;right:-25%}
+.process-status .e-process span{margin-left: -8px;}
+.process-status .d-process span{margin-left: -8px;}
+.process-status .r-process span{margin-left: 10px;}
+.process-status .d-l-process span{margin-left: -14px;}
+.process-delay .modular-content{padding-left: 50px;}
+.echart_div .echart_qushi{width:60%;}
+#OGGtend{width:100%;height:250px;}
+#OGGcount,#OGGcount1{width:100%;height:200px;}
+#OGGcount1{width:100%;height:100px;}
+.timeDelay{width:100%;height:250px;}
+.echart_div .echart_tongji{width:40%}
+
+
