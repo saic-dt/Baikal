@@ -1,0 +1,362 @@
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="frame/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/list-common.css"/>
+    <link rel="stylesheet" href="css/dataManage.css"/>
+    <title>数据链路监控面板</title>
+</head>
+<body>
+<div class="main">
+    <!--头部区域-->
+    <div class="main-top">
+        <div class="top-left fl">
+            <div class="logo-img">
+                <img src="images/logo.png"/>
+            </div>
+        </div>
+        <div class="top-right fl">
+            <ul class="clearfix">
+                <li><img src="images/shezhi.png"/></li>
+                <li><img src="images/email.png"/></li>
+                <li class="personName">
+                    <span id="username"></span>
+                    <div class="accountReplace">
+                        <a class="dropOut" onclick="logout();">退出账户</a>
+                    </div>
+                </li>
+                <li class="personal"><img src="images/personal.png"/></li>
+            </ul>
+        </div>
+    </div>
+    <!--主要区域-->
+    <div class="main-content main-contentH">
+        <!--左侧边栏-->
+        <div id="menu" class="main-left-menu fl">
+            <p class="copy_p">上海汽车集团股份有限公司版权所有</p>
+        </div>
+        <!--中间图标区-->
+        <div class="main-centre fl">
+            <div class="banner_dash">
+                <div class="banner_icon">
+                    <img src="images/background_center.png"/>
+                    <span class="center_span">数据源管理</span>
+                </div>
+            </div>
+            <div class="modular-common">
+                <div class="modular-title">
+                    <div class="modular-title-name"><span>数据源列表</span></div>
+                    <div class="modular-title-search fl">
+                        <select class="configureTitleSelect" id="tenantSelect" onchange="instWSTrafficListFun();">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="modular-content">
+                    <table class="list-two" id="trafficList">
+                        <tr>
+                            <th>类型</th>
+                            <th>数据库名</th>
+                            <th>IP地址</th>
+                            <th>主进程端口</th>
+                            <th>实际路径</th>
+                            <th>目标集群</th>
+                            <th style="width: 80px;">操作</th>
+                        </tr>
+
+                    </table>
+                    <div class="list-two-page">
+                        <div class="operating-but">
+                            <span class="activePage" id="addData">新增数据源</span>
+                        </div>
+                        <div class="button-page">
+                            <span onclick="PreviousNextPage(0);">上一页</span>
+                            <span class="activePage" onclick="PreviousNextPage(1);">下一页</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="goldGate">
+                <!--<div class="progressTable">
+                    <div class="progressTableTitle">
+                        <span class="configureTitleName">数据源列表</span>
+                        <select  class="configureTitleSelect" id="tenantSelect" onchange="instWSTrafficListFun();">
+
+                        </select>
+                    </div>
+                    <table class="table logTable" id="trafficList">
+                        <tr>
+                            <th>类型</th>
+                            <th>数据库名</th>
+                            <th>IP地址</th>
+                            <th>主进程端口</th>
+                            <th>实际路径</th>
+                            <th>目标集群</th>
+                            <th style="width: 80px;">操作</th>
+                        </tr>
+
+                    </table>
+                    <div class="buttonLeft">
+                        <span class="activePage" id="addData">新增数据源</span>
+                    </div>
+                    <div class="buttonPage">
+                        <span onclick="PreviousNextPage(0);">上一页</span>
+                        <span class="activePage" onclick="PreviousNextPage(1);">下一页</span>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        <!--右边区域-->
+        <div class="main-right fl">
+            <h4 class="title-h4">同步增量行数趋势</h4>
+            <div class="main-right-incremental">
+                <div id="tendency"></div>
+            </div>
+            <h4 class="title-h4 title-trend">趋势事件</h4>
+            <div class="main-right-trend">
+                <div class="history">
+                    <div class="history-date">
+                        <ul id="history-date-ul">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--新增弹框-->
+<div class="addBokDiv" style="width: 680px;" id="addUpdBokDiv">
+    <input type="hidden" id="addType" value="save"/>
+    <div class="addBokTitle">
+        <div class="addTitleCount">
+            <div class="addTitleLi on"><span>ORACLE</span></div>
+            <div class="addTitleLi"><span>MYSQL</span></div>
+            <div class="addTitleLi"><span>DB2</span></div>
+        </div>
+    </div>
+    <div class="tabsCountDiv" id="oradeTabsCount">
+        <input type="hidden" class="rowKey" value=""/>
+        <input type="hidden" class="dbType" value="ORACLE"/>
+        <p class="title_role title_role2">服务器</p>
+        <p class="title_error"></p>
+        <div class="addBokUl">
+            <div class="addBokUlLi">
+                <span>OS用户:</span>
+                <input type="text" value="" class="osUser"/>
+            </div>
+            <div class="addBokUlLi">
+                <span class="auto">IP地址:</span>
+                <input type="text" value="" class="ipAddress"/>
+            </div>
+        </div>
+        <div class="userNameDiv">
+            <span>安装路径:</span>
+            <input type="text" class="maxWidth basePath" value=""/>
+        </div>
+        <p class="title_role title_role2 two">数据库</p>
+        <div class="userNameDiv">
+            <span>DB_HOME:</span>
+            <input type="text" class="maxWidth dbHome" value=""/>
+        </div>
+        <div class="userNameDiv">
+            <span>数据库名:</span>
+            <input type="text" class="maxWidth dbName" value=""/>
+        </div>
+        <p class="title_role title_role2 two">链路</p>
+        <div class="addBokUl">
+            <div class="addBokUlLi">
+                <span>链路用户:</span>
+                <input type="text" value="" class="linkUser"/>
+            </div>
+            <div class="addBokUlLi">
+                <span class="auto">密码:</span>
+                <input type="password" value="" class="password" style="width: 163px;"/>
+            </div>
+        </div>
+        <div class="userNameDiv">
+            <span>主进程端口:</span>
+            <input type="text" class="maxWidth mainProcPort" value=""/>
+        </div>
+        <p class="title_role title_role2 two">目标集群</p>
+        <div class="userNameDiv">
+            <select class="maxWidth clusterSelect remoteCluster">
+                <option value="">oracle</option>
+                <option value="">mysql</option>
+                <option value="">DB2</option>
+            </select>
+        </div>
+        <div class="btnDiv">
+            <button class="insures roleCancel">取消</button>
+            <button class="insures roleInsure">确认</button>
+        </div>
+    </div>
+    <div class="tabsCountDiv" style="display: none;" id="mysqlTabsCount">
+        <input type="hidden" class="rowKey" value=""/>
+        <input type="hidden" class="dbType" value="MYSQL"/>
+        <p class="title_role title_role2">服务器</p>
+        <p class="title_error"></p>
+        <div class="addBokUl">
+            <div class="addBokUlLi">
+                <span>OS用户:</span>
+                <input type="text" value="" class="osUser"/>
+            </div>
+            <div class="addBokUlLi">
+                <span class="auto">IP地址:</span>
+                <input type="text" value="" class="ipAddress"/>
+            </div>
+        </div>
+        <div class="userNameDiv">
+            <span>安装路径:</span>
+            <input type="text" class="maxWidth basePath" value=""/>
+        </div>
+        <p class="title_role title_role2 two">数据库</p>
+        <div class="userNameDiv">
+            <span>DB_HOME:</span>
+            <input type="text" class="maxWidth dbHome" value="" style="width: 410px;"/>
+        </div>
+        <div class="addBokUl">
+            <div class="addBokUlLi">
+                <span>数据库名:</span>
+                <input type="text" value="" class="dbName"/>
+            </div>
+            <div class="addBokUlLi">
+                <span class="auto">数据库端口:</span>
+                <input type="text" value="" class="dbPort" style="width: 163px;"/>
+            </div>
+        </div>
+        <div class="userNameDiv">
+            <span>日志路径:</span>
+            <input type="text" class="maxWidth dbLogPath" value="" style="width: 410px;"/>
+        </div>
+        <div class="addBokUl">
+            <div class="addBokUlLi">
+                <span>Root用户:</span>
+                <input type="text" value="" class="rootUser"/>
+            </div>
+            <div class="addBokUlLi">
+                <span class="auto">Root用户密码:</span>
+                <input type="password" value="" class="rootPasswd" style="width: 145px;"/>
+            </div>
+        </div>
+
+        <p class="title_role title_role2 two">链路</p>
+        <div class="addBokUl">
+            <div class="addBokUlLi">
+                <span>链路用户:</span>
+                <input type="text" value="" class="linkUser"/>
+            </div>
+            <div class="addBokUlLi">
+                <span class="auto">密码:</span>
+                <input type="password" value="" class="password" style="width: 163px;"/>
+            </div>
+        </div>
+        <div class="userNameDiv">
+            <span>主进程端口:</span>
+            <input type="text" class="maxWidth mainProcPort" value=""/>
+        </div>
+        <p class="title_role title_role2 two">目标集群</p>
+        <div class="userNameDiv">
+            <select class="maxWidth clusterSelect remoteCluster">
+                <option value="">oracle</option>
+                <option value="">mysql</option>
+                <option value="">DB2</option>
+            </select>
+        </div>
+        <div class="btnDiv">
+            <button class="insures roleCancel">取消</button>
+            <button class="insures roleInsure">确认</button>
+        </div>
+    </div>
+    <div class="tabsCountDiv" style="display: none;" id="DBTabsCount">
+        <input type="hidden" class="rowKey" value=""/>
+        <input type="hidden" class="dbType" value="DB2"/>
+        <p class="title_role title_role2">服务器</p>
+        <p class="title_error"></p>
+        <div class="addBokUl">
+            <div class="addBokUlLi">
+                <span>OS用户:</span>
+                <input type="text" value="" class="osUser"/>
+            </div>
+            <div class="addBokUlLi">
+                <span class="auto">IP地址:</span>
+                <input type="text" value="" class="ipAddress"/>
+            </div>
+        </div>
+        <div class="userNameDiv">
+            <span>安装路径:</span>
+            <input type="text" class="maxWidth basePath" value=""/>
+        </div>
+        <p class="title_role title_role2 two">数据库</p>
+        <div class="userNameDiv">
+            <span>DB_HOME:</span>
+            <input type="text" class="maxWidth dbHome" value=""/>
+        </div>
+        <div class="userNameDiv">
+            <span>数据库名:</span>
+            <input type="text" class="maxWidth dbName" value=""/>
+        </div>
+        <p class="title_role title_role2 two">链路</p>
+        <div class="addBokUl">
+            <div class="addBokUlLi">
+                <span>链路用户:</span>
+                <input type="text" value="" class="linkUser"/>
+            </div>
+            <div class="addBokUlLi">
+                <span class="auto">密码:</span>
+                <input type="password" value="" style="width: 163px;" class="password"/>
+            </div>
+        </div>
+        <div class="userNameDiv">
+            <span>主进程端口:</span>
+            <input type="text" class="maxWidth mainProcPort" value=""/>
+        </div>
+        <p class="title_role title_role2 two">目标集群</p>
+        <div class="userNameDiv">
+            <select class="maxWidth clusterSelect remoteCluster">
+                <option value="">oracle</option>
+                <option value="">mysql</option>
+                <option value="">DB2</option>
+            </select>
+        </div>
+        <div class="btnDiv">
+            <button class="insures roleCancel">取消</button>
+            <button class="insures roleInsure">确认</button>
+        </div>
+    </div>
+</div>
+<!--遮罩层-->
+<div class="maskPosition"></div>
+
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="js/common/common.js"></script>
+<script type="text/javascript" src="js/lib/base64/jquery.base64.js"></script>
+<script type="text/javascript" src="js/common/data-lake-common.js"></script>
+<script type="text/javascript" src="js/echarts.js"></script>
+<script type="text/javascript" src="js/common/echarts-fun.js"></script>
+<script type="text/javascript" src="js/ServerManagement/dataManage.js"></script>
+<script type="text/javascript" src="js/ServerManagement/rightCommon.js"></script>
+</body>
+</html>

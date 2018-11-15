@@ -1,0 +1,214 @@
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="frame/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/tenant.css"/>
+    <title>租户管理</title>
+</head>
+<body>
+<div class="main">
+    <!--头部区域-->
+    <div class="main-top">
+        <div class="top-left fl">
+            <div class="logo-img">
+                <img src="images/logo.png"/>
+            </div>
+        </div>
+        <div class="top-right fl">
+            <ul class="clearfix">
+                <li><img src="images/shezhi.png"/></li>
+                <li><img src="images/email.png"/></li>
+                <li class="personName">
+                    <span id="username"></span>
+                    <div class="accountReplace">
+                        <a class="dropOut" onclick="logout();">退出账户</a>
+                    </div>
+                </li>
+                <li class="personal"><img src="images/personal.png"/></li>
+            </ul>
+        </div>
+    </div>
+    <!--主要区域-->
+    <div class="main-content main-contentH">
+        <!--左侧边栏-->
+        <div id="menu" class="main-left-menu fl">
+            <p class="copy_p">上海汽车集团股份有限公司版权所有</p>
+        </div>
+        <!--中间图标区-->
+        <div class="main-centre fl">
+            <div class="banner_dash">
+                <div class="banner_icon">
+                    <img src="images/background_center.png"/>
+                    <span class="center_span">租户管理</span>
+                </div>
+            </div>
+            <div class="modular-common">
+                <div class="modular-title">
+                    <div class="modular-title-name"><span>租户列表</span></div>
+                </div>
+                <div class="modular-content">
+                    <div class="ulDiv">
+                        <ul class="clearfix tableUl">
+                            <li></li>
+                            <li>租户名称</li>
+                            <li>租户说明</li>
+                        </ul>
+                        <div class="border-Div DivRoleUser" id="roleList">
+                        </div>
+                        <div class="buttonGroup">
+                            <button class="addRole activeButton" id="addRole">新增租户</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modular-common">
+                <div class="modular-title">
+                    <div class="modular-title-name"><span>用户管理</span></div>
+                </div>
+                <div class="modular-content">
+                    <div class="ulDiv">
+                        <ul class="clearfix tableUl ul2">
+                            <li></li>
+                            <li></li>
+                            <li>用户名称</li>
+                            <li>归属租户</li>
+                        </ul>
+                        <div class="border-Div border-DivRole" id="userList">
+                        </div>
+                        <div class="buttonGroup">
+                            <button class="fanxuan2">反选</button>
+                            <button class="delAll" id="userDelAll">批量删除</button>
+                            <button class="addRole activeButton" id="addUser">新增用户</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="roleDiv">
+                <p class="title_role">租户列表</p>
+                <div class="ulDiv">
+                    <ul class="clearfix tableUl">
+                        <li></li>
+                        <li>租户名称</li>
+                        <li>租户说明</li>
+                    </ul>
+                    <div class="border-Div DivRoleUser" id="roleList">
+                    </div>
+                    <div class="buttonGroup">
+                        <button class="addRole activeButton" id="addRole">新增租户</button>
+                    </div>
+                </div>
+            </div>
+            <div class="roleDiv roleDiv2">
+                <p class="title_role">用户管理</p>
+                <div class="ulDiv">
+                    <ul class="clearfix tableUl ul2">
+                        <li></li>
+                        <li></li>
+                        <li>用户名称</li>
+                        <li>归属租户</li>
+                    </ul>
+                    <div class="border-Div border-DivRole" id="userList">
+                    </div>
+                    <div class="buttonGroup">
+                        <button class="fanxuan2">反选</button>
+                        <button class="delAll" id="userDelAll">批量删除</button>
+                        <button class="addRole activeButton" id="addUser">新增用户</button>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+        <!--右边区域-->
+        <div class="main-right fl">
+            <h4 class="title-h4">同步增量行数趋势</h4>
+            <div class="main-right-incremental">
+                <div id="tendency"></div>
+            </div>
+            <h4 class="title-h4 title-trend">趋势事件</h4>
+            <div class="main-right-trend">
+                <div class="history">
+                    <div class="history-date">
+                        <ul id="history-date-ul">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--新增用户弹框-->
+<div class="addUserDiv">
+    <p class="title_role title_role2">新增用户</p>
+    <p class="title_error"></p>
+    <input type="hidden" id="addUserType"/>
+    <div class="userNameDiv">
+        <span>用户名称:</span>
+        <input type="text" value="" id="userAddName"/>
+    </div>
+    <div class="userNameDiv">
+        <span>用户密码:</span>
+        <input type="password" autocomplete="new-password" value="" id="userPassword"/>
+    </div>
+    <div class="userNameDiv">
+        <span>租户列表:</span>
+        <select class="person" id="select1">
+        </select>
+    </div>
+    <button class="insures userInsure">确认</button>
+    <button class="insures userCancel" style="margin-right: 0;">取消</button>
+
+</div>
+<!--新增租户弹框-->
+<div class="addRoleDiv">
+    <p class="title_role title_role2">新增租户</p>
+    <p class="title_error"></p>
+    <div class="userNameDiv">
+        <span>租户名称:</span>
+        <input type="text" value="" id="roleName"/>
+    </div>
+    <div class="userNameDiv">
+        <span>租户说明:</span>
+        <input type="text" value="" id="description"/>
+        <button class="insures roleInsure">确认</button>
+        <button class="insures roleCancel" style="margin-right: 0;">取消</button>
+    </div>
+</div>
+<!--确定弹出框-->
+<div class="angin_div angin_del" id="promptBox" style="display: none; max-width: 470px;">
+
+</div>
+<!--遮罩层-->
+<div class="maskPosition"></div>
+
+
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="js/common/common.js"></script>
+<script type="text/javascript" src="js/lib/base64/jquery.base64.js"></script>
+<script type="text/javascript" src="js/common/data-lake-common.js"></script>
+<script type="text/javascript" src="js/echarts.js"></script>
+<script type="text/javascript" src="js/common/echarts-fun.js"></script>
+<script type="text/javascript" src="js/lib/formProofread/formProofreadRegex.js"></script>
+<script type="text/javascript" src="js/ServerManagement/tenant.js"></script>
+<script type="text/javascript" src="js/ServerManagement/rightCommon.js"></script>
+<script type="text/javascript" src="js/jquery.md5.js"></script>
+</body>
+</html>

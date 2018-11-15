@@ -1,0 +1,43 @@
+.modular-common .modular-title{margin-bottom: 0;}
+.modular-common .modular-content{padding: 0 50px;}
+.roleDiv{width:90%;margin:0 auto;}
+.roleDiv2{margin-top:20px;}
+p.title_role{color: #0384dd;font-size: 14px;position: relative;height: 45px;line-height: 45px;margin: 0;}
+p.title_role::before{content: "";display: inline-block;width: 10px;height: 10px;background: #1e90e5;border-radius: 5px;-webkit-border-radius: 5px;-ms-border-radius: 5px;-moz-border-radius: 5px;-o-border-radius: 5px;margin-right: 10px;}
+div.ulDiv{width:100%;}
+div.ulDiv ul{height:30px;margin-bottom: 0;}
+div.ulDiv ul.tableUl{background: #67bdfe;border-radius: 5px 5px 0 0;-webkit-border-radius: 5px 5px 0 0;-moz-border-radius:5px 5px 0 0 ;-ms-border-radius:5px 5px 0 0;-o-border-radius:5px 5px 0 0;}
+.border-Div{border: 1px solid #67bdfe;}
+.border-Div ul li span{position: relative;}
+.border-Div ul li span img{position: absolute;left:2px;top:2px;width:10px;display: none;}
+.border-Div ul li span img.checkedImg{display: block;}
+div.ulDiv ul li{float: left;height:30px;line-height: 30px;color:#1391e9;text-align: center;}
+div.ulDiv ul li{border-right:1px solid #67bdfe;}
+div.ulDiv ul li:last-child{border-right:none;}
+div.ulDiv ul.tableUl li{color:#fff;}
+div.ulDiv ul li span{width:15px;height:15px;display: inline-block;border: 1px solid #1391e9;}
+div.ulDiv ul li:nth-child(1){ width:15%}
+div.ulDiv ul li:nth-child(2){width:25%}
+div.ulDiv ul li:nth-child(3){width:60%}
+div.ulDiv div .ul1:nth-child(2n){background: #cfecff;}
+div.ulDiv .ul2 li:nth-child(1),div.ulDiv .ul2 li:nth-child(2),div.ulDiv .ul2 li:nth-child(3){width:15%}
+div.ulDiv .ul2 li:nth-child(4){width:55%}
+.buttonGroup{width:100%;margin-top:20px;}
+.buttonGroup button{border: 1px solid #1391e9;border-radius: 5px 5px 0 0;-webkit-border-radius: 5px;-moz-border-radius:5px;-ms-border-radius:5px;-o-border-radius:5px;background: none;color:#1391e9;width:100px;height:30px;margin-right: 10px;}
+.buttonGroup button.activeButton{background: #0384dd;color:#fff;}
+.addUserDiv{width:430px;background: url("../images/roleDivBG.png") no-repeat center;background-size: cover;position: fixed;top:50%;left:50%;transform: translate(-50%,-50%);-webkit-transform:  translate(-50%,-50%);-moz-transform:  translate(-50%,-50%);-ms-transform:  translate(-50%,-50%);-o-transform:  translate(-50%,-50%);z-index: 10000;box-shadow: 0 0 100px rgba(0,0,0,.2);-webkit-box-shadow: 0 0 100px rgba(0,0,0,.2);border-radius: 10px;-webkit-border-radius:10px;-moz-border-radius: 10px;-ms-border-radius: 10px;-o-border-radius: 10px;display: none;}
+p.title_role2{margin-left:25px;margin-top:5px;margin-bottom: 5px;color:#fff;}
+p.title_role2::before{background: #fff;}
+.userNameDiv{margin-left: 25px;margin-right: 25px;margin-bottom: 25px;overflow: hidden;}
+.userNameDiv span{color:#fff;font-size: 14px;float: left;margin-right:10px;line-height: 30px;}
+.userNameDiv input{width:80%;height:30px;background: #ddf2ff;
+border: none;padding-left:5px;color:#0384dd;float: left;border-radius: 5px;-webkit-border-radius: 5px;-ms-border-radius: 5px;-moz-border-radius: 5px;-o-border-radius: 5px;}
+.checkBoxDiv{float: left;background: #ddf2ff;width: 80%;border-radius: 5px;-webkit-border-radius: 5px;-ms-border-radius: 5px;-moz-border-radius: 5px;-o-border-radius: 5px;}
+.checkBoxDiv ul li{float: left;width:50%;color:#097bd3;line-height: 30px;border-bottom: 1px solid #097bd3;padding-left: 10px;}
+.checkBoxDiv ul li:hover{cursor: pointer;}
+.checkBoxDiv ul li:nth-child(7),.checkBoxDiv ul li:nth-child(8){/* border-bottom:none; */}
+.checkBoxDiv ul li span{float: right;display: inline-block;width: 10px;height: 10px;border: 1px solid #0384dd;margin: 10px;}
+.checkBoxDiv ul li.activeBg span{background: #0384dd;}
+.checkBoxDiv ul li:nth-child(odd){border-right:1px solid #097bd3;}
+button.insures{color: #0685dd;background: #fff;font-size: 14px;text-align: center;width: 70px;line-height: 30px;border: none;float: right;margin: 0px 32px;margin-bottom: 25px;border-radius: 5px;-webkit-border-radius: 5px;-ms-border-radius: 5px;-moz-border-radius: 5px;-o-border-radius: 5px;}
+.addRoleDiv{width:430px;background: url("../images/roleDivBG.png") no-repeat center;background-size: cover;position: fixed;top:50%;left:50%;transform: translate(-50%,-50%);-webkit-transform:  translate(-50%,-50%);-moz-transform:  translate(-50%,-50%);-ms-transform:  translate(-50%,-50%);-o-transform:  translate(-50%,-50%);z-index: 10000;box-shadow: 0 0 100px rgba(0,0,0,.2);-webkit-box-shadow: 0 0 100px rgba(0,0,0,.2);border-radius: 10px;-webkit-border-radius:10px;-moz-border-radius: 10px;-ms-border-radius: 10px;-o-border-radius: 10px;display: none;}

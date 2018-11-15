@@ -1,0 +1,17 @@
+.list-one{background: #ddf2ff;width: 100%;max-width: 100%; border: 0;font-size: 12px;}
+.list-one tr th{background: #cfecff;text-align: center;padding: 6px;cursor: pointer;color: #1e90e5;}
+.list-one tr td{text-align: center;padding: 6px;cursor: pointer;}
+.list-one tr td img{display: block;margin:0 auto; width: 10px;}
+.list-one tr td.td-but{color: #1e90e5;}
+.list-one tr:nth-child(2n){background:#cfecff;}
+
+.list-two{width:100%;margin-bottom: 0;}
+.list-two tr th,.list-two tr td{border: none;padding:0;color:#808182;font-size: 12px;text-align: center;line-height: 30px;font-weight: normal;}
+.list-two tr:nth-child(odd){background: #cfecff;}
+.list-two tr th{font-weight: bold;}
+.list-two td span.but {color: #1e90e5;cursor: pointer;}
+.list-two-page{width: 100%; padding:20px 0 10px; height: 63px;}
+.list-two-page .operating-but{float: left; margin: 0 10px;}
+.list-two-page .button-page{float: right;padding-right: 50px;}
+.list-two-page .button-page span,.list-two-page .operating-but span{display: inline-block;border: 1px solid #128de3;color:#128de3;font-size: 12px;padding: 7px 15px;cursor: pointer;border-radius: 5px;-webkit-border-radius: 5px;-ms-border-radius: 5px;-moz-border-radius: 5px;-o-border-radius: 5px;}
+.list-two-page .button-page span.activePage,.list-two-page .operating-but span.activePage{color:#fff;background: #128de3;}

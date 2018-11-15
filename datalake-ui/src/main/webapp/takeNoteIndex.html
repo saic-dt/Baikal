@@ -1,0 +1,293 @@
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <!--<link rel="stylesheet" href="css/style-base.css">-->
+    <link rel="stylesheet" href="frame/bootstrap/css/bootstrap.min.css"/>
+    <!--<link rel="stylesheet" href="css/style-public.css"/>-->
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/takeNote.css"/>
+    <link rel="stylesheet" href="css/takeSelect.css"/>
+
+    <title>数据资产管理</title>
+</head>
+<body>
+<div class="main">
+    <!--头部区域-->
+    <div class="main-top">
+        <div class="top-left fl">
+            <div class="logo-img">
+                <img src="images/logo.png"/>
+            </div>
+        </div>
+        <div class="top-right fl">
+            <ul class="clearfix">
+                <li><img src="images/shezhi.png"/></li>
+                <li><img src="images/email.png"/></li>
+                <li class="personName">
+                    <span id="username"></span>
+                    <div class="accountReplace">
+                        <a class="dropOut" onclick="logout();">退出账户</a>
+                    </div>
+                </li>
+                <li class="personal"><img src="images/personal.png"/></li>
+            </ul>
+        </div>
+    </div>
+    <!--主要区域-->
+    <div class="main-content main-contentH">
+        <!--左侧边栏-->
+        <div id="menu" class="main-left-menu fl">
+            <p class="copy_p">上海汽车集团股份有限公司版权所有</p>
+        </div>
+        <!--中间图标区-->
+        <div class="main-centre fl">
+            <div class="Content_banner">
+                <ol class="clearfix" id="labelOl">
+                    <li class="activeLi"><span class="glyphicon glyphicon-tag"></span>标签1</li>
+                    <li><span class="glyphicon glyphicon-tag"></span>标签2</li>
+                </ol>
+            </div>
+            <div class="labelContDiv" id="labelOne">
+                <div class="clearfix timeDiv">
+                    <div class="timeframe">
+                        <span>开始时间:</span>
+                        <input id="labelOneBeginDate" value=""/>
+                    </div>
+                    <div class="timeframe">
+                        <span>结束时间:</span>
+                        <input id="labelOneEndDate" value=""/>
+                    </div>
+                </div>
+                <div class="clearfix chartDiv">
+                    <div class="rukuDateNum rukuDateNumA">
+                        <div class="rukuNumDiv">
+                            <div class="rukuNum">
+                                <div id="labelOneE1" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rukudateDiv">
+                            <h5 id="labelOneD1H"></h5>
+                            <div class="rukuNum">
+                                <div id="labelOneD1" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rukuDateNum rukuDateNumB">
+                        <div class="rukuNumDiv">
+                            <div class="rukuNum">
+                                <div id="labelOneE2" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rukudateDiv">
+                            <h5 id="labelOneD2H"></h5>
+                            <div class="rukuNum">
+                                <div id="labelOneD2" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rukuDateNum rukuDateNumC">
+                        <div class="rukuNumDiv">
+                            <div class="rukuNum">
+                                <div id="labelOneE3" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rukudateDiv">
+                            <h5 id="labelOneD3H"></h5>
+                            <div class="rukuNum" id="dateOne">
+                                <div id="labelOneD3" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix chartDiv" style="padding-bottom: 10px;">
+                    <div class="rukuDateNum rukuDateNumA">
+                        <div class="rukuNumDiv">
+                            <div class="rukuNum">
+                                <div id="labelOneE4" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rukudateDiv">
+                            <h5 id="labelOneD4H"></h5>
+                            <div class="rukuNum">
+                                <div id="labelOneD4" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rukuDateNum rukuDateNumB">
+                        <div class="rukuNumDiv">
+                            <div class="rukuNum">
+                                <div id="labelOneE5" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rukudateDiv">
+                            <h5 id="labelOneD5H"></h5>
+                            <div class="rukuNum">
+                                <div id="labelOneD5" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rukuDateNum rukuDateNumC">
+                        <div class="rukuNumDiv">
+                            <div class="rukuNum">
+                                <div id="labelOneE6" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rukudateDiv">
+                            <h5 id="labelOneD6H"></h5>
+                            <div class="rukuNum" id="dateOne1">
+                                <div id="labelOneD6" class="rukuWidth">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="labelContDiv" id="labelTwo" style="display: none;">
+                <div class="clearfix  timeDiv">
+                    <div class="timeframe">
+                        <span>统计日期:</span>
+                        <input id="statisticsDate" value=""/>
+                    </div>
+                    <div class="timeframe">
+                        <span>归属企业:</span>
+                        <div class="ui-select span5">
+                            <div class="divSelect" id="selectDept"></div>
+                            <div class="pop-dialog full">
+                                <div class="pointer">
+                                    <div class="arrow"></div>
+                                    <div class="arrow_border"></div>
+                                </div>
+                                <div class="body">
+                                    <div class="settings">
+                                        <a href="javascript:void(0);" class="close-icon"><span
+                                                class="glyphicon glyphicon-remove-sign"></span></i></a>
+                                        <div class="items" id="enterpriseCont">
+                                            <div class="item">
+                                                <span class="glyphicon glyphicon-align-justify"></span>
+                                                <em>default</em>
+                                                <input type="checkbox" checked="checked" class="check">
+                                            </div>
+                                            <div class="item">
+                                                <span class="glyphicon glyphicon-align-justify"></span>
+                                                <em>DOL</em>
+                                                <input type="checkbox" class="check">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card-content table-responsive">
+                                <table class="table takenote_list takenote_list1" id="tableCase">
+                                    <thead class="text-warning">
+                                    <tr>
+                                        <th class="">统计日期</th>
+                                        <th class="">归属企业</th>
+                                        <th class="">数据库</th>
+                                        <th class="">数据库解释</th>
+                                        <th class="">记录条数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data_tongji">
+                    <p class="tongji_p">数据统计</p>
+                    <div class="clearfix timeDiv" style="margin: 0; padding-bottom: 20px;">
+                        <div class="timeframe">
+                            <span>开始时间:</span>
+                            <input id="labelTwoBeginDate" value=""/>
+                        </div>
+                        <div class="timeframe">
+                            <span>结束时间:</span>
+                            <input id="labelTwoEndDate" value=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="clmData">
+                    <div id="clmData1" style="width:100%;height:300px;"></div>
+                </div>
+            </div>
+        </div>
+        <!--右边区域-->
+        <div class="main-right fl">
+            <p class="right-title"><img src="images/shuju-icon.png" alt=""/><span id="tableNameSpan">DataBases</span>
+            </p>
+            <div class="screening">
+                <input type="text" value="" id="dataBaseSearch"/>
+                <img src="images/search.png" alt=""/>
+            </div>
+            <ul class="total-result" id="dataBaseList">
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="js/common/common.js"></script>
+<script type="text/javascript" src="js/lib/base64/jquery.base64.js"></script>
+<script type="text/javascript" src="js/common/data-lake-common.js"></script>
+<script type="text/javascript" src="js/lib/base64/jquery.base64.js"></script>
+<script type="text/javascript" src="js/echarts.js"></script>
+<script type="text/javascript" src="js/echart-all-3.js"></script>
+<script type="text/javascript" src="js/common/echarts-fun.js"></script>
+<!-- 日期控件 -->
+<link rel="stylesheet" type="text/css" href="js/lib/datetimepicker-master/jquery.datetimepicker.css"/>
+<script src="js/lib/datetimepicker-master/jquery.datetimepicker.full.js"></script>
+<!-- 日期控件end -->
+<script type="text/javascript" src="js/ServerManagement/takeNoteIndex.js"></script>
+<script type="text/javascript" src="js/constantData/ownershipEnterprise.js"></script>
+
+</body>
+</html>

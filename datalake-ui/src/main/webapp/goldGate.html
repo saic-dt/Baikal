@@ -1,0 +1,262 @@
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据链路监控面板</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="frame/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/list-common.css"/>
+    <link rel="stylesheet" href="css/goldGate.css"/>
+</head>
+<body>
+<div class="main">
+    <!--头部区域-->
+    <div class="main-top">
+        <div class="top-left fl">
+            <div class="logo-img">
+                <img src="images/logo.png"/>
+            </div>
+        </div>
+        <div class="top-right fl">
+            <ul class="clearfix">
+                <li><img src="images/shezhi.png"/></li>
+                <li><img src="images/email.png"/></li>
+                <li class="personName">
+                    <span id="username"></span>
+                    <div class="accountReplace">
+                        <a class="dropOut" onclick="logout();">退出账户</a>
+                    </div>
+                </li>
+                <li class="personal"><img src="images/personal.png"/></li>
+            </ul>
+        </div>
+    </div>
+    <!--主要区域-->
+    <div class="main-content main-contentH">
+        <!--左侧边栏-->
+        <div id="menu" class="main-left-menu fl">
+            <p class="copy_p">上海汽车集团股份有限公司版权所有</p>
+        </div>
+        <!--中间图标区-->
+        <div class="main-centre fl">
+            <div class="banner_dash">
+                <div class="banner_icon">
+                    <img src="images/background_center.png"/>
+                    <span class="center_span">数据链路监控面板</span>
+                </div>
+                <a class="href_aImg" style="cursor:pointer;" onclick="skipSuperior();"><img
+                        src="images/href_icon1.png"/></a>
+            </div>
+            <div class="modular-common gold-search">
+                <div class="modular-title">
+                    <div class="modular-title-name"><span>查询</span></div>
+                </div>
+                <div class="modular-content">
+                    <div class="inut_div">
+                        <input type="text" id="searchQuery" style="position: relative; z-index: 102;"/>
+                        <span class="glyphicon glyphicon-search" id="searchQueryGlyphicon"
+                              style="top:2px; z-index: 102;"></span>
+                    </div>
+                    <div class="sorting_box" id="searchQuerySorting" style="z-index: 102;">
+                        <div class="sorting">
+                            <ul class="clearfix">
+
+                            </ul>
+                        </div>
+                        <div class="lastLiAll">
+                            <p onclick="queryAjaxFun();" style="cursor: pointer;">查询</p>
+                            <p class="allDelete" onclick="cancelAll();" style="cursor: pointer;">全部取消</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="echart_div">
+                <div class="modular-common echart_qushi fl">
+                    <div class="modular-title">
+                        <div class="modular-title-name"><span>同步增量行数趋势</span></div>
+                    </div>
+                    <div class="modular-content">
+                        <div class="increment" id="OGGtend"></div>
+                    </div>
+                </div>
+                <div class="modular-common echart_tongji fl">
+                    <div class="modular-title">
+                        <div class="modular-title-name"><span>同步行数统计图</span></div>
+                    </div>
+                    <div class="modular-content">
+                        <div class="increment" id="OGGcount"></div>
+                        <div class="" id="OGGcount1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modular-common flow-list">
+                <div class="modular-title">
+                    <div class="modular-title-name"><span>流量列表</span></div>
+                </div>
+                <div class="modular-content">
+                    <table class="list-two" id="trafficList">
+                        <tr>
+                            <th>时间</th>
+                            <th>实例</th>
+                            <th>数据库</th>
+                            <th>表名</th>
+                            <th>insert</th>
+                            <th>update</th>
+                            <th>delete</th>
+                            <th>totals</th>
+                        </tr>
+                    </table>
+                    <div class="list-two-page">
+                        <div class="button-page">
+                            <span onclick="PreviousNextPage(1);">上一页</span>
+                            <span class="activePage" onclick="PreviousNextPage(0);">下一页</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modular-common" id="process_state">
+                <div class="modular-title">
+                    <div class="modular-title-name"><span>进程状态</span></div>
+                </div>
+                <div class="modular-content">
+                    <div class="process-status">
+                        <ol>
+                            <li><span id="e_process_rows">100</span><span> row/min</span></li>
+                            <li><span id="d_process_rows">100</span><span> row/min</span></li>
+                            <li><span id="r_process_rows">100</span><span> row/min</span></li>
+                        </ol>
+                        <ul>
+                            <li class="e-process"><span></span><img src="images/lianlu.png"/></li>
+                            <li class="d-process"><span></span><img src="images/lianlu.png"/></li>
+                            <li class="r-process"><span></span><img src="images/lianlu.png"/></li>
+                            <li class="d-l-process"><span>DataLake</span><img src="images/lianlu.png"/></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modular-common process-delay">
+                <div class="modular-title">
+                    <div class="modular-title-name"><span>进程延时趋势</span></div>
+                </div>
+                <div class="modular-content">
+                    <div class="timeDelay" id="timeDelay"></div>
+                </div>
+            </div>
+            <!--<div class="goldGate">
+                <div class="chaxun">
+                    <h4 class="configureTitle">查询</h4>
+                    <div class="inut_div">
+                        <input type="text" id="searchQuery" style="position: relative; z-index: 102;"/>
+                        <span class="glyphicon glyphicon-search" id="searchQueryGlyphicon" style="top:2px; z-index: 102;"></span>
+                    </div>
+                    <div class="sorting_box" id="searchQuerySorting" style="z-index: 102;">
+                        <div class="sorting">
+                            <ul class="clearfix">
+
+                            </ul>
+                        </div>
+                        <div class="lastLiAll">
+                            <p onclick="queryAjaxFun();" style="cursor: pointer;">查询</p><p class="allDelete"  onclick="cancelAll();" style="cursor: pointer;">全部取消</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="echart_div clearfix">
+                    <div class="echart_qushi fl">
+                        <h4 class="configureTitle h4Margin">同步增量行数趋势</h4>
+                        <div class="increment" id="OGGtend"></div>
+                    </div>
+                    <div class="echart_tongji fl">
+                        <h4 class="configureTitle h4Margin">同步行数统计图</h4>
+                        <div class="increment" id="OGGcount"></div>
+                        <div class="" id="OGGcount1"></div>
+                    </div>
+                </div>
+                <div class="progressTable">
+                    <h4 class="configureTitle h4Margin">流量列表</h4>
+                    <table class="table logTable" id="trafficList">
+                        <tr>
+                            <th>时间</th>
+                            <th>实例</th>
+                            <th>数据库</th>
+                            <th>表名</th>
+                            <th>insert</th>
+                            <th>update</th>
+                            <th>delete</th>
+                            <th>totals</th>
+                        </tr>
+
+                    </table>
+                    <div class="buttonPage">
+                        <span onclick="PreviousNextPage(1);">上一页</span>
+                        <span class="activePage" onclick="PreviousNextPage(0);">下一页</span>
+                    </div>
+                </div>
+                <div class="configureS" id="processState">
+                    <h4 class="configureTitle">进程状态</h4>
+                    <div class="process-status">
+                        <ol class="clearfix">
+                            <li><span id="eprocRows">100</span><span> row/min</span></li>
+                            <li><span id="dprocRows">100</span><span> row/min</span></li>
+                            <li><span id="rprocRows">100</span><span> row/min</span></li>
+                        </ol>
+                        <ul class="clearfix">
+                            <li class="eprocess"><span style="margin-left: -8px;"></span><img src="images/lianlu.png"/></li>
+                            <li class="dprocess"><span style="margin-left: -8px;"></span><img src="images/lianlu.png"/></li>
+                            <li class="rprocess"><span style="margin-left: 10px;"></span><img src="images/lianlu.png"/></li>
+                            <li class="lastLi"><span style="margin-left: -14px;">DataLake</span><img src="images/lianlu.png"/></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="echart_div clearfix">
+                    <h4 class="configureTitle h4Margin">进程延时趋势</h4>
+                    <div class="timeDelay" id="timeDelay"></div>
+                </div>
+            </div>-->
+
+        </div>
+        <!--右边区域-->
+        <div class="main-right fl">
+            <h4 class="title-h4">同步增量行数趋势</h4>
+            <div class="main-right-incremental">
+                <div id="tendency"></div>
+            </div>
+            <h4 class="title-h4 title-trend">趋势事件</h4>
+            <div class="main-right-trend">
+                <div class="history">
+                    <div class="history-date">
+                        <ul id="history-date-ul">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="maskDiv" id="searchMask"></div>
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="js/common/common.js"></script>
+<script type="text/javascript" src="js/lib/base64/jquery.base64.js"></script>
+<script type="text/javascript" src="js/common/data-lake-common.js"></script>
+<script type="text/javascript" src="js/echarts.js"></script>
+<script type="text/javascript" src="js/common/echarts-fun.js"></script>
+<script type="text/javascript" src="js/ServerManagement/goldGate.js"></script>
+<script type="text/javascript" src="js/ServerManagement/rightCommon.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="frame/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/list-common.css"/>
+    <link rel="stylesheet" href="css/dashborad.css"/>
+    <title>Dashboard</title>
+</head>
+<body>
+<div class="main">
+    <!--头部区域-->
+    <div class="main-top">
+        <div class="top-left fl">
+            <div class="logo-img">
+                <img src="images/logo.png"/>
+            </div>
+        </div>
+        <div class="top-right fl">
+            <ul class="clearfix">
+                <li><img src="images/shezhi.png"/></li>
+                <li><img src="images/email.png"/></li>
+                <li class="personName">
+                    <span id="username"></span>
+                    <div class="accountReplace">
+                        <a class="dropOut" onclick="logout();">退出账户</a>
+                    </div>
+                </li>
+                <li class="personal"><img src="images/personal.png"/></li>
+            </ul>
+        </div>
+    </div>
+    <!--主要区域-->
+    <div class="main-content main-contentH">
+        <!--左侧边栏-->
+        <div id="menu" class="main-left-menu fl">
+            <p class="copy_p">上海汽车集团股份有限公司版权所有</p>
+        </div>
+        <!--中间图标区-->
+        <div class="main-centre fl">
+            <div class="banner_dash">
+                <div class="banner_icon">
+                    <img src="images/background_icon.png"/>
+                    <span class="left_span">DOL</span>
+                    <span class="right_span">SMPV</span>
+                </div>
+                <a class="href_aImg" style="cursor: pointer;" onclick="skipSubordinate();"><img
+                        src="images/href_icon.png"/></a>
+            </div>
+            <div class="modular-common">
+                <div class="modular-title">
+                    <div class="modular-title-name"><span>已同步</span></div>
+                    <div class="modular-title-search fl">
+                        <input type="text" id="searchSync">
+                        <span class="search-ion"></span>
+                    </div>
+                </div>
+                <div class="modular-content">
+                    <table class="list-one">
+                        <tr class="list-charts-title">
+                            <th class="one-list">原表名</th>
+                            <th class="one-list" style=" width: 50%;">曲线表数据</th>
+                            <th class="two-list">重新同步</th>
+                            <!--<th class="two-list">沙盒同步</th>
+                            <th class="two-list" style="display: none;">编辑</th>-->
+                            <th class="two-list">删除</th>
+                        </tr>
+                    </table>
+                    <div class="rowScroll" id="syncScroll">
+                        <table class="list-one">
+                            <tbody id="text-warning-sync">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modular-common">
+                <div class="modular-title">
+                    <div class="modular-title-name"><span>未同步</span></div>
+                    <div class="modular-title-search fl">
+                        <input type="text" id="search">
+                        <span class="search-ion"></span>
+                    </div>
+                </div>
+                <div class="modular-content">
+                    <table class="list-one">
+                        <tr class="list-charts-title">
+                            <th class="one-list">原表名</th>
+                            <th class="one-list list-progess"></th>
+                            <th class="two-list">当前步骤</th>
+                            <th class="two-list" style="display: none;">编辑</th>
+                            <th class="two-list">同步</th>
+                        </tr>
+                    </table>
+                    <div class="rowScroll" id="unsyncScroll">
+                        <table class="list-one">
+                            <tbody id="text-warning-unsync">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="update_form">-->
+            <!--<div class="guolv">-->
+            <!--<p class="title_tb">已同步</p>-->
+            <!--<div>-->
+            <!--<input type="text" id="searchSync">-->
+            <!--<span class="glyphicon glyphicon-search"></span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="container-fluid">-->
+            <!--<div class="row">-->
+            <!--<div class="col-lg-12 col-md-12">-->
+            <!--<div class="table_div">-->
+            <!--<table class="table table-hover update_form_list list-charts">-->
+            <!--<thead class="text-warning">-->
+            <!--<tr  class="list-charts-title">-->
+            <!--<th class="one-list">原表名</th>-->
+            <!--<th class="one-list" style=" width: 40%;">曲线表数据</th>-->
+            <!--<th class="two-list" style="position: relative;">重新同步</th>-->
+            <!--<th class="two-list" style="position: relative;">沙盒同步</th>&lt;!&ndash;沙盒同步&ndash;&gt;-->
+            <!--<th class="two-list" style="display: none;">编辑</th>-->
+            <!--<th class="two-list">删除</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--</table>-->
+            <!--</div>-->
+            <!--<div class="card-content table-responsive">-->
+            <!--<div class="table_div rowScroll table-div-charts" id="syncScroll">-->
+            <!--<table class="table table-hover update_form_list list-charts">-->
+            <!--<tbody id="text-warning-sync">-->
+
+            <!--</tbody>-->
+            <!--</table>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="guolv">-->
+            <!--<p class="title_tb">未同步</p>-->
+            <!--<div>-->
+            <!--<input type="text" id="search">-->
+            <!--<span class="glyphicon glyphicon-search"></span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="container-fluid">-->
+            <!--<div class="row">-->
+            <!--<div class="col-lg-12 col-md-12">-->
+            <!--<div class="card-content table-responsive">-->
+            <!--<div class="table_div">-->
+            <!--<table class="table table-hover update_form_list">-->
+            <!--<thead class="text-warning">-->
+            <!--<tr>-->
+            <!--<th class="one-list">原表名</th>-->
+            <!--<th class="one-list list-progess"></th>-->
+            <!--<th class="two-list">当前步骤</th>-->
+            <!--<th class="two-list" style="display: none;">编辑</th>-->
+            <!--<th class="two-list">同步</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--</table>-->
+            <!--</div>-->
+            <!--<div class="table_div rowScroll" id="unsyncScroll">-->
+            <!--<table class="table table-hover update_form_list">-->
+            <!--<tbody id="text-warning-unsync">-->
+            <!--</tbody>-->
+            <!--</table>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+        <!--右边区域-->
+        <div class="main-right fl">
+            <h4 class="title-h4">同步增量行数趋势</h4>
+            <div class="main-right-incremental">
+                <div id="tendency"></div>
+            </div>
+            <h4 class="title-h4 title-trend">趋势事件</h4>
+            <div class="main-right-trend">
+                <div class="history">
+                    <div class="history-date">
+                        <ul id="history-date-ul">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--提示框-->
+<div class="angin_div angin_rely">
+</div>
+<!--沙盒同步弹框-->
+<div class="sandboxDiv">
+    <p class="title_role title_role2">沙盒同步</p>
+    <p class="title_error"></p>
+    <div class="sandboxNameDiv">
+        <span>原表名:</span>
+        <input type="text" value="" id="sandboxTable" disabled="disabled"/>
+    </div>
+    <div class="sandboxNameDiv">
+        <span>沙盒列表:</span>
+        <div class="checkBoxDiv">
+            <ul class="ulSelect" id="sandboxDivUl" style="min-height:20px;">
+            </ul>
+        </div>
+    </div>
+    <button class="insures sandboxInsure">确认</button>
+    <button class="insures sandboxCancel" style="margin-right: 0;">取消</button>
+</div>
+<!--遮罩层-->
+<div class="maskPosition"></div>
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="js/common/common.js"></script>
+<script type="text/javascript" src="js/lib/base64/jquery.base64.js"></script>
+<script type="text/javascript" src="js/common/data-lake-common.js"></script>
+<script type="text/javascript" src="js/echarts.js"></script>
+<script type="text/javascript" src="js/common/echarts-fun.js"></script>
+<script type="text/javascript" src="js/ServerManagement/dashboard.js"></script>
+<script type="text/javascript" src="js/ServerManagement/rightCommon.js"></script>
+</body>
+</html>
