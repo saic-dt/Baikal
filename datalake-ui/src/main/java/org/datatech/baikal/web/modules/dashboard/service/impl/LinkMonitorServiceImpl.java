@@ -39,7 +39,7 @@ import org.datatech.baikal.web.modules.dashboard.service.LinkMonitorService;
 import org.datatech.baikal.web.modules.dashboard.service.MetaService;
 import org.datatech.baikal.web.modules.dashboard.service.MonitorSchemaService;
 import org.datatech.baikal.web.modules.dashboard.service.MonitorTableService;
-import org.datatech.baikal.web.modules.external.PageModel;
+import org.datatech.baikal.web.external.PageModel;
 import org.datatech.baikal.web.utils.CollectionsUtil;
 import org.datatech.baikal.web.utils.EhcacheUtils;
 import org.datatech.baikal.web.utils.MonitorSchemaRowKeyFilter;

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.datatech.baikal.web.modules.external;
+package org.datatech.baikal.web.external;
 
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;

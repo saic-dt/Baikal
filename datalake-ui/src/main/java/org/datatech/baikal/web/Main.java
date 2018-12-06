@@ -12,32 +12,35 @@
  * limitations under the License.
  */
 
-package org.datatech.baikal.web.modules.external;
+package org.datatech.baikal.web;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.datatech.baikal.web.common.conf.Config;
 import org.datatech.baikal.web.entity.bean.TenantBean;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
 import org.datatech.baikal.web.modules.dashboard.service.SourceJdbcService;
 import org.datatech.baikal.web.modules.dashboard.service.TenantService;
 import org.datatech.baikal.web.utils.TaskTool.TaskTool;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.Banner;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
-/**
- * 启动服务
- */
-@Component
-public class StartService implements ApplicationListener<ContextRefreshedEvent> {
+import lombok.extern.slf4j.Slf4j;
 
-    private static final Log log = LogFactory.getLog(StartService.class);
+@SpringBootApplication(exclude = MongoAutoConfiguration.class)
+@Slf4j
+public class Main implements CommandLineRunner {
+
+    public static void main(String[] args) {
+        SpringApplication app = new SpringApplication(Main.class);
+        app.setBannerMode(Banner.Mode.OFF);
+        app.run(args);
+    }
 
     @Resource
     private SourceJdbcService sourceJdbcService;
@@ -46,26 +49,21 @@ public class StartService implements ApplicationListener<ContextRefreshedEvent> 
     private TenantService tenantService;
 
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent arg0) {
-        if (!Config.startIntoFlg) {
-
-            List<SourceJdbcBO> oracleList = new ArrayList<>();
-            try {
-                List<TenantBean> tenantList = tenantService.tenantList();
-                tenantList.forEach(v -> oracleList.addAll(queryAll(v.getTenantName())));
-                log.info("start init database connection pool...");
-                for (SourceJdbcBO sourceJdbc : oracleList) {
-                    log.info(String.format("create pool %s.%s  ing...", sourceJdbc.getINSTANCE_NAME(),
-                            sourceJdbc.getSCHEMA_NAME()));
-                    intoConntionPool(sourceJdbc);
-                }
-                log.info("end init database connection pool");
-            } catch (Exception e) {
-                e.printStackTrace();
+    public void run(String... args) {
+        List<SourceJdbcBO> oracleList = new ArrayList<>();
+        try {
+            List<TenantBean> tenantList = tenantService.tenantList();
+            tenantList.forEach(v -> oracleList.addAll(queryAll(v.getTenantName())));
+            log.info("start init database connection pool...");
+            for (SourceJdbcBO sourceJdbc : oracleList) {
+                log.info(String.format("create pool %s.%s  ing...", sourceJdbc.getINSTANCE_NAME(),
+                        sourceJdbc.getSCHEMA_NAME()));
+                intoConntionPool(sourceJdbc);
             }
-
+            log.info("end init database connection pool");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        Config.startIntoFlg = false;
     }
 
     private void intoConntionPool(SourceJdbcBO sourceJdbc) {

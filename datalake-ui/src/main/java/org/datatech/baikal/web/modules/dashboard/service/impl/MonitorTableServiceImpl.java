@@ -30,7 +30,7 @@ import org.datatech.baikal.web.entity.bean.TenantBean;
 import org.datatech.baikal.web.entity.bo.MonitorTableBO;
 import org.datatech.baikal.web.modules.dashboard.service.MonitorTableService;
 import org.datatech.baikal.web.modules.dashboard.service.TenantService;
-import org.datatech.baikal.web.modules.external.PageModel;
+import org.datatech.baikal.web.external.PageModel;
 import org.datatech.baikal.web.modules.sqlite.service.SqliteService;
 import org.datatech.baikal.web.utils.StringUtil;
 import org.datatech.baikal.web.vo.MonitorTableVO;

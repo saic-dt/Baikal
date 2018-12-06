@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.apache.web.filter.xss;
+package org.datatech.baikal.web.filter;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;

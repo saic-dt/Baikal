@@ -16,7 +16,7 @@ package org.datatech.baikal.web.modules.dashboard.service;
 
 import java.util.List;
 
-import org.datatech.baikal.web.modules.external.PageModel;
+import org.datatech.baikal.web.external.PageModel;
 import org.datatech.baikal.web.vo.MonitorTableVO;
 import org.datatech.baikal.web.vo.SourceDataFilterVO;
 

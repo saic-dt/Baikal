@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.apache.web.filter;
+package org.datatech.baikal.web.filter;
 
 import java.io.PrintWriter;
 import java.util.Map;
@@ -20,18 +20,19 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.datatech.baikal.web.common.conf.Enums;
 import org.datatech.baikal.web.common.validate.AjaxResponse;
 import org.datatech.baikal.web.utils.JsonUtil;
+import org.datatech.baikal.web.utils.StringUtil;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class LoginInterceptor extends HandlerInterceptorAdapter {
+import lombok.extern.slf4j.Slf4j;
 
-    private static final Log log = LogFactory.getLog(LoginInterceptor.class);
-
+@Slf4j
+@Component
+public class LoginInterceptor implements HandlerInterceptor {
     /**
      * 在业务处理器处理请求之前被调用 如果返回false 从当前的拦截器往回执行所有拦截器的afterCompletion(),再退出拦截器链 如果返回true
      * 执行下一个拦截器,直到所有的拦截器都执行完毕 再执行被拦截的Controller 然后进入拦截器链,
@@ -47,7 +48,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String requestURI = request.getRequestURI();
-        log.debug("url:" + requestURI);
+        log.info("url:" + requestURI);
         Map<String, String[]> print = request.getParameterMap();
         log.debug("开始打印传入的参数");
         for (Object key : print.keySet()) {
@@ -61,7 +62,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         }
         log.debug("打印参数结束");
 
-        if (request.getSession().getAttribute("user") == null) {
+        if (StringUtil.isNull(request.getSession().getAttribute("user"))) {
             log.info("--------------------Interceptor：跳转到login页面！-----------------");
             if (request.getHeader("x-requested-with") != null
                     && "XMLHttpRequest".equalsIgnoreCase(request.getHeader("x-requested-with"))) {

@@ -26,7 +26,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.datatech.baikal.web.common.exp.BizException;
-import org.datatech.baikal.web.modules.external.Constants;
+import org.datatech.baikal.web.external.Constants;
 import org.datatech.baikal.web.modules.sqlite.service.DBDDLService;
 import org.datatech.baikal.web.modules.sqlite.service.SqliteService;
 import org.datatech.baikal.web.utils.StringUtil;

@@ -22,16 +22,15 @@ import org.datatech.baikal.web.common.conf.Config;
 import org.datatech.baikal.web.common.conf.Enums;
 import org.datatech.baikal.web.entity.bo.MetaBO;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
-import org.datatech.baikal.web.modules.external.MongoDb;
-import org.datatech.baikal.web.modules.external.ZkHandler;
+import org.datatech.baikal.web.external.MongoDb;
+import org.datatech.baikal.web.external.SpringUtil;
+import org.datatech.baikal.web.external.ZkHandler;
 import org.datatech.baikal.web.utils.DataBaseUtil;
 import org.datatech.baikal.web.utils.EhcacheUtils;
 import org.datatech.baikal.web.utils.JsonUtil;
 import org.datatech.baikal.web.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
 
 /**
  * 获取数据库表的个数
@@ -96,8 +95,7 @@ public class TaskTool {
      * @return 已同步表的个数
      */
     public static Integer getTableCountSync(SourceJdbcBO sourceJdbcBO) {
-        WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
-        ZkHandler zkHandler = wac.getBean(ZkHandler.class);
+        ZkHandler zkHandler = SpringUtil.getBean(ZkHandler.class);
         int count = 0;
         final String tenantName = sourceJdbcBO.getTenantName();
         final String instance = sourceJdbcBO.getINSTANCE_NAME();
