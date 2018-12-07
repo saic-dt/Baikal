@@ -30,7 +30,7 @@ import org.datatech.baikal.web.common.conf.Config;
 import org.datatech.baikal.web.common.conf.Enums;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
 import org.datatech.baikal.web.entity.model.DBConnectionModel;
-import org.datatech.baikal.web.external.MongoDb;
+import org.datatech.baikal.web.core.MongoDb;
 
 /**
  * 数据库工具类

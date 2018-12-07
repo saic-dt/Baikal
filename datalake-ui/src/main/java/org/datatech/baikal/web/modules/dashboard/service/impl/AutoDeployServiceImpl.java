@@ -30,7 +30,7 @@ import org.datatech.baikal.web.entity.bean.SourceDbBean;
 import org.datatech.baikal.web.entity.model.ScheamMgRtDataModel;
 import org.datatech.baikal.web.entity.model.SchemaMagModel;
 import org.datatech.baikal.web.modules.dashboard.service.AutoDeployService;
-import org.datatech.baikal.web.external.ZkHandler;
+import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.utils.DataBaseUtil;
 import org.datatech.baikal.web.utils.JsonIterUtil;
 import org.datatech.baikal.web.utils.StringUtil;

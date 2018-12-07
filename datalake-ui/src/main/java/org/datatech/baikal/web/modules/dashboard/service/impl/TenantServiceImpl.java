@@ -32,7 +32,7 @@ import org.datatech.baikal.web.entity.User;
 import org.datatech.baikal.web.entity.bean.TenantBean;
 import org.datatech.baikal.web.modules.dashboard.service.OperationLogService;
 import org.datatech.baikal.web.modules.dashboard.service.TenantService;
-import org.datatech.baikal.web.external.ZkHandler;
+import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.utils.JsonIterUtil;
 import org.datatech.baikal.web.utils.JsonUtil;
 import org.datatech.baikal.web.utils.SecurityUtils;

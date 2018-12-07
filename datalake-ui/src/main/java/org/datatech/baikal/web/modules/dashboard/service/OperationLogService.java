@@ -17,7 +17,7 @@ package org.datatech.baikal.web.modules.dashboard.service;
 import java.util.List;
 
 import org.datatech.baikal.web.entity.bo.OperationLogBO;
-import org.datatech.baikal.web.external.PageModel;
+import org.datatech.baikal.web.core.PageModel;
 import org.datatech.baikal.web.vo.OperationLogVO;
 
 /**

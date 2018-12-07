@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 import org.datatech.baikal.web.common.validate.AjaxResponse;
 import org.datatech.baikal.web.modules.dashboard.service.DashboardService;
 import org.datatech.baikal.web.modules.dashboard.service.LinkMonitorService;
-import org.datatech.baikal.web.external.PageModel;
+import org.datatech.baikal.web.core.PageModel;
 import org.datatech.baikal.web.vo.EventVO;
 import org.datatech.baikal.web.vo.MonitorTableVO;
 import org.datatech.baikal.web.vo.SourceDataFilterVO;

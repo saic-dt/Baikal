@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.datatech.baikal.web.external;
+package org.datatech.baikal.web.core;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

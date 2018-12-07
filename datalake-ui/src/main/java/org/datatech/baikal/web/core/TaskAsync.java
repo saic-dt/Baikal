@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.datatech.baikal.web.external;
+package org.datatech.baikal.web.core;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -30,8 +30,6 @@ import org.datatech.baikal.web.entity.bo.EventBO;
 import org.datatech.baikal.web.entity.bo.MonitorSchemaBO;
 import org.datatech.baikal.web.entity.bo.MonitorTableBO;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
-import org.datatech.baikal.web.external.Constants;
-import org.datatech.baikal.web.external.MongoDb;
 import org.datatech.baikal.web.modules.dashboard.service.EventService;
 import org.datatech.baikal.web.modules.dashboard.service.MetaService;
 import org.datatech.baikal.web.modules.dashboard.service.MonitorSchemaService;

@@ -26,7 +26,7 @@ import org.datatech.baikal.web.common.validate.AjaxResponse;
 import org.datatech.baikal.web.entity.User;
 import org.datatech.baikal.web.entity.model.HostListModel;
 import org.datatech.baikal.web.modules.dashboard.api.base.BaseController;
-import org.datatech.baikal.web.external.Constants;
+import org.datatech.baikal.web.core.Constants;
 import org.datatech.baikal.web.modules.pcf.service.HostListService;
 import org.datatech.baikal.web.modules.pcf.service.UserService;
 import org.springframework.stereotype.Controller;

@@ -27,7 +27,7 @@ import org.datatech.baikal.web.common.conf.Config;
 import org.datatech.baikal.web.common.conf.Enums;
 import org.datatech.baikal.web.modules.dashboard.service.OperationLogService;
 import org.datatech.baikal.web.modules.dashboard.service.UserRoleService;
-import org.datatech.baikal.web.external.ZkHandler;
+import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.utils.SecurityUtils;
 import org.springframework.stereotype.Service;
 

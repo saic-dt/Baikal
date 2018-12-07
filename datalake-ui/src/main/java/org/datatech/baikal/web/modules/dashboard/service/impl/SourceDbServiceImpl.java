@@ -25,7 +25,7 @@ import org.apache.zookeeper.data.Stat;
 import org.datatech.baikal.web.common.conf.Config;
 import org.datatech.baikal.web.entity.SourceDb;
 import org.datatech.baikal.web.modules.dashboard.service.SourceDbService;
-import org.datatech.baikal.web.external.ZkHandler;
+import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.utils.StringUtil;
 import org.datatech.baikal.web.vo.DataManagerPageVO;
 import org.springframework.stereotype.Service;

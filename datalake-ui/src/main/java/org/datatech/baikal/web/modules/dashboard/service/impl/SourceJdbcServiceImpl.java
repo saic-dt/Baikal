@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 import org.apache.zookeeper.data.Stat;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
 import org.datatech.baikal.web.modules.dashboard.service.SourceJdbcService;
-import org.datatech.baikal.web.external.ZkHandler;
+import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.utils.DataBaseUtil;
 import org.datatech.baikal.web.utils.JsonUtil;
 import org.datatech.baikal.web.utils.SecurityUtils;

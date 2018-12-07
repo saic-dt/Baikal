@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.datatech.baikal.web.external;
+package org.datatech.baikal.web.core;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -29,7 +29,7 @@ import org.datatech.baikal.web.common.conf.Config;
 import org.datatech.baikal.web.common.conf.Enums;
 import org.datatech.baikal.web.common.exp.BizException;
 import org.datatech.baikal.web.entity.User;
-import org.datatech.baikal.web.external.ZkHandler;
+import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.modules.pcf.service.UserService;
 import org.datatech.baikal.web.utils.DateUtil;
 import org.datatech.baikal.web.utils.EhcacheUtils;
