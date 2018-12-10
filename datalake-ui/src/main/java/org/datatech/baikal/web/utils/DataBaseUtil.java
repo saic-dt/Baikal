@@ -50,8 +50,8 @@ public class DataBaseUtil {
     final static String LIKE = "%";
     /**
      * DB驱动字符串 MAP key DB_TYPE value 对应的 CLASS_NAME DB_TYPE 读取自
-     * org.datatech.baikal.web.common.conf.Enums CLASS_NAME 读取自
-     * org.datatech.baikal.web.common.conf.Config 配置类
+     * Enums CLASS_NAME 读取自
+     * Config 配置类
      */
     public static Map<String, String> DRIVE_CLASS_MAP = new ConcurrentHashMap<String, String>() {
         private static final long serialVersionUID = 2L;

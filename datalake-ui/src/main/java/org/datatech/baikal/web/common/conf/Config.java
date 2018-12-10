@@ -73,9 +73,6 @@ public class Config {
     public static String ZK_NAMESPACE = "datalake";
     //zk main task队列路径
     public static String PATH_QUEUE_MAIN_TASK = "/queue/main_task";
-    //初始化标记整合类 true 表示需要初始化
-    public static Boolean startIntoFlg = true;
-    public final String UNDERLINE_3 = "___";
 
     /**
      * 根据给定的步长输出时刻集合

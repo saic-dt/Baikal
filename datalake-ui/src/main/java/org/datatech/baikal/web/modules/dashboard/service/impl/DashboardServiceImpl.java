@@ -681,7 +681,7 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public List<JSONObject> getSyncDataTransferList(SourceDataFilterVO sd, int particleSize) throws Exception {
         final SimpleDateFormat HHmm = new SimpleDateFormat("HH:mm");
-        final String functionName = "org.datatech.baikal.web.modules.dashboard.service.impl.DashboardServiceImpl.getSyncDataTransferList";
+        final String functionName = "DashboardServiceImpl.getSyncDataTransferList";
         final String tenantName = SecurityUtils.getTenantName();
         List<JSONObject> reList = new ArrayList<>();
         JSONObject reObj = null;

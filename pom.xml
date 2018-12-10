@@ -31,6 +31,8 @@
         <module>task-framework</module>
         <module>datalake-merge</module>
         <module>datalake-ui</module>
+        <module>datalake-common</module>
+        <module>datalake-core</module>
     </modules>
 
     <repositories>
