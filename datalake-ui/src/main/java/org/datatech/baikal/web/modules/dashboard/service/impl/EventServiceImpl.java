@@ -23,7 +23,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.datatech.baikal.web.common.exp.BizException;
+import org.datatech.baikal.common.exp.BizException;
 import org.datatech.baikal.web.entity.bo.EventBO;
 import org.datatech.baikal.web.modules.dashboard.service.EventService;
 import org.datatech.baikal.web.modules.sqlite.service.SqliteService;

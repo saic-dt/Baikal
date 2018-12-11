@@ -16,10 +16,10 @@ package org.datatech.baikal.web.modules.dashboard.api;
 
 import java.util.List;
 
-import org.datatech.baikal.web.common.conf.Enums;
+import org.datatech.baikal.web.common.Enums;
 import org.datatech.baikal.web.common.validate.AjaxResponse;
-import org.datatech.baikal.web.modules.dashboard.service.OperationLogService;
 import org.datatech.baikal.web.core.PageModel;
+import org.datatech.baikal.web.modules.dashboard.service.OperationLogService;
 import org.datatech.baikal.web.vo.OperationLogVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

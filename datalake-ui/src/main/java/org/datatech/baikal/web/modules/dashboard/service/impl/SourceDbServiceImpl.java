@@ -22,10 +22,11 @@ import javax.annotation.Resource;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.data.Stat;
-import org.datatech.baikal.web.common.conf.Config;
+import org.datatech.baikal.common.Configuration;
+import org.datatech.baikal.web.common.Config;
+import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.entity.SourceDb;
 import org.datatech.baikal.web.modules.dashboard.service.SourceDbService;
-import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.utils.StringUtil;
 import org.datatech.baikal.web.vo.DataManagerPageVO;
 import org.springframework.stereotype.Service;
@@ -160,7 +161,7 @@ public class SourceDbServiceImpl implements SourceDbService {
     @Override
     public void dbDelete(String rowKey, String tenantName) throws Exception {
         CuratorFramework client = handler.getClient();
-        String[] tmp = rowKey.split(Config.DELIMITER);
+        String[] tmp = rowKey.split(Configuration.DELIMITER);
         String path = Config.ZK_NODE_METASTORE + "/" + tenantName + "/SourceDb" + "/" + tmp[0] + "/" + tmp[1];
         client.delete().guaranteed().deletingChildrenIfNeeded().forPath(path);
     }

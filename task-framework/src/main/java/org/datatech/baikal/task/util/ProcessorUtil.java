@@ -17,7 +17,7 @@ package org.datatech.baikal.task.util;
 import java.util.Random;
 
 import org.apache.commons.codec.binary.Base64;
-import org.datatech.baikal.task.Config;
+import org.datatech.baikal.common.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +28,7 @@ public class ProcessorUtil {
     private static final Logger logger = LoggerFactory.getLogger(ProcessorUtil.class);
 
     public static int getSeqFromPath(String path) {
-        return Integer.parseInt(path.substring(Config.PATH_SEQ_PREFIX.length()));
+        return Integer.parseInt(path.substring(Configuration.PATH_SEQ_PREFIX.length()));
     }
 
     /**

@@ -20,6 +20,7 @@ import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.queue.SimpleDistributedQueue;
 import org.apache.curator.retry.RetryOneTime;
 import org.apache.curator.utils.ZKPaths;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.task.Config;
 import org.datatech.baikal.task.common.BaseTask;
 import org.slf4j.Logger;
@@ -111,8 +112,9 @@ public class ZkHandler implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        client = CuratorFrameworkFactory.builder().retryPolicy(new RetryOneTime(10)).namespace(Config.ZK_NAMESPACE)
-                .ensembleProvider(new FixedEnsembleProvider(zookeeperQuorum)).connectionTimeoutMs(0).build();
+        client = CuratorFrameworkFactory.builder().retryPolicy(new RetryOneTime(10))
+                .namespace(Configuration.ZK_NAMESPACE).ensembleProvider(new FixedEnsembleProvider(zookeeperQuorum))
+                .connectionTimeoutMs(0).build();
         client.start();
         String queuePath;
         if (taskQueueIp != null) {
@@ -123,7 +125,8 @@ public class ZkHandler implements InitializingBean {
         logger.info("task queue path [{}]", queuePath);
         queueTask = new SimpleDistributedQueue(client, queuePath);
         queueTaskBackOut = new SimpleDistributedQueue(client, getQueuePath(Config.PATH_QUEUE_TASK_BACK_OUT));
-        ZooKeeperConfigurationSource zkConfigSource = new ZooKeeperConfigurationSource(client, Config.PATH_CONFIG);
+        ZooKeeperConfigurationSource zkConfigSource = new ZooKeeperConfigurationSource(client,
+                Configuration.PATH_CONFIG);
         zkConfigSource.start();
         DynamicWatchedConfiguration zkDynamicConfig = new DynamicWatchedConfiguration(zkConfigSource);
         ConfigurationManager.install(zkDynamicConfig);
@@ -250,9 +253,9 @@ public class ZkHandler implements InitializingBean {
      */
     public String getQueuePath(String path) {
         if (tenantName == null) {
-            return ZKPaths.makePath(Config.PATH_QUEUE, path);
+            return ZKPaths.makePath(Configuration.PATH_QUEUE, path);
         } else {
-            return ZKPaths.makePath(Config.PATH_QUEUE, tenantName, path);
+            return ZKPaths.makePath(Configuration.PATH_QUEUE, tenantName, path);
         }
     }
 }

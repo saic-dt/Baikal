@@ -23,8 +23,8 @@ import javax.annotation.Resource;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.data.Stat;
-import org.datatech.baikal.web.common.conf.Config;
-import org.datatech.baikal.web.common.conf.Enums;
+import org.datatech.baikal.web.common.Config;
+import org.datatech.baikal.web.common.Enums;
 import org.datatech.baikal.web.modules.dashboard.service.OperationLogService;
 import org.datatech.baikal.web.modules.dashboard.service.UserRoleService;
 import org.datatech.baikal.web.core.ZkHandler;

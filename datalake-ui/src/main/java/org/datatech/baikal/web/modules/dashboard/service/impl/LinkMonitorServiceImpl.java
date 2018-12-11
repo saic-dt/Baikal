@@ -29,8 +29,10 @@ import java.util.TreeMap;
 
 import javax.annotation.Resource;
 
-import org.datatech.baikal.web.common.conf.Config;
-import org.datatech.baikal.web.common.exp.BizException;
+import org.datatech.baikal.common.Configuration;
+import org.datatech.baikal.common.exp.BizException;
+import org.datatech.baikal.web.common.Config;
+import org.datatech.baikal.web.core.PageModel;
 import org.datatech.baikal.web.entity.MonitorSchema;
 import org.datatech.baikal.web.entity.bo.MetaBO;
 import org.datatech.baikal.web.entity.bo.MonitorTableBO;
@@ -39,7 +41,6 @@ import org.datatech.baikal.web.modules.dashboard.service.LinkMonitorService;
 import org.datatech.baikal.web.modules.dashboard.service.MetaService;
 import org.datatech.baikal.web.modules.dashboard.service.MonitorSchemaService;
 import org.datatech.baikal.web.modules.dashboard.service.MonitorTableService;
-import org.datatech.baikal.web.core.PageModel;
 import org.datatech.baikal.web.utils.CollectionsUtil;
 import org.datatech.baikal.web.utils.EhcacheUtils;
 import org.datatech.baikal.web.utils.MonitorSchemaRowKeyFilter;
@@ -104,7 +105,7 @@ public class LinkMonitorServiceImpl implements LinkMonitorService {
 
         // 含有零点时间戳的所有表名不重复的按照值取top5
         if (StringUtil.isNull(sdf.getSource_tables())) {
-            String prefixFilter = String.join(Config.DELIMITER, sdf.getSource_instance(), sdf.getSource_schema(),
+            String prefixFilter = String.join(Configuration.DELIMITER, sdf.getSource_instance(), sdf.getSource_schema(),
                     startTime);
             List<MonitorTableBO> tables = monitorTableService.listAllByFilter(prefixFilter, tenantName);
 
@@ -119,7 +120,7 @@ public class LinkMonitorServiceImpl implements LinkMonitorService {
             configBOs.forEach(x -> set.add(x.getSOURCE_TABLE()));
             Map<String, Long> comparMap = new HashMap<>();
             for (MonitorTableBO comObj : tables) {
-                String tableName = comObj.getRowKey().split(Config.DELIMITER)[3];
+                String tableName = comObj.getRowKey().split(Configuration.DELIMITER)[3];
                 if (set.contains(tableName)) {
                     if (StringUtil.isNull(comparMap.get(tableName))) {
                         comparMap.put(tableName, new BigDecimal(comObj.getTOTAL_ROWS()).longValue());
@@ -154,12 +155,13 @@ public class LinkMonitorServiceImpl implements LinkMonitorService {
         map.put("SOURCE_SCHEMA", sdf.getSource_schema());
         map.put("SOURCE_INSTANCE", sdf.getSource_instance());
         for (String tableName : source_tables) {
-            String prefixRowkey = String.join(Config.DELIMITER, sdf.getSource_instance(), sdf.getSource_schema());
-            String startRowkey = String.join(Config.DELIMITER, prefixRowkey, startTime, tableName);
-            String endRowkey = String.join(Config.DELIMITER, prefixRowkey, endTime, tableName);
+            String prefixRowkey = String.join(Configuration.DELIMITER, sdf.getSource_instance(),
+                    sdf.getSource_schema());
+            String startRowkey = String.join(Configuration.DELIMITER, prefixRowkey, startTime, tableName);
+            String endRowkey = String.join(Configuration.DELIMITER, prefixRowkey, endTime, tableName);
 
             // 缓存处理
-            final String cacheKey = String.join(Config.DELIMITER, functionName, sdf.getSource_instance(),
+            final String cacheKey = String.join(Configuration.DELIMITER, functionName, sdf.getSource_instance(),
                     sdf.getSource_schema(), SecurityUtils.getTenantName());
             List<MonitorTableBO> list = EhcacheUtils.getMonitorTbaleCache(cacheKey);
             if (list == null || list.size() == 0) {
@@ -176,11 +178,11 @@ public class LinkMonitorServiceImpl implements LinkMonitorService {
             Calendar calendar = Calendar.getInstance();
             HashMap<String, Long> srcDataMap = new HashMap<String, Long>(1000);
             for (MonitorTableBO data : list) {
-                if (!tableName.equals(data.getRowKey().split(Config.DELIMITER)[3])) {
+                if (!tableName.equals(data.getRowKey().split(Configuration.DELIMITER)[3])) {
                     continue;
                 }
                 String hourMin = DateFormatter
-                        .long2HHmm(new Timestamp(new Long(data.getRowKey().split(Config.DELIMITER)[2]) * 1000));
+                        .long2HHmm(new Timestamp(new Long(data.getRowKey().split(Configuration.DELIMITER)[2]) * 1000));
                 if (srcDataMap.containsKey(hourMin)) {
                     srcDataMap.put(hourMin, srcDataMap.get(hourMin) + data.getTOTAL_ROWS());
                 } else {
@@ -309,9 +311,9 @@ public class LinkMonitorServiceImpl implements LinkMonitorService {
         String startTime = yyyyMmDd.parse(yyyyMmDd.format(new Timestamp(currentTime))).getTime() / 1000 + "";
         String endTime = (currentTime) / 1000 + "";
 
-        String prefixRowkey = String.join(Config.DELIMITER, sdf.getSource_instance(), sdf.getSource_schema());
-        String startRowkey = String.join(Config.DELIMITER, prefixRowkey, startTime);
-        String endRowkey = String.join(Config.DELIMITER, prefixRowkey, endTime);
+        String prefixRowkey = String.join(Configuration.DELIMITER, sdf.getSource_instance(), sdf.getSource_schema());
+        String startRowkey = String.join(Configuration.DELIMITER, prefixRowkey, startTime);
+        String endRowkey = String.join(Configuration.DELIMITER, prefixRowkey, endTime);
         Map<String, String> map = new HashMap<>();
         map.put("SOURCE_SCHEMA", sdf.getSource_schema());
         map.put("SOURCE_INSTANCE", sdf.getSource_instance());
@@ -319,7 +321,7 @@ public class LinkMonitorServiceImpl implements LinkMonitorService {
         String tenantName = SecurityUtils.getTenantName();
 
         // 缓存处理
-        final String cacheKey = String.join(Config.DELIMITER, functionName, sdf.getSource_instance(),
+        final String cacheKey = String.join(Configuration.DELIMITER, functionName, sdf.getSource_instance(),
                 sdf.getSource_schema(), tenantName);
         // 从cache中拉取数据，拉取不到则从数据库中查询
         List<MonitorSchemaVO> list = EhcacheUtils.getMonitorTbaleCache(cacheKey);
@@ -334,7 +336,7 @@ public class LinkMonitorServiceImpl implements LinkMonitorService {
         for (MonitorSchemaVO data : MonitorSchemaRowKeyFilter.filterList(list)) {
 
             String hourMin = DateFormatter
-                    .long2HHmm(new Timestamp(new Long(data.getRowKey().split(Config.DELIMITER)[2]) * 1000));
+                    .long2HHmm(new Timestamp(new Long(data.getRowKey().split(Configuration.DELIMITER)[2]) * 1000));
             srcDataMap.put(hourMin, data);
         }
 
@@ -430,9 +432,9 @@ public class LinkMonitorServiceImpl implements LinkMonitorService {
         String tenantName = SecurityUtils.getTenantName();
         int interval = Integer.parseInt(timeRange);
         Map<String, Long> rangMillis = TimeRangeUtil.rangeMillis(interval);
-        String prefixRowkey = String.join(Config.DELIMITER, obj.getSource_instance(), obj.getSource_schema());
-        String startRowkey = String.join(Config.DELIMITER, prefixRowkey, rangMillis.get("startTime").toString());
-        String endRowkey = String.join(Config.DELIMITER, prefixRowkey, rangMillis.get("endTime").toString());
+        String prefixRowkey = String.join(Configuration.DELIMITER, obj.getSource_instance(), obj.getSource_schema());
+        String startRowkey = String.join(Configuration.DELIMITER, prefixRowkey, rangMillis.get("startTime").toString());
+        String endRowkey = String.join(Configuration.DELIMITER, prefixRowkey, rangMillis.get("endTime").toString());
         Map<String, String> map = new HashMap<>();
         map.put("SOURCE_SCHEMA", obj.getSource_schema());
         map.put("SOURCE_INSTANCE", obj.getSource_instance());
@@ -492,15 +494,16 @@ public class LinkMonitorServiceImpl implements LinkMonitorService {
         SimpleDateFormat yyyyMmDd = new SimpleDateFormat("yyyy-MM-dd");
         String startTime = yyyyMmDd.parse(yyyyMmDd.format(new Timestamp(currentTime))).getTime() / 1000 + "";
         String endTime = (currentTime) / 1000 + "";
-        String prefix = String.join(Config.DELIMITER, obj.getSource_instance(), obj.getSource_schema());
-        String prefixRowkey = String.join(Config.DELIMITER, prefix, startTime);
-        String prefixEndRowkey = String.join(Config.DELIMITER, prefix, endTime);
+        String prefix = String.join(Configuration.DELIMITER, obj.getSource_instance(), obj.getSource_schema());
+        String prefixRowkey = String.join(Configuration.DELIMITER, prefix, startTime);
+        String prefixEndRowkey = String.join(Configuration.DELIMITER, prefix, endTime);
         StringBuffer whereSql = new StringBuffer();
         if (!StringUtil.isNull(obj.getSource_tables())) {
             List<String> source_tables = Arrays.asList(obj.getSource_tables().split(","));
             whereSql.append(" and (");
             for (int i = 0; i < source_tables.size(); i++) {
-                whereSql.append(" RowKey like '%").append(Config.DELIMITER).append(source_tables.get(i)).append("'");
+                whereSql.append(" RowKey like '%").append(Configuration.DELIMITER).append(source_tables.get(i))
+                        .append("'");
                 if (i != source_tables.size() - 1) {
                     whereSql.append(" or ");
                 }
@@ -510,8 +513,8 @@ public class LinkMonitorServiceImpl implements LinkMonitorService {
         List<MetaBO> deleteTables = configService.listDeteteTables(obj.getSource_instance(), obj.getSource_schema());
         if (deleteTables.size() > 0) {
             for (MetaBO configBO : deleteTables) {
-                whereSql.append(" and RowKey not like '%").append(Config.DELIMITER).append(configBO.getSOURCE_TABLE())
-                        .append("'");
+                whereSql.append(" and RowKey not like '%").append(Configuration.DELIMITER)
+                        .append(configBO.getSOURCE_TABLE()).append("'");
             }
         }
 
@@ -519,8 +522,9 @@ public class LinkMonitorServiceImpl implements LinkMonitorService {
                 whereSql.toString());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (MonitorTableVO mt : alls) {
-            String tableName = mt.getRowKey().split(Config.DELIMITER)[3];
-            mt.setCreateTime(sdf.format(new Timestamp(Long.valueOf(mt.getRowKey().split(Config.DELIMITER)[2]) * 1000)));
+            String tableName = mt.getRowKey().split(Configuration.DELIMITER)[3];
+            mt.setCreateTime(
+                    sdf.format(new Timestamp(Long.valueOf(mt.getRowKey().split(Configuration.DELIMITER)[2]) * 1000)));
             mt.setSource_table(tableName);
             mt.setSource_instance(obj.getSource_instance());
             mt.setSource_schema(obj.getSource_schema());

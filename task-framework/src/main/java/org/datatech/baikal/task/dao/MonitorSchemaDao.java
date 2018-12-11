@@ -14,7 +14,7 @@
 package org.datatech.baikal.task.dao;
 
 import org.apache.commons.httpclient.NameValuePair;
-import org.datatech.baikal.task.Config;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.task.util.MonitorUtil;
 import org.datatech.baikal.task.util.RestfulUtil;
 import org.datatech.baikal.task.util.ZkHandler;
@@ -48,8 +48,8 @@ public class MonitorSchemaDao {
      */
     public void insertSchemaStats(String dateTimeStr, String instanceName, String schemaName, String procType,
             String procName, String procStatus, String procLag, String procCheckpoint, String procRows) {
-        String rowkey = String.join(Config.DELIMITER, instanceName, schemaName, MonitorUtil.getTimestamp(dateTimeStr),
-                procName);
+        String rowkey = String.join(Configuration.DELIMITER, instanceName, schemaName,
+                MonitorUtil.getTimestamp(dateTimeStr), procName);
         String tenantName = handler.getTenantName();
         NameValuePair[] data = { new NameValuePair("PROC_CHECKPOINT", procCheckpoint),
                 new NameValuePair("PROC_LAG", procLag), new NameValuePair("PROC_STATUS", procStatus),

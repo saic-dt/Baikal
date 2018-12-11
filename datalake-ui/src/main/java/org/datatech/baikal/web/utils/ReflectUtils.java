@@ -36,7 +36,7 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.DynaProperty;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.datatech.baikal.web.common.exp.SysException;
+import org.datatech.baikal.common.exp.SysException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

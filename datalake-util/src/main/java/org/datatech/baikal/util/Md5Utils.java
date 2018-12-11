@@ -12,16 +12,11 @@
  * limitations under the License.
  */
 
-package org.datatech.baikal.web.utils.security;
+package org.datatech.baikal.util;
 
 import java.security.MessageDigest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class Md5Utils {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(Md5Utils.class);
 
     private static byte[] md5(String s) {
         MessageDigest algorithm;
@@ -32,7 +27,7 @@ public class Md5Utils {
             byte[] messageDigest = algorithm.digest();
             return messageDigest;
         } catch (Exception e) {
-            LOGGER.error("MD5 Error...", e);
+            e.printStackTrace();
         }
         return null;
     }
@@ -57,7 +52,7 @@ public class Md5Utils {
         try {
             return new String(toHex(md5(s)).getBytes("UTF-8"), "UTF-8");
         } catch (Exception e) {
-            LOGGER.error("not supported charset...{}", e);
+            e.printStackTrace();
             return s;
         }
     }

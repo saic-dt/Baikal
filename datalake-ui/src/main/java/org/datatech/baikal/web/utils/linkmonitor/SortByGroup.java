@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.datatech.baikal.web.common.conf.Config;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.web.entity.MonitorSchema;
 import org.datatech.baikal.web.entity.model.LinkMonitorStateModel;
 
@@ -46,7 +46,7 @@ public class SortByGroup {
 
     private static void putMap(MonitorSchema bean, Map<Long, MonitorSchema> eMap, Map<Long, MonitorSchema> dMap,
             Map<Long, MonitorSchema> rMap) {
-        final String[] keys = bean.getRow_key().split(Config.DELIMITER);
+        final String[] keys = bean.getRow_key().split(Configuration.DELIMITER);
         if (keys == null || keys.length < 4) {
             return;
         }

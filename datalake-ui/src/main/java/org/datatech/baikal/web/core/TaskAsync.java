@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
-import org.datatech.baikal.web.common.conf.Config;
-import org.datatech.baikal.web.common.conf.Enums;
+import org.datatech.baikal.common.Configuration;
+import org.datatech.baikal.web.common.Enums;
 import org.datatech.baikal.web.entity.bo.EventBO;
 import org.datatech.baikal.web.entity.bo.MonitorSchemaBO;
 import org.datatech.baikal.web.entity.bo.MonitorTableBO;
@@ -78,7 +78,7 @@ public class TaskAsync {
             count = MongoDb.getDocumentCount(sourceJdbcBO.getSCHEMA_NAME(), uri, sourceData.getSource_table());
         } else {
             Connection connection = DataBaseUtil.getConnentByClassPool(sourceJdbcBO.getJDBC_URL(),
-                    sourceJdbcBO.getUSER(), sourceJdbcBO.getPASSWORD(), Config.JDBC_CLASS_NAME_MYSQL);
+                    sourceJdbcBO.getUSER(), sourceJdbcBO.getPASSWORD(), Configuration.JDBC_CLASS_NAME_MYSQL);
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select count(*) from " + sourceData.getSource_table());
 
@@ -118,7 +118,7 @@ public class TaskAsync {
                 obj.put("DDL_CHANGED", "0");
                 configService.save(obj.toString(), SecurityUtils.getTenantName(), sourceData);
 
-                String mtt_row_key = String.join(Config.DELIMITER, instance, schema,
+                String mtt_row_key = String.join(Configuration.DELIMITER, instance, schema,
                         String.valueOf(currentTimeMillis / 1000), table);
 
                 MonitorTableBO monitorTableBO = new MonitorTableBO();
@@ -131,7 +131,7 @@ public class TaskAsync {
                 monitorTableBO.setTenantName(tenantName);
                 monitorTableService.save(monitorTableBO);
 
-                String row_key = String.join(Config.DELIMITER, instance, schema,
+                String row_key = String.join(Configuration.DELIMITER, instance, schema,
                         String.valueOf(currentTimeMillis / 1000), "RKAFKASS");
 
                 MonitorSchemaBO monitorSchemaBO = new MonitorSchemaBO();

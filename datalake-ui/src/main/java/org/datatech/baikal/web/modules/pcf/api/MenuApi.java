@@ -18,7 +18,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.datatech.baikal.web.common.conf.Config;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.web.common.validate.AjaxResponse;
 import org.datatech.baikal.web.entity.Menu;
 import org.datatech.baikal.web.modules.pcf.service.MenuService;
@@ -48,7 +48,7 @@ public class MenuApi {
             List<Menu> set = menuService.get();
             JSONObject obj = new JSONObject();
             obj.put("elements", set);
-            obj.put("isAdmin", Config.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName()));
+            obj.put("isAdmin", Configuration.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName()));
             return AjaxResponse.success("获取菜单成功", obj);
         } catch (Exception e) {
             e.printStackTrace();

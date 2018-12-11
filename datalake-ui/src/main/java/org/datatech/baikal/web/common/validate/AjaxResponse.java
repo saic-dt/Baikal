@@ -21,7 +21,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import org.datatech.baikal.web.common.exp.BizException;
+import org.datatech.baikal.common.exp.BizException;
 
 /**
  * web 控制层返回的对象

@@ -24,13 +24,13 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.datatech.baikal.web.common.conf.Config;
-import org.datatech.baikal.web.common.exp.BizException;
+import org.datatech.baikal.common.Configuration;
+import org.datatech.baikal.common.exp.BizException;
+import org.datatech.baikal.web.core.PageModel;
 import org.datatech.baikal.web.entity.bean.TenantBean;
 import org.datatech.baikal.web.entity.bo.MonitorTableBO;
 import org.datatech.baikal.web.modules.dashboard.service.MonitorTableService;
 import org.datatech.baikal.web.modules.dashboard.service.TenantService;
-import org.datatech.baikal.web.core.PageModel;
 import org.datatech.baikal.web.modules.sqlite.service.SqliteService;
 import org.datatech.baikal.web.utils.StringUtil;
 import org.datatech.baikal.web.vo.MonitorTableVO;
@@ -226,18 +226,21 @@ public class MonitorTableServiceImpl implements MonitorTableService {
                 connection = sqliteService.getMonitorConnection(te.getTenantName());
                 state = connection.createStatement();
                 StringBuffer sql = new StringBuffer();
-                sql.append("select substr(substr(substr(RowKey,instr(RowKey,'" + Config.DELIMITER + "')+1),"
-                        + "instr(substr(RowKey,instr(RowKey,'" + Config.DELIMITER + "')+1),'" + Config.DELIMITER
-                        + "')+1)," + "instr(substr( substr(RowKey,instr(RowKey,'" + Config.DELIMITER + "')+1),"
-                        + "instr(substr(RowKey,instr(RowKey,'" + Config.DELIMITER + "')+1),'" + Config.DELIMITER
-                        + "')+1),'" + Config.DELIMITER + "')+1) as `table`," + "substr(RowKey,0,instr(RowKey,'"
-                        + Config.DELIMITER + "')) as `instance`,substr(substr(RowKey,instr(RowKey,'" + Config.DELIMITER
-                        + "')+1),0," + "instr(substr(RowKey,instr(RowKey,'" + Config.DELIMITER + "')+1),'"
-                        + Config.DELIMITER + "')) as `schema`," + "max(substr(substr(substr(RowKey,instr(RowKey,'"
-                        + Config.DELIMITER + "')+1)," + "instr(substr(RowKey,instr(RowKey,'" + Config.DELIMITER
-                        + "')+1),'" + Config.DELIMITER + "')+1),0," + "instr(substr(substr(RowKey,instr(RowKey,'"
-                        + Config.DELIMITER + "')+1)," + "instr(substr(RowKey,instr(RowKey,'" + Config.DELIMITER
-                        + "')+1),'" + Config.DELIMITER + "')+1),'" + Config.DELIMITER + "'))) as `timestamp`,"
+                sql.append("select substr(substr(substr(RowKey,instr(RowKey,'" + Configuration.DELIMITER + "')+1),"
+                        + "instr(substr(RowKey,instr(RowKey,'" + Configuration.DELIMITER + "')+1),'"
+                        + Configuration.DELIMITER + "')+1)," + "instr(substr( substr(RowKey,instr(RowKey,'"
+                        + Configuration.DELIMITER + "')+1)," + "instr(substr(RowKey,instr(RowKey,'"
+                        + Configuration.DELIMITER + "')+1),'" + Configuration.DELIMITER + "')+1),'"
+                        + Configuration.DELIMITER + "')+1) as `table`," + "substr(RowKey,0,instr(RowKey,'"
+                        + Configuration.DELIMITER + "')) as `instance`,substr(substr(RowKey,instr(RowKey,'"
+                        + Configuration.DELIMITER + "')+1),0," + "instr(substr(RowKey,instr(RowKey,'"
+                        + Configuration.DELIMITER + "')+1),'" + Configuration.DELIMITER + "')) as `schema`,"
+                        + "max(substr(substr(substr(RowKey,instr(RowKey,'" + Configuration.DELIMITER + "')+1),"
+                        + "instr(substr(RowKey,instr(RowKey,'" + Configuration.DELIMITER + "')+1),'"
+                        + Configuration.DELIMITER + "')+1),0," + "instr(substr(substr(RowKey,instr(RowKey,'"
+                        + Configuration.DELIMITER + "')+1)," + "instr(substr(RowKey,instr(RowKey,'"
+                        + Configuration.DELIMITER + "')+1),'" + Configuration.DELIMITER + "')+1),'"
+                        + Configuration.DELIMITER + "'))) as `timestamp`,"
                         + "sum(insert_rows) as insert_sum,sum(UPDATE_ROWS) as update_sum,sum(DELETE_ROWS) as delete_sum,"
                         + "sum(total_rows) as totals from MonitorTable group by  `schema`,`instance`,`table` order by `schema`,`instance`,`table`");
                 set = state.executeQuery(sql.toString());
@@ -246,7 +249,7 @@ public class MonitorTableServiceImpl implements MonitorTableService {
                 Map<String, List<JSONObject>> dataMap = new HashMap<>();
                 while (set.next()) {
                     jsonObject = new JSONObject();
-                    String key = set.getString("instance") + Config.DELIMITER + set.getString("schema");
+                    String key = set.getString("instance") + Configuration.DELIMITER + set.getString("schema");
                     if (StringUtil.isNull(dataMap.get(key))) {
                         tables = new ArrayList<>();
                     } else {
@@ -259,12 +262,12 @@ public class MonitorTableServiceImpl implements MonitorTableService {
                     jsonObject.put("timestamp", set.getLong("timestamp"));
                     jsonObject.put("totals", set.getLong("totals"));
                     tables.add(jsonObject);
-                    dataMap.put(set.getString("instance") + Config.DELIMITER + set.getString("schema"), tables);
+                    dataMap.put(set.getString("instance") + Configuration.DELIMITER + set.getString("schema"), tables);
                 }
                 for (Map.Entry<String, List<JSONObject>> entry : dataMap.entrySet()) {
                     instanceSchema = new JSONObject();
-                    instanceSchema.put("instance", entry.getKey().split(Config.DELIMITER)[0]);
-                    instanceSchema.put("schema", entry.getKey().split(Config.DELIMITER)[1]);
+                    instanceSchema.put("instance", entry.getKey().split(Configuration.DELIMITER)[0]);
+                    instanceSchema.put("schema", entry.getKey().split(Configuration.DELIMITER)[1]);
                     instanceSchema.put("tables", entry.getValue());
                     elements.add(instanceSchema);
                 }

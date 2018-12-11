@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.datatech.baikal.web.common.conf;
+package org.datatech.baikal.web.common;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,57 +20,19 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Config {
-    /**
-     *  关系型数据库驱动类
-     */
-    public static final String JDBC_CLASS_NAME_ORACLE = "oracle.jdbc.driver.OracleDriver";
-    public static final String JDBC_CLASS_NAME_DB2 = "com.ibm.db2.jcc.DB2Driver";
-    public static final String JDBC_CLASS_NAME_MYSQL = "com.mysql.cj.jdbc.Driver";
-    public static final String JDBC_CLASS_NAME_SQL_SERVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    /**
-     *  默认租户
-     */
-
-    public static final String DEFAULT_TBL_NAMESPACE = "datalake";
-    public static final String DEFAULT_WILDCARD = "%";
     //metastore node path
     public static final String ZK_NODE_METASTORE = "/metastore";
     public static final String ZK_NODE_USER = "/users";
     public static final String ZK_NODE_TENANT = "/tenant";
-    //ACL node path
-    public static final String ZK_ACL_FORMATE = "/metastore/%s/meta/%s/%s/%s/ACL";
-    //table node path
-    public static final String ZK_META_FORMATE = "/metastore/%s/meta/%s/%s/%s";
     public static final int REMINDER_TIME = 7;
     public static final int FAILURE_NUMBER = 5;
     public static final int PASSWORD_GROUP_SIZE = 6;
-    //sandbox node path
-    public static final String SANDBOX_BASIS_PATH = "/sandbox";
-    //sandbox sync table node path
-    public static final String SANDBOX_INFO_PATH_TEMP = "/sandbox/%s/%s___%s___%s___%s";
-    //sandbox name node path
-    public static final String SANDBOX_PATH_TEMP = "/sandbox/%s";
-    //sandbox table name format
-    public static final String SANDBOX_MATCH_TEMP = "%s___%s___%s___%s";
     public static final String LINE_3 = "---";
     //task prefix
     public static final String TASK_PREFIX = "/task_";
-    //table 表结构发送改变 通知zk节点
-    public static final String PATH_NOTIFY_ACL = "notify_acl";
     public static String BACKSLASH = "/"; // char 10 used for delimiter
-    public static String DELIMITER = "\n"; // char 10 used for delimiter
-    //源数据库为关系型数据库生成的节点
-    public static String PATH_SCHEMA = "schema";
     //源数据库为mongo数据库时生成的mongo节点
     public static String PATH_MONGO_SCHEMA = "mongo-schema";
-    //zk 队列中节点序号前缀
-    public static String PATH_SEQ_PREFIX = "seq-";
-    //zk 配置文件路径
-    public static String PATH_CONFIG = "/config";
-    //zk queue
-    public static String PATH_QUEUE = "/queue";
-    //zk默认空间
-    public static String ZK_NAMESPACE = "datalake";
     //zk main task队列路径
     public static String PATH_QUEUE_MAIN_TASK = "/queue/main_task";
 

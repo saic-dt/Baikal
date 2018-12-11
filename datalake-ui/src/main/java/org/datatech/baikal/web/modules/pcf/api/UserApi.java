@@ -18,7 +18,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.datatech.baikal.web.common.conf.Config;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.web.common.validate.AjaxResponse;
 import org.datatech.baikal.web.entity.User;
 import org.datatech.baikal.web.modules.dashboard.service.impl.TenantServiceImpl;
@@ -42,7 +42,7 @@ public class UserApi {
     @RequestMapping("/delete")
     @ResponseBody
     public AjaxResponse deleteUser(String[] rowKey) {
-        if (!Config.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
+        if (!Configuration.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
             return AjaxResponse.fail("你所在租户无权执行该操作");
         }
         try {
@@ -57,7 +57,7 @@ public class UserApi {
     @RequestMapping("/list")
     @ResponseBody
     public AjaxResponse userList() {
-        if (!Config.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
+        if (!Configuration.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
             return AjaxResponse.fail("你所在租户无权执行该操作");
         }
         List<JSONObject> userList;
@@ -73,7 +73,7 @@ public class UserApi {
     @RequestMapping("/add")
     @ResponseBody
     public AjaxResponse addUser(User user) {
-        if (!Config.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
+        if (!Configuration.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
             return AjaxResponse.fail("你所在租户无权执行该操作");
         }
         try {
@@ -88,7 +88,7 @@ public class UserApi {
     @RequestMapping("/get")
     @ResponseBody
     public AjaxResponse getUser(String rowkey) {
-        if (!Config.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
+        if (!Configuration.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
             return AjaxResponse.fail("你所在租户无权执行该操作");
         }
         try {

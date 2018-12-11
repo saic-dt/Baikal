@@ -20,10 +20,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
-import org.datatech.baikal.web.utils.JsonUtil;
+import org.datatech.baikal.util.JsonUtil;
 import org.datatech.baikal.web.utils.StringUtil;
 
 import com.mongodb.MongoClient;
@@ -70,8 +71,11 @@ public class MongoDb {
         MongoDatabase db = client.getDatabase(databaseName);
         MongoCollection<Document> collection = db.getCollection(collectionName);
         Document document = collection.find().first();
-        String jsonString = document.toJson();
-        Map<String, String> map = JsonUtil.getMap4Json(jsonString);
+        Map<String, String> map = new HashedMap();
+        if(StringUtil.isNotEmpty(document)) {
+            String jsonString = document.toJson();
+            map = JsonUtil.getMap4Json(jsonString);
+        }
         return map;
     }
 

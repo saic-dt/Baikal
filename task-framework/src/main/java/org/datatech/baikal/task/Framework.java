@@ -28,6 +28,7 @@ import org.apache.curator.utils.ZKPaths;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.data.Stat;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.task.common.BaseTask;
 import org.datatech.baikal.task.common.DbType;
 import org.datatech.baikal.task.common.SourceDb;
@@ -154,8 +155,7 @@ public class Framework {
         if (ts != null) {
             if (ts.getFailedTask() != null) {
                 currentTask = ts.getFailedTask();
-                int maxTaskRetry = Config.getIntProperty(Config.CFG_MAX_TASK_RETRY,
-                        Config.DEFAULT_MAX_TASK_RETRY);
+                int maxTaskRetry = Config.getIntProperty(Config.CFG_MAX_TASK_RETRY, Config.DEFAULT_MAX_TASK_RETRY);
                 if (currentTask.getRetryCount() >= maxTaskRetry) {
                     logger.info("the failed task [{}] has reached max retry count [{}], discarded",
                             currentTask.toJson(), maxTaskRetry);
@@ -164,7 +164,7 @@ public class Framework {
                     String schemaName = currentTask.getSchemaName();
                     String tableName = currentTask.getTableName();
                     if ((instanceName != null) && (schemaName != null) && (tableName != null)) {
-                        String configRowKey = String.join(Config.DELIMITER, instanceName, schemaName, tableName);
+                        String configRowKey = String.join(Configuration.DELIMITER, instanceName, schemaName, tableName);
                         int flagValue;
                         switch (currentTask.getTaskType()) {
                         case MAIN_TASK:

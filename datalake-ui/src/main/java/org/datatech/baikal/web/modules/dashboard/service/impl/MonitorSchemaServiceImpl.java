@@ -24,7 +24,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.datatech.baikal.web.common.exp.BizException;
+import org.datatech.baikal.common.exp.BizException;
 import org.datatech.baikal.web.entity.bo.MonitorSchemaBO;
 import org.datatech.baikal.web.modules.dashboard.service.MonitorSchemaService;
 import org.datatech.baikal.web.modules.sqlite.service.SqliteService;

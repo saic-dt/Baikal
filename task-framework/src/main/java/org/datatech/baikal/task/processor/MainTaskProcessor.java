@@ -15,6 +15,7 @@ package org.datatech.baikal.task.processor;
 
 import org.apache.curator.utils.ZKPaths;
 import org.apache.zookeeper.CreateMode;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.task.Config;
 import org.datatech.baikal.task.common.BaseTask;
 import org.datatech.baikal.task.common.MetaConfig;
@@ -69,7 +70,7 @@ public class MainTaskProcessor extends BaseTaskProcessor {
         String schemaName = task.getSchemaName();
         String tableName = task.getTableName();
         String seqPrefixPath = zkHandler.getSchemaPath(tenantName, instanceName, schemaName, Config.PATH_PREFIX_SEQ,
-                Config.PATH_SEQ_PREFIX, Config.PATH_SCHEMA);
+                Configuration.PATH_SEQ_PREFIX, Configuration.PATH_SCHEMA);
         String seqPath = zkHandler.getClient().create().creatingParentsIfNeeded()
                 .withMode(CreateMode.PERSISTENT_SEQUENTIAL).forPath(seqPrefixPath);
         String seqNode = ZKPaths.getNodeFromPath(seqPath);
@@ -116,16 +117,16 @@ public class MainTaskProcessor extends BaseTaskProcessor {
             logger.info("job failed due to spark job process failed");
             return;
         }
-        String schemaPrefix = Config.PATH_SCHEMA;
+        String schemaPrefix = Configuration.PATH_SCHEMA;
         if (sourceJdbc != null) {
             if (Config.DB_TYPE_MONGO.equals(sourceJdbc.getDB_TYPE().name())) {
-                schemaPrefix = Config.PATH_MONGO_SCHEMA;
+                schemaPrefix = Configuration.PATH_MONGO_SCHEMA;
             } else if (Config.DB_TYPE_MYSQL.equals(sourceJdbc.getDB_TYPE().name()) && sourceJdbc.getUSE_CANAL()) {
-                schemaPrefix = Config.PATH_MYSQL_SCHEMA;
+                schemaPrefix = Configuration.PATH_MYSQL_SCHEMA;
             }
         }
         seqPrefixPath = zkHandler.getSchemaPath(tenantName, instanceName, schemaName, Config.PATH_NOTIFY,
-                Config.PATH_SEQ_PREFIX, schemaPrefix);
+                Configuration.PATH_SEQ_PREFIX, schemaPrefix);
         seqPath = zkHandler.getClient().create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT_SEQUENTIAL)
                 .forPath(seqPrefixPath, Bytes.toBytes(secondaryTask.toJson()));
         logger.info("created zk sequential node [{}] and notified application adapter", seqPath);

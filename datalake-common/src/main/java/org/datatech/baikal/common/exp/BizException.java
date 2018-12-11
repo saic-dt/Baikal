@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.datatech.baikal.web.common.exp;
+package org.datatech.baikal.common.exp;
 
 /**
  * 异常信息处理类

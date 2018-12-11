@@ -18,9 +18,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.datatech.baikal.mongosync.bean.ConfigBO;
-import org.datatech.baikal.mongosync.util.JsonUtil;
 import org.datatech.baikal.mongosync.util.SpringUtil;
 import org.datatech.baikal.mongosync.util.ZkHandler;
+import org.datatech.baikal.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -23,6 +23,7 @@ import org.apache.spark.launcher.SparkAppHandle;
 import org.apache.spark.launcher.SparkLauncher;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.task.Config;
 import org.datatech.baikal.task.common.BaseTask;
 import org.datatech.baikal.task.common.DbType;
@@ -100,15 +101,15 @@ public class SecondaryTaskProcessor extends BaseTaskProcessor {
         if (Config.DB_TYPE_MONGO.equals(dbType.name())) {
             logger.info("dbType is MONGO");
             seqPath = handler.getSchemaPath(tenantName, instanceName, schemaName, Config.PATH_NOTIFY, seqNode,
-                    Config.PATH_MONGO_SCHEMA);
+                    Configuration.PATH_MONGO_SCHEMA);
         } else if (Config.DB_TYPE_MYSQL.equals(dbType.name())) {
             logger.info("dbType is MYSQL");
             seqPath = handler.getSchemaPath(tenantName, instanceName, schemaName, Config.PATH_NOTIFY, seqNode,
-                    Config.PATH_MYSQL_SCHEMA);
+                    Configuration.PATH_MYSQL_SCHEMA);
         } else {
             logger.info("dbType is others");
             seqPath = handler.getSchemaPath(tenantName, instanceName, schemaName, Config.PATH_NOTIFY, seqNode,
-                    Config.PATH_SCHEMA);
+                    Configuration.PATH_SCHEMA);
         }
         Stat seqStat = handler.getClient().checkExists().forPath(seqPath);
         if (seqStat != null) {
@@ -125,8 +126,9 @@ public class SecondaryTaskProcessor extends BaseTaskProcessor {
                     + "and set meta_flag to task timeout";
             if ((currentTs - createTs) >= (timeout * 1000)) {
                 logger.info(warnMessage, timeout);
-                logger.info("SecondaryTaskProcessor updateMetaFlag: instanceName [{}], schemaName [{}], tableName [{}], flagValue [{}]",
-                    instanceName, schemaName, tableName, Config.META_FLAG_SECONDARY_TASK_TIMEOUT);
+                logger.info(
+                        "SecondaryTaskProcessor updateMetaFlag: instanceName [{}], schemaName [{}], tableName [{}], flagValue [{}]",
+                        instanceName, schemaName, tableName, Config.META_FLAG_SECONDARY_TASK_TIMEOUT);
                 metaConfigDao.updateMetaFlag(instanceName, schemaName, tableName,
                         Config.META_FLAG_SECONDARY_TASK_TIMEOUT);
             } else {
@@ -166,7 +168,7 @@ public class SecondaryTaskProcessor extends BaseTaskProcessor {
 
         // notify application adapter that full dump has ended
         String seqPrefixPath = handler.getSchemaPath(tenantName, instanceName, schemaName, Config.PATH_NOTIFY_END,
-                Config.PATH_SEQ_PREFIX, Config.PATH_SCHEMA);
+                Configuration.PATH_SEQ_PREFIX, Configuration.PATH_SCHEMA);
         handler.getClient().create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT_SEQUENTIAL)
                 .forPath(seqPrefixPath, Bytes.toBytes(task.toJson()));
         logger.info("notified application adapter that full dump has ended");

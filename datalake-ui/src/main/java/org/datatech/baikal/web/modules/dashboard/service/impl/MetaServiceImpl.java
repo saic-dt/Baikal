@@ -20,14 +20,15 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.zookeeper.data.Stat;
-import org.datatech.baikal.web.common.conf.Config;
-import org.datatech.baikal.web.common.conf.Enums;
+import org.datatech.baikal.common.Configuration;
+import org.datatech.baikal.util.JsonUtil;
+import org.datatech.baikal.web.common.Config;
+import org.datatech.baikal.web.common.Enums;
+import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.entity.bo.MetaBO;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
 import org.datatech.baikal.web.modules.dashboard.service.MetaService;
-import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.utils.JsonIterUtil;
-import org.datatech.baikal.web.utils.JsonUtil;
 import org.datatech.baikal.web.utils.SecurityUtils;
 import org.datatech.baikal.web.utils.StringUtil;
 import org.datatech.baikal.web.vo.SourceDataFilterVO;
@@ -172,7 +173,7 @@ public class MetaServiceImpl implements MetaService {
                 jsonObject.put("source_instance", sd.getSource_instance());
                 jsonObject.put("source_table", table);
                 jsonObject.put("row_key",
-                        String.join(Config.DELIMITER, sd.getSource_instance(), sd.getSource_schema(), table));
+                        String.join(Configuration.DELIMITER, sd.getSource_instance(), sd.getSource_schema(), table));
                 list.add(jsonObject);
 
             }

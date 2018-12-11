@@ -13,7 +13,7 @@
  */
 package org.datatech.baikal.task.common;
 
-import org.datatech.baikal.task.Config;
+import org.datatech.baikal.common.Configuration;
 
 /**
  * Database type.
@@ -22,27 +22,27 @@ public enum DbType {
     /**
      * Oracle database type with its JDBC driver class.
      */
-    ORACLE(Config.JDBC_CLASS_NAME_ORACLE),
+    ORACLE(Configuration.JDBC_CLASS_NAME_ORACLE),
     /**
      * DB2 database type with its JDBC driver class.
      */
-    DB2(Config.JDBC_CLASS_NAME_DB2),
+    DB2(Configuration.JDBC_CLASS_NAME_DB2),
     /**
      * MySQL database type with its JDBC driver class.
      */
-    MYSQL(Config.JDBC_CLASS_NAME_MYSQL),
+    MYSQL(Configuration.JDBC_CLASS_NAME_MYSQL),
     /**
      * Microsoft SQL Server database type with its JDBC driver class.
      */
-    MSSQL(Config.JDBC_CLASS_NAME_MSSQL),
+    MSSQL(Configuration.JDBC_CLASS_NAME_MSSQL),
     /**
      * Mongo database type with its JDBC driver class.
      */
-    MONGO(Config.JDBC_CLASS_NAME_MONGO),
+    MONGO(Configuration.JDBC_CLASS_NAME_MONGO),
     /**
      * Apache Ingite database type with its JDBC driver class.
      */
-    IGNITE(Config.JDBC_CLASS_NAME_IGNITE),
+    IGNITE(Configuration.JDBC_CLASS_NAME_IGNITE),
     /**
      * Apache HBase without JDBC driver class.
      */

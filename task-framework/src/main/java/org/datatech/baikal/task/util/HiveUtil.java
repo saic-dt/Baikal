@@ -84,7 +84,7 @@ public class HiveUtil {
     }
 
     public String getNamespace() {
-        return (tenantName == null) ? Config.DEFAULT_TBL_NAMESPACE : tenantName;
+        return (tenantName == null) ? org.datatech.baikal.common.Configuration.DEFAULT_TBL_NAMESPACE : tenantName;
     }
 
     public void createSparkTable(String instanceName, String schemaName, String tableName, String tablePrefix)

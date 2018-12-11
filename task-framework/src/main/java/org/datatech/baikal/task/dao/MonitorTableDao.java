@@ -16,7 +16,7 @@ package org.datatech.baikal.task.dao;
 import java.io.IOException;
 
 import org.apache.commons.httpclient.NameValuePair;
-import org.datatech.baikal.task.Config;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.task.common.MonitorTable;
 import org.datatech.baikal.task.util.MonitorUtil;
 import org.datatech.baikal.task.util.RestfulUtil;
@@ -51,8 +51,8 @@ public class MonitorTableDao {
      */
     public void insertTableStats(String dateTimeStr, String instanceName, String schemaName, String tableName,
             String insertRows, String updateRows, String deleteRows, String discardRows, String totalRows) {
-        String rowkey = String.join(Config.DELIMITER, instanceName, schemaName, MonitorUtil.getTimestamp(dateTimeStr),
-                tableName);
+        String rowkey = String.join(Configuration.DELIMITER, instanceName, schemaName,
+                MonitorUtil.getTimestamp(dateTimeStr), tableName);
         String tenantName = handler.getTenantName();
         NameValuePair[] data = { new NameValuePair("RowKey", rowkey), new NameValuePair("DELETE_ROWS", deleteRows),
                 new NameValuePair("DISCARD_ROWS", discardRows), new NameValuePair("INSERT_ROWS", insertRows),
@@ -75,8 +75,8 @@ public class MonitorTableDao {
      */
     public MonitorTable getTableStats(String dateTimeStr, String instanceName, String schemaName, String tableName)
             throws IOException {
-        String rowkey = String.join(Config.DELIMITER, instanceName, schemaName, MonitorUtil.getTimestamp(dateTimeStr),
-                tableName);
+        String rowkey = String.join(Configuration.DELIMITER, instanceName, schemaName,
+                MonitorUtil.getTimestamp(dateTimeStr), tableName);
         return new MonitorTable();
     }
 }

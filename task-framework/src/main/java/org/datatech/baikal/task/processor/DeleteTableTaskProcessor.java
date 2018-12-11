@@ -14,6 +14,7 @@
 package org.datatech.baikal.task.processor;
 
 import org.apache.zookeeper.CreateMode;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.task.Config;
 import org.datatech.baikal.task.common.BaseTask;
 import org.datatech.baikal.task.common.EventType;
@@ -62,9 +63,9 @@ public class DeleteTableTaskProcessor extends BaseTaskProcessor {
         String schemaName = task.getSchemaName();
         String tableName = task.getTableName();
         String mongoSync = "/mongo-schema" + "/" + tenantName + "/" + instanceName + "/" + schemaName + "/" + "notify"
-                + "/" + Config.PATH_SEQ_PREFIX;
+                + "/" + Configuration.PATH_SEQ_PREFIX;
         String mysqlSync = "/canal-schema" + "/" + tenantName + "/" + instanceName + "/" + schemaName + "/" + "notify"
-                + "/" + Config.PATH_SEQ_PREFIX;
+                + "/" + Configuration.PATH_SEQ_PREFIX;
         hiveUtil.dropHiveTable(instanceName, schemaName, tableName);
         hiveUtil.dropSparkTable(instanceName, schemaName, tableName);
         JSONObject json = new JSONObject();

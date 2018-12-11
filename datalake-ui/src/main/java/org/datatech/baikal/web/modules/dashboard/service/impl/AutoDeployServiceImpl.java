@@ -23,14 +23,15 @@ import javax.annotation.Resource;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.data.Stat;
-import org.datatech.baikal.web.common.conf.Config;
+import org.datatech.baikal.common.Configuration;
+import org.datatech.baikal.web.common.Config;
+import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.entity.SourceJdbc;
 import org.datatech.baikal.web.entity.bean.ScheamMagBean;
 import org.datatech.baikal.web.entity.bean.SourceDbBean;
 import org.datatech.baikal.web.entity.model.ScheamMgRtDataModel;
 import org.datatech.baikal.web.entity.model.SchemaMagModel;
 import org.datatech.baikal.web.modules.dashboard.service.AutoDeployService;
-import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.utils.DataBaseUtil;
 import org.datatech.baikal.web.utils.JsonIterUtil;
 import org.datatech.baikal.web.utils.StringUtil;
@@ -68,7 +69,7 @@ public class AutoDeployServiceImpl implements AutoDeployService {
                 JSONObject data = JSONObject.fromObject(content);
                 if (StringUtil.isNotEmpty(dbType) && dbType.equals(data.get("DB_TYPE"))) {
                     SourceDbBean bean = new SourceDbBean();
-                    bean.setRowKey(osip + Config.DELIMITER + instance);
+                    bean.setRowKey(osip + Configuration.DELIMITER + instance);
                     bean.setDbType((String) data.get("DB_TYPE"));
                     bean.setOsUser((String) data.get("OS_USER"));
                     bean.setBasePath((String) data.get("BASE_PATH"));
@@ -87,7 +88,7 @@ public class AutoDeployServiceImpl implements AutoDeployService {
         }
 
         for (SourceDbBean bean : rtList) {
-            String[] rowKey = bean.getRowKey().split(Config.DELIMITER);
+            String[] rowKey = bean.getRowKey().split(Configuration.DELIMITER);
             String key = rowKey[0] + lip + rowKey[1] + arrow + bean.getRmtIp();
             resutlMap.put(key, bean);
         }
@@ -113,7 +114,7 @@ public class AutoDeployServiceImpl implements AutoDeployService {
                 String content = new String(client.getData().forPath(path + "/" + instance + "/" + schema));
                 JSONObject data = JSONObject.fromObject(content);
                 SourceJdbc entity = new SourceJdbc();
-                entity.setRow_key(instance + Config.DELIMITER + schema);
+                entity.setRow_key(instance + Configuration.DELIMITER + schema);
                 entity.setDb_type((String) data.get("DB_TYPE"));
                 entity.setInstance_name(instance);
                 entity.setJdbc_url((String) data.get("JDBC_URL"));
@@ -145,7 +146,7 @@ public class AutoDeployServiceImpl implements AutoDeployService {
     @Override
     public void delete(final String rowkey, String tenantName) throws Exception {
         CuratorFramework client = handler.getClient();
-        String[] keys = rowkey.split(Config.DELIMITER);
+        String[] keys = rowkey.split(Configuration.DELIMITER);
         String path = Config.ZK_NODE_METASTORE + "/" + tenantName + "/SourceJdbc/" + keys[0] + "/" + keys[1];
         Stat stat = client.checkExists().forPath(path);
         if (null == stat) {
@@ -157,7 +158,7 @@ public class AutoDeployServiceImpl implements AutoDeployService {
     @Override
     public Map<String, String> getData(final String rowkey, final String tableName) throws Exception {
         CuratorFramework client = handler.getClient();
-        String[] keys = rowkey.split(Config.DELIMITER);
+        String[] keys = rowkey.split(Configuration.DELIMITER);
         String path = Config.ZK_NODE_METASTORE + "/" + tableName + "/SourceJdbc" + keys[0] + "/" + keys[1];
         String content = new String(client.getData().forPath(path));
         Map<String, String> json2Map = JsonIterUtil.json2Map(content, new TypeLiteral<Map<String, String>>() {

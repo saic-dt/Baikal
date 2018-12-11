@@ -26,7 +26,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.derby.iapi.services.property.PropertyUtil;
-import org.datatech.baikal.web.common.exp.BizException;
+import org.datatech.baikal.common.exp.BizException;
 import org.datatech.baikal.web.modules.sqlite.service.DBDDLService;
 import org.datatech.baikal.web.modules.sqlite.service.SqliteService;
 import org.springframework.stereotype.Service;

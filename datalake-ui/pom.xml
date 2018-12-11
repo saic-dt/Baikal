@@ -22,6 +22,12 @@
     <name>datalake-ui Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
+    <parent>
+        <artifactId>datalake-parent</artifactId>
+        <groupId>org.datatech.baikal</groupId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -44,7 +50,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <downloadSources>true</downloadSources>
 
-        <!--<zookeeper.version>3.4.10</zookeeper.version>-->
         <noggit.version>0.5</noggit.version>
         <wstx-asl.version>3.2.7</wstx-asl.version>
 
@@ -58,8 +63,6 @@
         <curator.version>4.0.0</curator.version>
 
         <curator.zookeeper.version>0.7.5</curator.zookeeper.version>
-
-        <zookeeper.version>3.4.5</zookeeper.version>
 
         <mongo.version>3.7.0</mongo.version>
 
@@ -83,11 +86,6 @@
         <jsoniter.version>0.9.21</jsoniter.version>
 
     </properties>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.3.RELEASE</version>
-    </parent>
 
     <dependencies>
 
@@ -139,6 +137,18 @@
             </exclusions>
         </dependency>
         <!-- json end -->
+
+        <dependency>
+            <groupId>org.datatech.baikal</groupId>
+            <artifactId>datalake-util</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.datatech.baikal</groupId>
+            <artifactId>datalake-common</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>net.sf.ehcache</groupId>

@@ -20,9 +20,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.datatech.baikal.web.common.conf.Enums;
+import org.datatech.baikal.util.JsonUtil;
+import org.datatech.baikal.web.common.Enums;
 import org.datatech.baikal.web.common.validate.AjaxResponse;
-import org.datatech.baikal.web.utils.JsonUtil;
 import org.datatech.baikal.web.utils.StringUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

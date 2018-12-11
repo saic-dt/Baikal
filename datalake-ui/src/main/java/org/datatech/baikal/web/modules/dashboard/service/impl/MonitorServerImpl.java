@@ -26,8 +26,9 @@ import java.util.TreeMap;
 
 import javax.annotation.Resource;
 
-import org.datatech.baikal.web.common.conf.Config;
-import org.datatech.baikal.web.common.conf.Enums;
+import org.datatech.baikal.common.Configuration;
+import org.datatech.baikal.web.common.Config;
+import org.datatech.baikal.web.common.Enums;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
 import org.datatech.baikal.web.modules.dashboard.service.EventService;
 import org.datatech.baikal.web.modules.dashboard.service.MonitorSchemaService;
@@ -91,9 +92,9 @@ public class MonitorServerImpl implements MonitorService {
             legendArr.add(String.join(Config.BACKSLASH, sourceInstance, sourceSchema));
             String startTime = yyyyMmDd.parse(yyyyMmDd.format(new Timestamp(currentTime))).getTime() / 1000 + "";
             String endTime = currentTime / 1000 + "";
-            String prefixRowkey = String.join(Config.DELIMITER, sourceInstance, sourceSchema);
-            String startRowkey = String.join(Config.DELIMITER, prefixRowkey, startTime);
-            String endRowkey = String.join(Config.DELIMITER, prefixRowkey, endTime);
+            String prefixRowkey = String.join(Configuration.DELIMITER, sourceInstance, sourceSchema);
+            String startRowkey = String.join(Configuration.DELIMITER, prefixRowkey, startTime);
+            String endRowkey = String.join(Configuration.DELIMITER, prefixRowkey, endTime);
             // 获取MonitorSchema表中的内容
             Map<String, Long> dataMap = getStringLongMap(map, startRowkey, endRowkey, particleSize);
             JSONArray currentData = new JSONArray();
@@ -159,9 +160,9 @@ public class MonitorServerImpl implements MonitorService {
             long todaySeconds = yyyyMmDd.parse(yyyyMmDd.format(new Timestamp(currentTime))).getTime() / 1000;
             // 上一周期的数据
             String startTime = todaySeconds - 24 * 60 * 60 + "";
-            String prefixRowkey = String.join(Config.DELIMITER, sd.getSource_instance(), sd.getSource_schema());
-            startRowkey = String.join(Config.DELIMITER, prefixRowkey, startTime);
-            endRowkey = String.join(Config.DELIMITER, prefixRowkey, todaySeconds + "");
+            String prefixRowkey = String.join(Configuration.DELIMITER, sd.getSource_instance(), sd.getSource_schema());
+            startRowkey = String.join(Configuration.DELIMITER, prefixRowkey, startTime);
+            endRowkey = String.join(Configuration.DELIMITER, prefixRowkey, todaySeconds + "");
 
             map.put("before", "true");
             // 获取MonitorSchema表中的内容
@@ -180,8 +181,8 @@ public class MonitorServerImpl implements MonitorService {
             // 当前周期的数据
             legendArr.add("当前周期");
             String endTime = currentTime / 1000 + "";
-            startRowkey = String.join(Config.DELIMITER, prefixRowkey, todaySeconds + "");
-            endRowkey = String.join(Config.DELIMITER, prefixRowkey, endTime);
+            startRowkey = String.join(Configuration.DELIMITER, prefixRowkey, todaySeconds + "");
+            endRowkey = String.join(Configuration.DELIMITER, prefixRowkey, endTime);
             dataMap = getStringLongMap(map, startRowkey, endRowkey, particleSize);
             JSONArray currentData = new JSONArray();
             for (String key : dataMap.keySet()) {
@@ -219,10 +220,11 @@ public class MonitorServerImpl implements MonitorService {
         // 获取MonitorSchema表中的内容
         Calendar calendar = Calendar.getInstance();
         final String functionName = "DashboardServiceImpl.getStringLongMap";
-        final String[] dts = startRowkey.split(Config.DELIMITER);
+        final String[] dts = startRowkey.split(Configuration.DELIMITER);
         final String instance = dts[0];
         final String schema = dts[1];
-        final String cacheKey = String.join(Config.DELIMITER, functionName, instance, schema, startRowkey, tenantName);
+        final String cacheKey = String.join(Configuration.DELIMITER, functionName, instance, schema, startRowkey,
+                tenantName);
         List<MonitorSchemaVO> msList = EhcacheUtils.getMonitorSchemaCache(cacheKey);
         if (msList == null) {
             if (StringUtil.isNull(map.get("before"))) {
@@ -238,7 +240,7 @@ public class MonitorServerImpl implements MonitorService {
         List<MonitorSchemaVO> dlt = MonitorSchemaRowKeyFilter.filterList(msList);
         for (MonitorSchemaVO data : dlt) {
             String hourMin = DateFormatter
-                    .long2HHmm(new Timestamp(Long.valueOf(data.getRowKey().split(Config.DELIMITER)[2]) * 1000));
+                    .long2HHmm(new Timestamp(Long.valueOf(data.getRowKey().split(Configuration.DELIMITER)[2]) * 1000));
             if (srcDataMap.containsKey(hourMin)) {
                 srcDataMap.put(hourMin, Long.valueOf(data.getPROC_ROWS()) + srcDataMap.get(hourMin));
             } else {

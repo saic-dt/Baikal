@@ -14,7 +14,7 @@
 
 package org.datatech.baikal.web.modules.dashboard.api;
 
-import org.datatech.baikal.web.common.conf.Config;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.web.common.validate.AjaxResponse;
 import org.datatech.baikal.web.modules.dashboard.service.impl.TenantServiceImpl;
 import org.datatech.baikal.web.utils.SecurityUtils;
@@ -40,7 +40,7 @@ public class TenantApi {
     @RequestMapping("/tenantList")
     @ResponseBody
     public AjaxResponse list() {
-        if (!Config.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
+        if (!Configuration.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
             return AjaxResponse.fail("你所在租户无权执行该操作");
         }
         try {
@@ -58,7 +58,7 @@ public class TenantApi {
     @RequestMapping("/tenantInfo")
     @ResponseBody
     public AjaxResponse tenantInfo(String tenantName) {
-        if (!Config.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
+        if (!Configuration.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
             return AjaxResponse.fail("你所在租户无权执行该操作");
         }
         try {
@@ -79,7 +79,7 @@ public class TenantApi {
     @RequestMapping("/tenantCreate")
     @ResponseBody
     public AjaxResponse tenantCreate(String tenantName, String desCription) {
-        if (!Config.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
+        if (!Configuration.DEFAULT_TBL_NAMESPACE.equals(SecurityUtils.getTenantName())) {
             return AjaxResponse.fail("你所在租户无权执行该操作");
         }
         try {

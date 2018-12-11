@@ -20,8 +20,9 @@ import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.queue.SimpleDistributedQueue;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.curator.utils.ZKPaths;
-import org.datatech.baikal.web.common.conf.BaseTask;
-import org.datatech.baikal.web.common.conf.Config;
+import org.datatech.baikal.common.Configuration;
+import org.datatech.baikal.web.common.BaseTask;
+import org.datatech.baikal.web.common.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -52,14 +53,16 @@ public class ZkHandler implements InitializingBean {
         try {
             RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
             client = CuratorFrameworkFactory.builder().connectString(zookeeperQuorum).retryPolicy(retryPolicy)
-                    .namespace(Config.ZK_NAMESPACE).sessionTimeoutMs(1000 * 6).connectionTimeoutMs(1000 * 6).build();
+                    .namespace(Configuration.ZK_NAMESPACE).sessionTimeoutMs(1000 * 6).connectionTimeoutMs(1000 * 6)
+                    .build();
             client.start();
 
             String queuePath = getQueuePath(Config.PATH_QUEUE_MAIN_TASK);
             logger.info("task queue path [{}]", queuePath);
             queueTask = new SimpleDistributedQueue(client, queuePath);
 
-            ZooKeeperConfigurationSource zkConfigSource = new ZooKeeperConfigurationSource(client, Config.PATH_CONFIG);
+            ZooKeeperConfigurationSource zkConfigSource = new ZooKeeperConfigurationSource(client,
+                    Configuration.PATH_CONFIG);
             zkConfigSource.start();
             DynamicWatchedConfiguration zkDynamicConfig = new DynamicWatchedConfiguration(zkConfigSource);
             ConfigurationManager.install(zkDynamicConfig);
@@ -85,6 +88,6 @@ public class ZkHandler implements InitializingBean {
      * @return a zk path string
      */
     public String getQueuePath(String path) {
-        return ZKPaths.makePath(Config.PATH_QUEUE, path);
+        return ZKPaths.makePath(Configuration.PATH_QUEUE, path);
     }
 }

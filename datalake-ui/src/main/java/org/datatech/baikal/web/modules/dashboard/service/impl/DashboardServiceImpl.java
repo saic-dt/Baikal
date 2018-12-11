@@ -34,11 +34,15 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
-import org.datatech.baikal.web.common.conf.BaseTask;
-import org.datatech.baikal.web.common.conf.Config;
-import org.datatech.baikal.web.common.conf.Enums;
-import org.datatech.baikal.web.common.conf.TaskType;
-import org.datatech.baikal.web.common.exp.BizException;
+import org.datatech.baikal.common.Configuration;
+import org.datatech.baikal.common.exp.BizException;
+import org.datatech.baikal.util.JsonUtil;
+import org.datatech.baikal.web.common.BaseTask;
+import org.datatech.baikal.web.common.Config;
+import org.datatech.baikal.web.common.Enums;
+import org.datatech.baikal.web.common.TaskType;
+import org.datatech.baikal.web.core.TaskAsync;
+import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.entity.bo.MetaBO;
 import org.datatech.baikal.web.entity.bo.MonitorTableBO;
 import org.datatech.baikal.web.entity.bo.OperationLogBO;
@@ -49,12 +53,9 @@ import org.datatech.baikal.web.modules.dashboard.service.MetaService;
 import org.datatech.baikal.web.modules.dashboard.service.MonitorTableService;
 import org.datatech.baikal.web.modules.dashboard.service.OperationLogService;
 import org.datatech.baikal.web.modules.dashboard.service.SourceJdbcService;
-import org.datatech.baikal.web.core.TaskAsync;
-import org.datatech.baikal.web.core.ZkHandler;
 import org.datatech.baikal.web.utils.DataBaseUtil;
 import org.datatech.baikal.web.utils.DateUtil;
 import org.datatech.baikal.web.utils.EhcacheUtils;
-import org.datatech.baikal.web.utils.JsonUtil;
 import org.datatech.baikal.web.utils.SecurityUtils;
 import org.datatech.baikal.web.utils.StringUtil;
 import org.datatech.baikal.web.utils.TaskTool.TaskTool;
@@ -169,7 +170,7 @@ public class DashboardServiceImpl implements DashboardService {
     public void delete(String rowkey) throws Exception {
         final String tenantName = SecurityUtils.getTenantName();
         BizException.throwWhenFalse(!StringUtil.isNull(rowkey), "传入的参数不对");
-        String[] arr = rowkey.split(Config.DELIMITER);
+        String[] arr = rowkey.split(Configuration.DELIMITER);
         SourceDataVO sourceData = new SourceDataVO();
         sourceData.setSource_instance(arr[0]);
         sourceData.setSource_schema(arr[1]);
@@ -218,8 +219,8 @@ public class DashboardServiceImpl implements DashboardService {
                 }
                 if (set.contains(object.getSOURCE_TABLE())) {
                     obj = new JSONObject();
-                    obj.put("row_key", String.join(Config.DELIMITER, sdf.getSource_instance(), sdf.getSource_schema(),
-                            object.getSOURCE_TABLE()));
+                    obj.put("row_key", String.join(Configuration.DELIMITER, sdf.getSource_instance(),
+                            sdf.getSource_schema(), object.getSOURCE_TABLE()));
                     obj.put("source_table", object.getSOURCE_TABLE());
                     if (StringUtil.isNull(object.getSOFAR()) || StringUtil.isNull(object.getTOTAL_WORK())) {
                         if (unsyncTable(mateFlag)) {
@@ -320,8 +321,8 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public String startSync(SourceDataVO sourceData) throws Exception {
         final String tenantName = SecurityUtils.getTenantName();
-        String row_key = String.join(Config.DELIMITER, sourceData.getSource_instance(), sourceData.getSource_schema(),
-                sourceData.getSource_table());
+        String row_key = String.join(Configuration.DELIMITER, sourceData.getSource_instance(),
+                sourceData.getSource_schema(), sourceData.getSource_table());
 
         MetaBO configBO = configService.get(sourceData);
         if (configBO != null) {
@@ -410,9 +411,8 @@ public class DashboardServiceImpl implements DashboardService {
         if (StringUtil.isNull(sourceJdbcBO.getRMT_IP())) {
             handler.queueTask(mainTask);
         } else {
-            handler.queueTask(
-                    Config.PATH_QUEUE + Config.BACKSLASH + tenantName + Config.TASK_PREFIX + sourceJdbcBO.getRMT_IP(),
-                    mainTask);
+            handler.queueTask(Configuration.PATH_QUEUE + Config.BACKSLASH + tenantName + Config.TASK_PREFIX
+                    + sourceJdbcBO.getRMT_IP(), mainTask);
         }
     }
 
@@ -428,8 +428,8 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public String repStartSync(SourceDataVO sourceData) throws Exception {
         final String tenantName = SecurityUtils.getTenantName();
-        String rowkey = String.join(Config.DELIMITER, sourceData.getSource_instance(), sourceData.getSource_schema(),
-                sourceData.getSource_table());
+        String rowkey = String.join(Configuration.DELIMITER, sourceData.getSource_instance(),
+                sourceData.getSource_schema(), sourceData.getSource_table());
         MetaBO configBO = configService.get(sourceData);
         BizException.throwWhenFalse(!StringUtil.isNull(configBO), "数据记录不存在，不能重新同步");
         BizException.throwWhenFalse(ist(configBO.getMETA_FLAG(), configBO.getDDL_CHANGED()),
@@ -505,8 +505,8 @@ public class DashboardServiceImpl implements DashboardService {
                     continue;
                 }
                 obj = new JSONObject();
-                obj.put("row_key", String.join(Config.DELIMITER, object.getSOURCE_INSTANCE(), object.getSOURCE_SCHEMA(),
-                        object.getSOURCE_TABLE()));
+                obj.put("row_key", String.join(Configuration.DELIMITER, object.getSOURCE_INSTANCE(),
+                        object.getSOURCE_SCHEMA(), object.getSOURCE_TABLE()));
                 obj.put("source_table", sourceTable);
                 obj.put("meta_flag", object.getMETA_FLAG());
                 if (!unsyncTable(object.getMETA_FLAG())) {
@@ -531,7 +531,7 @@ public class DashboardServiceImpl implements DashboardService {
     public JSONObject syncData(String rowkey) throws Exception {
         JSONObject reObj = new JSONObject();
         SourceDataVO sourceDataVO = new SourceDataVO();
-        String[] arr = rowkey.split(Config.DELIMITER);
+        String[] arr = rowkey.split(Configuration.DELIMITER);
         sourceDataVO.setSource_instance(arr[0]);
         sourceDataVO.setSource_schema(arr[1]);
         sourceDataVO.setSource_table(arr[2]);
@@ -653,7 +653,7 @@ public class DashboardServiceImpl implements DashboardService {
                 reObj.put("percent", "0.00%");
                 reObj.put("residue_seconds", "[--:--]");
                 reObj.put("meta_flag", Enums.MetaFlag.META_FLAG_UI_FULLDUMP.value());
-                reObj.put("source_table", rowkey.substring(rowkey.lastIndexOf(Config.DELIMITER) + 1));
+                reObj.put("source_table", rowkey.substring(rowkey.lastIndexOf(Configuration.DELIMITER) + 1));
                 reObj.put("status", "正在构建表");
             }
         } else {
@@ -661,7 +661,7 @@ public class DashboardServiceImpl implements DashboardService {
             reObj.put("percent", "0.00%");
             reObj.put("residue_seconds", "[--:--]");
             reObj.put("meta_flag", "0");
-            reObj.put("source_table", rowkey.substring(rowkey.lastIndexOf(Config.DELIMITER) + 1));
+            reObj.put("source_table", rowkey.substring(rowkey.lastIndexOf(Configuration.DELIMITER) + 1));
             reObj.put("status", "正在构建表");
         }
         return reObj;
@@ -726,21 +726,21 @@ public class DashboardServiceImpl implements DashboardService {
             dataMap.putAll(Config.stepTimeMap(particleSize));
             Calendar calendar = Calendar.getInstance();
             reObj.put("meta_flag", obj.get("meta_flag"));
-            reObj.put("row_key",
-                    String.join(Config.DELIMITER, source_instance, source_schema, obj.getString("source_table")));
+            reObj.put("row_key", String.join(Configuration.DELIMITER, source_instance, source_schema,
+                    obj.getString("source_table")));
             reObj.put("source_table", obj.get("source_table"));
             if (!StringUtil.isNull(obj.get("ddl_changed"))) {
                 reObj.put("ddl_changed", obj.get("ddl_changed"));
             } else {
                 reObj.put("ddl_changed", Enums.DdlChanged.DDLCHANGED_DISABLED.value());
             }
-            configStartRowkey
-                    .append(String.join(Config.DELIMITER, source_instance, source_schema, startTime, source_table));
-            configEndRowkey
-                    .append(String.join(Config.DELIMITER, source_instance, source_schema, endTime, source_table));
+            configStartRowkey.append(
+                    String.join(Configuration.DELIMITER, source_instance, source_schema, startTime, source_table));
+            configEndRowkey.append(
+                    String.join(Configuration.DELIMITER, source_instance, source_schema, endTime, source_table));
             final String startRowkey = configStartRowkey.toString();
             final String endRowkey = configEndRowkey.toString();
-            final String cacheKey = String.join(Config.DELIMITER, functionName, source_instance, source_schema,
+            final String cacheKey = String.join(Configuration.DELIMITER, functionName, source_instance, source_schema,
                     source_table, tenantName, sd.getStart() + "");
             List<MonitorTableBO> monitorList = EhcacheUtils.getMonitorTbaleCache(cacheKey);
             if (monitorList == null) {
@@ -748,11 +748,11 @@ public class DashboardServiceImpl implements DashboardService {
                 EhcacheUtils.putMonitorTbaleCache(cacheKey, monitorList);
             }
             for (MonitorTableBO tableData : monitorList) {
-                if (!source_table.equals(tableData.getRowKey().split(Config.DELIMITER)[3])) {
+                if (!source_table.equals(tableData.getRowKey().split(Configuration.DELIMITER)[3])) {
                     continue;
                 }
-                String hourMin = DateFormatter
-                        .long2HHmm(new Timestamp(new Long(tableData.getRowKey().split(Config.DELIMITER)[2]) * 1000));
+                String hourMin = DateFormatter.long2HHmm(
+                        new Timestamp(new Long(tableData.getRowKey().split(Configuration.DELIMITER)[2]) * 1000));
                 if (srcDataMap.containsKey(hourMin)) {
                     srcDataMap.put(hourMin, Long.valueOf(tableData.getTOTAL_ROWS()) + srcDataMap.get(hourMin));
                 } else {
@@ -837,7 +837,7 @@ public class DashboardServiceImpl implements DashboardService {
             for (int i = 0; i <= day; i++) {
                 long startTime = yyyyMmDd.parse(DateUtil.getNextDay(firstDay, i + "")).getTime();
                 long endTime = yyyyMmDd.parse(DateUtil.getNextDay(firstDay, (i + 1) + "")).getTime();
-                String key = String.join(Config.DELIMITER, startTime + "", endTime + "");
+                String key = String.join(Configuration.DELIMITER, startTime + "", endTime + "");
                 timeMap.put(key, 0L);
             }
             if (day < 30) {
@@ -851,7 +851,7 @@ public class DashboardServiceImpl implements DashboardService {
         for (EventVO obj : list) {
             for (String key : timeMap.keySet()) {
                 if (!StringUtil.isNull(timeMap.get(key))) {
-                    String[] timeArr = key.split(Config.DELIMITER);
+                    String[] timeArr = key.split(Configuration.DELIMITER);
                     long startTime = Long.valueOf(timeArr[0]);
                     long endTime = Long.valueOf(timeArr[1]);
                     long times = obj.getEvent_id();

@@ -19,7 +19,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.datatech.baikal.web.common.conf.Config;
+import org.datatech.baikal.web.common.Config;
 import org.datatech.baikal.web.entity.Menu;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
 import org.datatech.baikal.web.modules.dashboard.service.SourceJdbcService;

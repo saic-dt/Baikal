@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.datatech.baikal.web.common.conf;
+package org.datatech.baikal.web.common;
 
 import com.google.gson.Gson;
 

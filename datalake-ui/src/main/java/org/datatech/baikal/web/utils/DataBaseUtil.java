@@ -26,11 +26,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.datatech.baikal.web.common.conf.Config;
-import org.datatech.baikal.web.common.conf.Enums;
+import org.datatech.baikal.common.Configuration;
+import org.datatech.baikal.web.common.Enums;
+import org.datatech.baikal.web.core.MongoDb;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
 import org.datatech.baikal.web.entity.model.DBConnectionModel;
-import org.datatech.baikal.web.core.MongoDb;
 
 /**
  * 数据库工具类
@@ -56,10 +56,10 @@ public class DataBaseUtil {
     public static Map<String, String> DRIVE_CLASS_MAP = new ConcurrentHashMap<String, String>() {
         private static final long serialVersionUID = 2L;
         {
-            put(Enums.DbType.DB_TYPE_ORACLE.value(), Config.JDBC_CLASS_NAME_ORACLE);
-            put(Enums.DbType.DB_TYPE_MYSQL.value(), Config.JDBC_CLASS_NAME_MYSQL);
-            put(Enums.DbType.DB_TYPE_MSSQL.value(), Config.JDBC_CLASS_NAME_SQL_SERVER);
-            put(Enums.DbType.DB_TYPE_DB2.value(), Config.JDBC_CLASS_NAME_DB2);
+            put(Enums.DbType.DB_TYPE_ORACLE.value(), Configuration.JDBC_CLASS_NAME_ORACLE);
+            put(Enums.DbType.DB_TYPE_MYSQL.value(), Configuration.JDBC_CLASS_NAME_MYSQL);
+            put(Enums.DbType.DB_TYPE_MSSQL.value(), Configuration.JDBC_CLASS_NAME_MSSQL);
+            put(Enums.DbType.DB_TYPE_DB2.value(), Configuration.JDBC_CLASS_NAME_DB2);
         }
     };
     private static Pattern pattern = Pattern
@@ -77,7 +77,7 @@ public class DataBaseUtil {
         final String url = conModel.getJdbcUrl();
         final String schema = conModel.getSourceSchema();
         final String tableName = conModel.getTableName();
-        final String key = String.join(Config.DELIMITER, functionName, className, url, schema, tableName);
+        final String key = String.join(Configuration.DELIMITER, functionName, className, url, schema, tableName);
         ArrayList<String> rtArray = EhcacheUtils.getDbCache(key);
         if (rtArray != null) {
             return rtArray;
@@ -108,7 +108,7 @@ public class DataBaseUtil {
         final String functionName = "getTableName";
         final String url = conModel.getJDBC_URL();
         final String schema = conModel.getSCHEMA_NAME();
-        final String key = String.join(Config.DELIMITER, functionName, className, url, schema);
+        final String key = String.join(Configuration.DELIMITER, functionName, className, url, schema);
         final String mate = conModel.getTableName();
         ArrayList<String> rtArray = EhcacheUtils.getDbCache(key);
         if (rtArray == null || rtArray.size() == 0) {
@@ -117,7 +117,7 @@ public class DataBaseUtil {
                 rtArray = new ArrayList<>(MongoDb.getTableName(conModel));
             } else {
                 Connection con = getConnentByClassPool(url, conModel.getUSER(), conModel.getPASSWORD(), className);
-                if (Config.JDBC_CLASS_NAME_MYSQL.equals(className)) {
+                if (Configuration.JDBC_CLASS_NAME_MYSQL.equals(className)) {
                     rtArray = mySqlGetTableName(con);
                 } else {
                     DatabaseMetaData dbmd = con.getMetaData();
@@ -194,7 +194,7 @@ public class DataBaseUtil {
      */
     public static Integer getTableQuantity(Connection con, String schema, String className) throws Exception {
         Integer siz = 0;
-        if (Config.JDBC_CLASS_NAME_MYSQL.equals(className)) {
+        if (Configuration.JDBC_CLASS_NAME_MYSQL.equals(className)) {
             siz = mySqlGetTableQuantity(con);
         } else {
             DatabaseMetaData dbmd = con.getMetaData();

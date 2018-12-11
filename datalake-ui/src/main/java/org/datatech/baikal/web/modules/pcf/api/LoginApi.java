@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.datatech.baikal.web.common.conf.Enums;
+import org.datatech.baikal.web.common.Enums;
 import org.datatech.baikal.web.common.validate.AjaxResponse;
 import org.datatech.baikal.web.entity.User;
 import org.datatech.baikal.web.entity.model.HostListModel;

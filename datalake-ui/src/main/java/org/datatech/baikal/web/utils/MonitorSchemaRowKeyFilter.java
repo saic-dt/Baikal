@@ -17,7 +17,7 @@ package org.datatech.baikal.web.utils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.datatech.baikal.web.common.conf.Config;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.web.vo.MonitorSchemaVO;
 
 /**
@@ -32,7 +32,7 @@ public class MonitorSchemaRowKeyFilter {
      * @return 是否以R开头 true：是 false:不是
      */
     public static Boolean filter(String srcString) {
-        final int siz = srcString.lastIndexOf(Config.DELIMITER) + 1;
+        final int siz = srcString.lastIndexOf(Configuration.DELIMITER) + 1;
         final String str = srcString.substring(siz, siz + 1);
         return RPORC.equals(str) ? true : false;
     }

@@ -12,35 +12,19 @@
  * limitations under the License.
  */
 
-/**
- * <p>Title: JsonUtil.java</p>
- * <p>Package com.Para.util</p>
- * <p>Description: JSON工具类</p>
- */
-package org.datatech.baikal.web.utils;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
+package org.datatech.baikal.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import net.sf.ezmorph.object.DateMorpher;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.JSONUtils;
 
+import java.util.*;
+
 /**
- * <p>
  * 处理json的工具类，负责json数据转换成java对象和java对象转换成json
- * </p>
  */
 public class JsonUtil {
 
@@ -55,7 +39,7 @@ public class JsonUtil {
      * <p>
      * Description:
      * </p>
-     * 
+     *
      * @param data 目标队形
      * @return 字符串
      */
@@ -97,7 +81,7 @@ public class JsonUtil {
      * <p>
      * Description:
      * </p>
-     * 
+     *
      * @param jsonData json字符串
      * @param beanType class类
      * @param <T> 泛型
@@ -117,7 +101,7 @@ public class JsonUtil {
 
     /**
      * 从一个JSON 对象字符格式中得到一个java对象
-     * 
+     *
      * @param jsonString json字符串
      * @param pojoCalss class类
      * @return Object 指定的对象
@@ -131,7 +115,7 @@ public class JsonUtil {
 
     /**
      * 从json HASH表达式中获取一个map，改map支持嵌套功能
-     * 
+     *
      * @param jsonString json字符串
      * @return Map map对象
      */
@@ -162,7 +146,7 @@ public class JsonUtil {
         JSONObject jsonObject;
         List list = new ArrayList();
         for (int i = 0; i < jsonArray.size(); i++) {
-            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[] { "yyyy-MM-dd HH:mm:ss" }));
+            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[]{"yyyy-MM-dd HH:mm:ss"}));
             jsonObject = jsonArray.getJSONObject(i);
             Iterator keyIter = jsonObject.keys();
             String key;
@@ -178,7 +162,7 @@ public class JsonUtil {
 
     /**
      * 从json数组中得到相应java数组
-     * 
+     *
      * @param jsonString json字符串
      * @return Object[] 数组
      */
@@ -190,7 +174,7 @@ public class JsonUtil {
 
     /**
      * 从json对象集合表达式中得到一个java对象列表
-     * 
+     *
      * @param jsonString json字符串
      * @param pojoClass class类
      * @return List 集合
@@ -203,7 +187,7 @@ public class JsonUtil {
 
         List list = new ArrayList();
         for (int i = 0; i < jsonArray.size(); i++) {
-            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[] { "yyyy-MM-dd HH:mm:ss" }));
+            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[]{"yyyy-MM-dd HH:mm:ss"}));
             jsonObject = jsonArray.getJSONObject(i);
             pojoValue = JSONObject.toBean(jsonObject, pojoClass);
             list.add(pojoValue);
@@ -229,7 +213,7 @@ public class JsonUtil {
 
         List list = new ArrayList();
         for (int i = 0; i < jsonArray.size(); i++) {
-            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[] { "yyyy-MM-dd HH:mm:ss" }));
+            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[]{"yyyy-MM-dd HH:mm:ss"}));
             jsonObject = jsonArray.getJSONObject(i);
             pojoValue = JSONObject.toBean(jsonObject, pojoClass, map);
             list.add(pojoValue);
@@ -241,7 +225,7 @@ public class JsonUtil {
 
     /**
      * 从json数组中解析出java字符串数组
-     * 
+     *
      * @param jsonString json字符串
      * @return String[] 字符串数组
      */
@@ -259,7 +243,7 @@ public class JsonUtil {
 
     /**
      * 从json数组中解析出javaLong型对象数组
-     * 
+     *
      * @param jsonString json字符串
      * @return Long[] long数组
      */
@@ -276,7 +260,7 @@ public class JsonUtil {
 
     /**
      * 从json数组中解析出java Integer型对象数组
-     * 
+     *
      * @param jsonString json字符串
      * @return Integer[] Integer数组
      */
@@ -292,31 +276,8 @@ public class JsonUtil {
     }
 
     /**
-     * 从json数组中解析出java Date 型对象数组，使用本方法必须保证
-     * 
-     * @param jsonString json字符串
-     * @param dataFormat 时间格式
-     * @return Date[] 时间数组
-     */
-    public static Date[] getDateArray4Json(String jsonString, String dataFormat) {
-
-        JSONArray jsonArray = JSONArray.fromObject(jsonString);
-        Date[] dateArray = new Date[jsonArray.size()];
-        String dateString;
-        Date date;
-
-        for (int i = 0; i < jsonArray.size(); i++) {
-            dateString = jsonArray.getString(i);
-            date = DateUtil.parseDate(dateString, dataFormat);
-            dateArray[i] = date;
-
-        }
-        return dateArray;
-    }
-
-    /**
      * 从json数组中解析出java Integer型对象数组
-     * 
+     *
      * @param jsonString json字符串
      * @return Double[] 浮点型数组
      */
@@ -333,7 +294,7 @@ public class JsonUtil {
 
     /**
      * 将java对象转换成json字符串
-     * 
+     *
      * @param javaObj 对象
      * @return String json字符串
      */
@@ -343,40 +304,6 @@ public class JsonUtil {
         json = JSONObject.fromObject(javaObj);
         return json.toString();
 
-    }
-
-    /**
-     * JSON 时间解析器具
-     * 
-     * @param datePattern 时间格式
-     * @return JsonConfig 对象
-     */
-    public static JsonConfig configJson(String datePattern) {
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setExcludes(new String[] { "" });
-        jsonConfig.setIgnoreDefaultExcludes(false);
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-        jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor(datePattern));
-
-        return jsonConfig;
-    }
-
-    /**
-     * 除去不想生成的字段（特别适合去掉级联的对象）+时间转换
-     * 
-     * @param excludes
-     *            除去不想生成的字段
-     * @param datePattern 时间格式
-     * @return JsonConfig 对象
-     */
-    public static JsonConfig configJson(String[] excludes, String datePattern) {
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setExcludes(excludes);
-        jsonConfig.setIgnoreDefaultExcludes(true);
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-        jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor(datePattern));
-
-        return jsonConfig;
     }
 
 }

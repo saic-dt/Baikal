@@ -19,6 +19,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.datatech.baikal.util.Md5Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class RestfulUtil {
         try {
             // prepare request body with username and password
             String password = checkIsNull(getPassword());
-            password = Md5Util.getMd5(Md5Util.getMd5("taskClient" + password));
+            password = Md5Utils.hash(Md5Utils.hash("taskClient" + password));
             NameValuePair[] data1 = { new NameValuePair("username", "admin"),
                     new NameValuePair("fromClient", "taskClient"), new NameValuePair("password", password) };
             postMethod.setRequestBody(data1);

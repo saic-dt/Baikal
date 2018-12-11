@@ -18,7 +18,7 @@ import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
-import org.datatech.baikal.web.common.conf.Config;
+import org.datatech.baikal.common.Configuration;
 
 /**
  * 数据湖zk节点初始化
@@ -27,7 +27,7 @@ public class ZKDataInit {
     public static void main(String[] args) throws Exception {
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
         CuratorFramework client = CuratorFrameworkFactory.builder().connectString("127.0.0.1:32788")
-                .namespace(Config.ZK_NAMESPACE).retryPolicy(retryPolicy).sessionTimeoutMs(1000 * 6)
+                .namespace(Configuration.ZK_NAMESPACE).retryPolicy(retryPolicy).sessionTimeoutMs(1000 * 6)
                 .connectionTimeoutMs(1000 * 6).build();
 
         client.start();
