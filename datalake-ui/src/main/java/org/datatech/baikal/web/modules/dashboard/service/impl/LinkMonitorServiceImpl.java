@@ -46,7 +46,7 @@ import org.datatech.baikal.web.utils.EhcacheUtils;
 import org.datatech.baikal.web.utils.MonitorSchemaRowKeyFilter;
 import org.datatech.baikal.web.utils.ReflectUtils;
 import org.datatech.baikal.web.utils.SecurityUtils;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.datatech.baikal.web.utils.TimeRangeUtil;
 import org.datatech.baikal.web.utils.formatter.DateFormatter;
 import org.datatech.baikal.web.utils.linkmonitor.SortByGroup;

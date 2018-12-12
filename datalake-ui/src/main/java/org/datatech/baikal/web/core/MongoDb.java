@@ -25,7 +25,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
 import org.datatech.baikal.util.JsonUtil;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;

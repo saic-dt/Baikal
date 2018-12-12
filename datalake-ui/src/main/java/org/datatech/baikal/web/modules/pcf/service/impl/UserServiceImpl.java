@@ -35,7 +35,7 @@ import org.datatech.baikal.web.entity.User;
 import org.datatech.baikal.web.modules.pcf.service.UserService;
 import org.datatech.baikal.web.utils.DateUtil;
 import org.datatech.baikal.web.utils.EhcacheUtils;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

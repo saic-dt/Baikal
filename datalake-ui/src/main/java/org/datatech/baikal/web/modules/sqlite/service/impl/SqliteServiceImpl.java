@@ -29,7 +29,7 @@ import org.datatech.baikal.common.exp.BizException;
 import org.datatech.baikal.web.core.Constants;
 import org.datatech.baikal.web.modules.sqlite.service.DBDDLService;
 import org.datatech.baikal.web.modules.sqlite.service.SqliteService;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.springframework.stereotype.Service;
 
 /**

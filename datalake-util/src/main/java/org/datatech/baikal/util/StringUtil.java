@@ -16,7 +16,7 @@
  * <p>ClassName: StringUtil</p>
  * <p>Description: 字符串操作</p>
  */
-package org.datatech.baikal.web.utils;
+package org.datatech.baikal.util;
 
 import java.io.IOException;
 import java.io.OutputStream;

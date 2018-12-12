@@ -25,9 +25,9 @@ import org.datatech.baikal.mongosync.Config;
 import org.datatech.baikal.mongosync.bean.SourceJdbcBO;
 import org.datatech.baikal.mongosync.bean.TimestampBean;
 import org.datatech.baikal.mongosync.util.MongoUtil;
-import org.datatech.baikal.mongosync.util.StringUtil;
 import org.datatech.baikal.mongosync.util.ZkHandler;
 import org.datatech.baikal.util.JsonUtil;
+import org.datatech.baikal.util.StringUtil;
 
 /**
  * Provide functions to manage MongoDB oplog sync process.

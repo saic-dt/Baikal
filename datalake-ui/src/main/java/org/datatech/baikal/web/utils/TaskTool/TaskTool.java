@@ -28,7 +28,7 @@ import org.datatech.baikal.web.entity.bo.MetaBO;
 import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
 import org.datatech.baikal.web.utils.DataBaseUtil;
 import org.datatech.baikal.web.utils.EhcacheUtils;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

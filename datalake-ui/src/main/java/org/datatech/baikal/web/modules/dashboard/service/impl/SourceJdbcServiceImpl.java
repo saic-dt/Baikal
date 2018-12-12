@@ -26,7 +26,7 @@ import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
 import org.datatech.baikal.web.modules.dashboard.service.SourceJdbcService;
 import org.datatech.baikal.web.utils.DataBaseUtil;
 import org.datatech.baikal.web.utils.SecurityUtils;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.springframework.stereotype.Service;
 
 /**

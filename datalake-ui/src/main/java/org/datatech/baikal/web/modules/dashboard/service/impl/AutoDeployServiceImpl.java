@@ -34,7 +34,7 @@ import org.datatech.baikal.web.entity.model.SchemaMagModel;
 import org.datatech.baikal.web.modules.dashboard.service.AutoDeployService;
 import org.datatech.baikal.web.utils.DataBaseUtil;
 import org.datatech.baikal.web.utils.JsonIterUtil;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.springframework.stereotype.Service;
 
 import com.jsoniter.spi.TypeLiteral;

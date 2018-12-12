@@ -57,7 +57,7 @@ import org.datatech.baikal.web.utils.DataBaseUtil;
 import org.datatech.baikal.web.utils.DateUtil;
 import org.datatech.baikal.web.utils.EhcacheUtils;
 import org.datatech.baikal.web.utils.SecurityUtils;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.datatech.baikal.web.utils.TaskTool.TaskTool;
 import org.datatech.baikal.web.utils.formatter.DateFormatter;
 import org.datatech.baikal.web.vo.EventVO;

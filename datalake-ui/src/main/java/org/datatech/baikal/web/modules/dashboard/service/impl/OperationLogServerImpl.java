@@ -31,7 +31,7 @@ import org.datatech.baikal.web.entity.bo.OperationLogBO;
 import org.datatech.baikal.web.modules.dashboard.service.OperationLogService;
 import org.datatech.baikal.web.modules.sqlite.service.SqliteService;
 import org.datatech.baikal.web.utils.SecurityUtils;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.datatech.baikal.web.vo.OperationLogVO;
 import org.springframework.stereotype.Service;
 

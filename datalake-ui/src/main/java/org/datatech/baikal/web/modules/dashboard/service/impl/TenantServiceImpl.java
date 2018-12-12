@@ -37,7 +37,7 @@ import org.datatech.baikal.web.modules.dashboard.service.OperationLogService;
 import org.datatech.baikal.web.modules.dashboard.service.TenantService;
 import org.datatech.baikal.web.utils.JsonIterUtil;
 import org.datatech.baikal.web.utils.SecurityUtils;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

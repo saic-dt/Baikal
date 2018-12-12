@@ -28,7 +28,7 @@ import org.datatech.baikal.web.entity.bo.EventBO;
 import org.datatech.baikal.web.modules.dashboard.service.EventService;
 import org.datatech.baikal.web.modules.sqlite.service.SqliteService;
 import org.datatech.baikal.web.utils.SecurityUtils;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.datatech.baikal.web.vo.EventVO;
 import org.datatech.baikal.web.vo.SourceDataVO;
 import org.springframework.stereotype.Service;

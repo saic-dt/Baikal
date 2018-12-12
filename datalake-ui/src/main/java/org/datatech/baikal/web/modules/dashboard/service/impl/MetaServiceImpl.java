@@ -30,7 +30,7 @@ import org.datatech.baikal.web.entity.bo.SourceJdbcBO;
 import org.datatech.baikal.web.modules.dashboard.service.MetaService;
 import org.datatech.baikal.web.utils.JsonIterUtil;
 import org.datatech.baikal.web.utils.SecurityUtils;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.datatech.baikal.web.vo.SourceDataFilterVO;
 import org.datatech.baikal.web.vo.SourceDataVO;
 import org.springframework.stereotype.Service;

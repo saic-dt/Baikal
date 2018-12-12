@@ -32,7 +32,7 @@ import org.datatech.baikal.web.entity.bo.MonitorTableBO;
 import org.datatech.baikal.web.modules.dashboard.service.MonitorTableService;
 import org.datatech.baikal.web.modules.dashboard.service.TenantService;
 import org.datatech.baikal.web.modules.sqlite.service.SqliteService;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.datatech.baikal.web.vo.MonitorTableVO;
 import org.springframework.stereotype.Service;
 

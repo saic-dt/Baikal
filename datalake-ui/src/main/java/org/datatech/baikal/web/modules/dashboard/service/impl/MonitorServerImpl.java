@@ -37,7 +37,7 @@ import org.datatech.baikal.web.modules.dashboard.service.SourceJdbcService;
 import org.datatech.baikal.web.utils.EhcacheUtils;
 import org.datatech.baikal.web.utils.MonitorSchemaRowKeyFilter;
 import org.datatech.baikal.web.utils.SecurityUtils;
-import org.datatech.baikal.web.utils.StringUtil;
+import org.datatech.baikal.util.StringUtil;
 import org.datatech.baikal.web.utils.formatter.DateFormatter;
 import org.datatech.baikal.web.vo.EventVO;
 import org.datatech.baikal.web.vo.MonitorSchemaVO;
