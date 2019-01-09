@@ -15,7 +15,7 @@
 package org.datatech.baikal.common.exp;
 
 /**
- * 系统异常处理类
+ * Datalake system related exception.
  */
 public class SysException extends RuntimeException {
     private static final long serialVersionUID = -4939355241567022625L;

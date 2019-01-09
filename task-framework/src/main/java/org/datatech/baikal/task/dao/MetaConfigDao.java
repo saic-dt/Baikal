@@ -21,9 +21,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.zookeeper.CreateMode;
+import org.datatech.baikal.common.Bytes;
 import org.datatech.baikal.task.common.DbType;
 import org.datatech.baikal.task.common.MetaConfig;
-import org.datatech.baikal.task.util.Bytes;
 import org.datatech.baikal.task.util.DbHelper;
 import org.datatech.baikal.task.util.ZkHandler;
 import org.slf4j.Logger;

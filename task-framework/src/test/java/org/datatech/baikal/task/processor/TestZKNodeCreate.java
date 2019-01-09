@@ -5,6 +5,7 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.RetryOneTime;
 import org.apache.zookeeper.CreateMode;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.task.Config;
 import org.datatech.baikal.task.common.BaseTask;
 import org.datatech.baikal.task.util.ZkHandler;
@@ -20,7 +21,7 @@ public class TestZKNodeCreate {
     public void createNode(BaseTask task) throws Exception {
 
         CuratorFramework client = CuratorFrameworkFactory.builder().retryPolicy(new RetryOneTime(10))
-                .namespace(Config.ZK_NAMESPACE).ensembleProvider(new FixedEnsembleProvider(zookeeperQuorum))
+                .namespace(Configuration.ZK_NAMESPACE).ensembleProvider(new FixedEnsembleProvider(zookeeperQuorum))
                 .connectionTimeoutMs(0).build();
         client.start();
         client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath(

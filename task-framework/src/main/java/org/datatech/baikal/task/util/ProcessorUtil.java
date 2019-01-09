@@ -17,6 +17,7 @@ package org.datatech.baikal.task.util;
 import java.util.Random;
 
 import org.apache.commons.codec.binary.Base64;
+import org.datatech.baikal.common.Bytes;
 import org.datatech.baikal.common.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

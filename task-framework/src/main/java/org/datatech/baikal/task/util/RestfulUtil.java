@@ -19,6 +19,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.datatech.baikal.common.Bytes;
 import org.datatech.baikal.util.Md5Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

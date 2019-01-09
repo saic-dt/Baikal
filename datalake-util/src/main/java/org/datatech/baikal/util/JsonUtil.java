@@ -13,36 +13,29 @@
  */
 
 package org.datatech.baikal.util;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import net.sf.ezmorph.object.DateMorpher;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.util.JSONUtils;
 
-import java.util.*;
-
 /**
- * 处理json的工具类，负责json数据转换成java对象和java对象转换成json
+ * Utility class for JSON processing.
  */
 public class JsonUtil {
 
-    // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    /**
-     * 将对象转换成json字符串。
-     * <p>
-     * Title: pojoToJson
-     * </p>
-     * <p>
-     * Description:
-     * </p>
-     *
-     * @param data 目标队形
-     * @return 字符串
-     */
     public static String objectToJson(Object data) {
         try {
             String string = MAPPER.writeValueAsString(data);
@@ -53,16 +46,6 @@ public class JsonUtil {
         return null;
     }
 
-    /**
-     * 将json结果集转化为对象
-     *
-     * @param jsonData
-     *            json数据
-     * @param beanType
-     *            对象中的object类型
-     * @param <T> 泛型
-     * @return 泛型实体
-     */
     public static <T> T jsonToPojo(String jsonData, Class<T> beanType) {
         try {
             T t = MAPPER.readValue(jsonData, beanType);
@@ -73,20 +56,6 @@ public class JsonUtil {
         return null;
     }
 
-    /**
-     * 将json数据转换成pojo对象list
-     * <p>
-     * Title: jsonToList
-     * </p>
-     * <p>
-     * Description:
-     * </p>
-     *
-     * @param jsonData json字符串
-     * @param beanType class类
-     * @param <T> 泛型
-     * @return List泛型集合
-     */
     public static <T> List<T> jsonToList(String jsonData, Class<T> beanType) {
         JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, beanType);
         try {
@@ -99,13 +68,6 @@ public class JsonUtil {
         return null;
     }
 
-    /**
-     * 从一个JSON 对象字符格式中得到一个java对象
-     *
-     * @param jsonString json字符串
-     * @param pojoCalss class类
-     * @return Object 指定的对象
-     */
     public static Object getObject4JsonString(String jsonString, Class pojoCalss) {
         Object pojo;
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
@@ -113,12 +75,6 @@ public class JsonUtil {
         return pojo;
     }
 
-    /**
-     * 从json HASH表达式中获取一个map，改map支持嵌套功能
-     *
-     * @param jsonString json字符串
-     * @return Map map对象
-     */
     public static Map getMap4Json(String jsonString) {
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
         Iterator keyIter = jsonObject.keys();
@@ -135,18 +91,12 @@ public class JsonUtil {
         return valueMap;
     }
 
-    /**
-     * 从json HASH表达式中获取一个map，改List支持嵌套功能
-     *
-     * @param jsonString json字符串
-     * @return List 集合
-     */
     public static List getList4Json(String jsonString) {
         JSONArray jsonArray = JSONArray.fromObject(jsonString);
         JSONObject jsonObject;
         List list = new ArrayList();
         for (int i = 0; i < jsonArray.size(); i++) {
-            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[]{"yyyy-MM-dd HH:mm:ss"}));
+            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[] { "yyyy-MM-dd HH:mm:ss" }));
             jsonObject = jsonArray.getJSONObject(i);
             Iterator keyIter = jsonObject.keys();
             String key;
@@ -160,34 +110,20 @@ public class JsonUtil {
         return list;
     }
 
-    /**
-     * 从json数组中得到相应java数组
-     *
-     * @param jsonString json字符串
-     * @return Object[] 数组
-     */
     public static Object[] getObjectArray4Json(String jsonString) {
         JSONArray jsonArray = JSONArray.fromObject(jsonString);
         return jsonArray.toArray();
 
     }
 
-    /**
-     * 从json对象集合表达式中得到一个java对象列表
-     *
-     * @param jsonString json字符串
-     * @param pojoClass class类
-     * @return List 集合
-     */
     public static List getList4Json(String jsonString, Class pojoClass) {
-
         JSONArray jsonArray = JSONArray.fromObject(jsonString);
         JSONObject jsonObject;
         Object pojoValue;
 
         List list = new ArrayList();
         for (int i = 0; i < jsonArray.size(); i++) {
-            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[]{"yyyy-MM-dd HH:mm:ss"}));
+            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[] { "yyyy-MM-dd HH:mm:ss" }));
             jsonObject = jsonArray.getJSONObject(i);
             pojoValue = JSONObject.toBean(jsonObject, pojoClass);
             list.add(pojoValue);
@@ -197,14 +133,6 @@ public class JsonUtil {
 
     }
 
-    /**
-     * 从json对象集合表达式中得到一个java对象列表
-     *
-     * @param jsonString json字符串
-     * @param pojoClass class类
-     * @param map map内置集合对象
-     * @return List 集合
-     */
     public static List getList4Json(String jsonString, Class pojoClass, Map<String, Class> map) {
 
         JSONArray jsonArray = JSONArray.fromObject(jsonString);
@@ -213,7 +141,7 @@ public class JsonUtil {
 
         List list = new ArrayList();
         for (int i = 0; i < jsonArray.size(); i++) {
-            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[]{"yyyy-MM-dd HH:mm:ss"}));
+            JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[] { "yyyy-MM-dd HH:mm:ss" }));
             jsonObject = jsonArray.getJSONObject(i);
             pojoValue = JSONObject.toBean(jsonObject, pojoClass, map);
             list.add(pojoValue);
@@ -223,12 +151,6 @@ public class JsonUtil {
 
     }
 
-    /**
-     * 从json数组中解析出java字符串数组
-     *
-     * @param jsonString json字符串
-     * @return String[] 字符串数组
-     */
     public static String[] getStringArray4Json(String jsonString) {
 
         JSONArray jsonArray = JSONArray.fromObject(jsonString);
@@ -241,14 +163,7 @@ public class JsonUtil {
         return stringArray;
     }
 
-    /**
-     * 从json数组中解析出javaLong型对象数组
-     *
-     * @param jsonString json字符串
-     * @return Long[] long数组
-     */
     public static Long[] getLongArray4Json(String jsonString) {
-
         JSONArray jsonArray = JSONArray.fromObject(jsonString);
         Long[] longArray = new Long[jsonArray.size()];
         for (int i = 0; i < jsonArray.size(); i++) {
@@ -258,14 +173,7 @@ public class JsonUtil {
         return longArray;
     }
 
-    /**
-     * 从json数组中解析出java Integer型对象数组
-     *
-     * @param jsonString json字符串
-     * @return Integer[] Integer数组
-     */
     public static Integer[] getIntegerArray4Json(String jsonString) {
-
         JSONArray jsonArray = JSONArray.fromObject(jsonString);
         Integer[] integerArray = new Integer[jsonArray.size()];
         for (int i = 0; i < jsonArray.size(); i++) {
@@ -275,14 +183,7 @@ public class JsonUtil {
         return integerArray;
     }
 
-    /**
-     * 从json数组中解析出java Integer型对象数组
-     *
-     * @param jsonString json字符串
-     * @return Double[] 浮点型数组
-     */
     public static Double[] getDoubleArray4Json(String jsonString) {
-
         JSONArray jsonArray = JSONArray.fromObject(jsonString);
         Double[] doubleArray = new Double[jsonArray.size()];
         for (int i = 0; i < jsonArray.size(); i++) {
@@ -292,14 +193,7 @@ public class JsonUtil {
         return doubleArray;
     }
 
-    /**
-     * 将java对象转换成json字符串
-     *
-     * @param javaObj 对象
-     * @return String json字符串
-     */
     public static String getJsonString4JavaPOJO(Object javaObj) {
-
         JSONObject json;
         json = JSONObject.fromObject(javaObj);
         return json.toString();

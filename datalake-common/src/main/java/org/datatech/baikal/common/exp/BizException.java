@@ -15,7 +15,7 @@
 package org.datatech.baikal.common.exp;
 
 /**
- * 异常信息处理类
+ * Datalake application related exception.
  */
 public class BizException extends RuntimeException {
     private static final long serialVersionUID = -4022870552336761084L;

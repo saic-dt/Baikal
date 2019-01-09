@@ -13,7 +13,6 @@
  */
 package org.datatech.baikal.task;
 
-import org.datatech.baikal.task.util.Bytes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

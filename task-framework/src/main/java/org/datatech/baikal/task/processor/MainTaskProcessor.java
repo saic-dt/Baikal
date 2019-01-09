@@ -15,6 +15,7 @@ package org.datatech.baikal.task.processor;
 
 import org.apache.curator.utils.ZKPaths;
 import org.apache.zookeeper.CreateMode;
+import org.datatech.baikal.common.Bytes;
 import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.task.Config;
 import org.datatech.baikal.task.common.BaseTask;
@@ -24,7 +25,6 @@ import org.datatech.baikal.task.common.TaskType;
 import org.datatech.baikal.task.dao.EventLogDao;
 import org.datatech.baikal.task.dao.MetaConfigDao;
 import org.datatech.baikal.task.dao.SourceJdbcDao;
-import org.datatech.baikal.task.util.Bytes;
 import org.datatech.baikal.task.util.HiveUtil;
 import org.datatech.baikal.task.util.ProcessorUtil;
 import org.datatech.baikal.task.util.ZkHandler;

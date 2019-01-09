@@ -7,6 +7,8 @@ import org.apache.curator.framework.api.CuratorWatcher;
 import org.apache.curator.utils.ZKPaths;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
+import org.datatech.baikal.common.Bytes;
+import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.task.Config;
 import org.datatech.baikal.task.Main;
 import org.junit.Test;
@@ -88,7 +90,7 @@ public class TestZkHandler {
         String schemaName = "dol";
         String seqNode = "seq-0000000033";
 
-        String notifyPath = ZKPaths.makePath(Config.PATH_SCHEMA, instanceName, schemaName, Config.PATH_NOTIFY);
+        String notifyPath = ZKPaths.makePath(Configuration.PATH_SCHEMA, instanceName, schemaName, Config.PATH_NOTIFY);
         List<String> nodes = handler.getClient().getChildren().forPath(notifyPath);
         if (nodes.size() > 0) {
             Collections.sort(nodes, Collections.reverseOrder());

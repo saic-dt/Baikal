@@ -16,6 +16,9 @@ package org.datatech.baikal.util;
 
 import java.security.MessageDigest;
 
+/**
+ * Utility class for MD5 hash calculation.
+ */
 public class Md5Utils {
 
     private static byte[] md5(String s) {

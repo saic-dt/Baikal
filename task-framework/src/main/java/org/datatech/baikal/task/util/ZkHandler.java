@@ -20,6 +20,7 @@ import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.queue.SimpleDistributedQueue;
 import org.apache.curator.retry.RetryOneTime;
 import org.apache.curator.utils.ZKPaths;
+import org.datatech.baikal.common.Bytes;
 import org.datatech.baikal.common.Configuration;
 import org.datatech.baikal.task.Config;
 import org.datatech.baikal.task.common.BaseTask;

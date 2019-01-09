@@ -14,9 +14,9 @@
 
 package org.datatech.baikal.task.dao;
 
+import org.datatech.baikal.common.Bytes;
 import org.datatech.baikal.task.common.DbType;
 import org.datatech.baikal.task.common.SourceJdbc;
-import org.datatech.baikal.task.util.Bytes;
 import org.datatech.baikal.task.util.ZkHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
