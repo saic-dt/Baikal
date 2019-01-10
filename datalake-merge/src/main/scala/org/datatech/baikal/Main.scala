@@ -250,12 +250,8 @@ object Main {
    * get new row with new rowkey
    */
   def getNewRow(row: Row): Row = {
-    // encrypt the values in the row
-
     val seq = row.toSeq
     val newSeq = seq.map(element => String.valueOf(element))
-    //val Seq2Bytes = newSeq.map(element => CipherUtil.encrypt(element.getBytes("UTF-8"), 1, 1))
-    //val Seq2Bytes = newSeq.map(element => element.getBytes("UTF-8"))
     val newRow = Row.fromSeq(newSeq)
     newRow
   }
