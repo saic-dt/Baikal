@@ -17,7 +17,6 @@ package org.datatech.baikal.merge.constants;
 public class DatalakeConstant {
     public static final String CF_NAME = "c";
     public static final String FLAG_CL_NAME = "__zt_";
-    public static final String ENCRYPTION_CL = "cl1";
     public static final String DEFAULT_TENANT = "datalake";
     public static final String CONFIG_TABLE = "Config";
     public static final String ROLE_TABLE = "DataAccessRole";

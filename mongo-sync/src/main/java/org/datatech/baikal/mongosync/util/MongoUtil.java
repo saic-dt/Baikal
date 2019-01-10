@@ -222,12 +222,12 @@ public class MongoUtil implements Runnable {
             if (Enums.OpType.UPDATE.value().equals(op)) {
                 Document doc = (Document) src.get("o2");
                 ObjectId objectId = doc.getObjectId("_id");
-                dt.put("before", encryption(doc, ns));
-                dt.put("after", encryption(updataValueExtract(src.get("o"), ns, objectId), ns));
+                dt.put("before", getBsonData(doc, ns));
+                dt.put("after", getBsonData(updataValueExtract(src.get("o"), ns, objectId), ns));
             } else if (Enums.OpType.DELETE.value().equals(op)) {
-                dt.put("before", encryption(src.get("o"), ns));
+                dt.put("before", getBsonData(src.get("o"), ns));
             } else {
-                dt.put("after", encryption(src.get("o"), ns));
+                dt.put("after", getBsonData(src.get("o"), ns));
             }
         } catch (IllegalAccessException | InvocationTargetException e) {
             logger.error("Exception occurred.", e);
@@ -266,7 +266,7 @@ public class MongoUtil implements Runnable {
         return ob;
     }
 
-    private Object encryption(Object data, String ns) {
+    private Object getBsonData(Object data, String ns) {
 
         if (data instanceof Document) {
             Document bsonData = (Document) data;
